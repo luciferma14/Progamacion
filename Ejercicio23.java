@@ -1,4 +1,4 @@
-public class Ejercicio23.java
+public class Ejercicio23
 {
     public static void main(String[] args);
     {    // a=8, b=3, c=-5
