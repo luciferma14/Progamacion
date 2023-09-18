@@ -16,5 +16,7 @@ public class Ejercicio41
         System.out.println(j != 6);
         System.out.println(c == 99);
         System.out.println(y - 1 < 1);
+        System.out.println(2 * (x + y == 0));
+        System.out.println(x + y >= 0);
     }
 }
