@@ -1,12 +1,24 @@
- public class Ejercicio_2 {
+package EjerciciosAvanzados1;
+
+import java.util.Scanner;
+
+public class Ejercicio_2 {
     public static void main(String[] args) {
-        System.out.println("Peso: ");
-        System.out.println("Altura: ");
+        Scanner scanner = new Scanner(System.in);
+         System.out.println(scanner);
 
-        int numeroPeso = scanner.nextInt();
-        int numeroAltura = scanner.nextInt();
+        System.out.println("Peso: "); // En kilogramos
+        System.out.println("Altura: "); // En metros
 
-            System.out.println();
+        double numeroPeso = scanner.nextDouble();
+        double numeroAltura = scanner.nextDouble();
+        double imc = (numeroPeso/numeroAltura*numeroAltura);
+
+         
+         System.out.println("\nTu índice de masa corporal es: " + imc);
+         
+
+        
     }
 
 }
