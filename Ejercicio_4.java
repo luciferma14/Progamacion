@@ -1,3 +1,5 @@
+package EjerciciosAvanzados1;
+
 import java.util.Scanner;
 
 public class Ejercicio_4 
@@ -12,58 +14,62 @@ public class Ejercicio_4
         int patasMil = 400;
         */
         int totalPatas = 452;
-
+        
         
         System.out.println("Cuantos animales de cada tipo hay:");
+        
 
-        Scanner animales = new Scanner (System.in);
-
-        System.out.println(animales);
-
-        int animal = animales.nextInt();
-
-        {
-              Scanner insectos = new Scanner (System.in);
+       try (Scanner totalAnimales = new Scanner (System.in))
+       {
+        
+        
+        Scanner insectos = new Scanner (System.in);
         {
             System.out.println("Insectos");
 
-                int totalAnimales = insectos.nextInt();
-        }
+                insectos.next();
 
         Scanner aracnicos = new Scanner (System.in);
         {
             System.out.println("Arácnicos");
 
-                int totalAnimales = aracnicos.nextInt();
+                aracnicos.nextInt();
         }
 
         Scanner crustaceos = new Scanner (System.in);
         {
             System.out.println("Crustáceos");
 
-                int totalAnimales = crustaceos.nextInt();
+                crustaceos.nextInt();
         }
 
         Scanner ciempies = new Scanner (System.in);
         {
             System.out.println("Ciempiés");
 
-                int totalAnimales = ciempies.nextInt();
+                ciempies.nextInt();
         }        
 
         Scanner milpies = new Scanner (System.in);
         {
             System.out.println("Milpiés");
 
-                int totalAnimales = milpies.nextInt();
-        }        
+                milpies.nextInt();
+        }   
+                int todasPatas = (totalPatas * insectos.nextInt(), aracnicos.nextInt(), crustaceos.nextInt(), 
+                    ciempies.nextInt(), milpies.nextInt());
 
-        System.out.printf("Patas que hay en total:" + totalPatas * animal);
+         System.out.println("Patas que hay en total:" + todasPatas);
+
+
 
         }
+       }
 
     }
 
-}
+}     
+    
+        
 
       
