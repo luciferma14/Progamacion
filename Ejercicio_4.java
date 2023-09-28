@@ -56,8 +56,8 @@ public class Ejercicio_4
 
                 milpies.nextInt();
         }   
-                int todasPatas = (totalPatas * insectos.nextInt(), aracnicos.nextInt(), crustaceos.nextInt(), 
-                    ciempies.nextInt(), milpies.nextInt());
+        int todasPatas = (totalPatas * insectos.nextInt(), aracnicos.nextInt(), crustaceos.nextInt(), 
+        ciempies.nextInt(), milpies.nextInt());   // No se por que me da error :(
 
          System.out.println("Patas que hay en total:" + todasPatas);
 
