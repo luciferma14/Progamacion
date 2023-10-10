@@ -7,7 +7,7 @@ public class EjercicioPE_3 {
 
         int num;
 
-        System.out.println("intruduce un número máximo de 6 dígitos: ");
+        System.out.println("intruduce un número + o - máx de 6 dígitos: ");
         num = sc.nextInt();
 
         
