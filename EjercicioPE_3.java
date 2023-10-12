@@ -1,3 +1,5 @@
+package PGM.EjercicioPE;
+
 import java.util.Scanner;
 
 public class EjercicioPE_3 {
@@ -6,11 +8,16 @@ public class EjercicioPE_3 {
         Scanner sc = new Scanner(System.in);
 
         int num;
+        int digitos;
 
-        System.out.println("intruduce un número + o - máx de 6 dígitos: ");
+        System.out.print("Intruduce un número + o - máx de 6 dígitos: ");
         num = sc.nextInt();
 
-        
+        num = Math.abs(num);
 
+        String numStr = Integer.toString(num);
+        digitos = numStr.length();
+        
+        System.out.println("El número tiene " + digitos + " digitos");
     }
 }
