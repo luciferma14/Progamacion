@@ -8,6 +8,9 @@ public class EjercicioPE_6 {
         int dia2;
         int hora;
         int hora2;
+        int horasTotales;
+        int horasTotales2;
+        int horasTranscurridas;
 
         System.out.println("Introduce primer día y hora: ");
 
@@ -113,5 +116,12 @@ public class EjercicioPE_6 {
 
         }
 
+        horasTotales = (dia - 1) * 24 + hora;
+        horasTotales2 = (dia2 -1) * 24 + hora2;
+
+        horasTranscurridas = Math.abs(horasTotales2 - horasTotales);
+
+        System.out.println(" hay " + horasTranscurridas + " horas");
+        
     }
 }
