@@ -48,7 +48,10 @@ public class EjercicioPE_7 {
         if (opcionOrdenador == opcionUsuario) {
             System.out.println("Ha habido un empate!");
 
-        } else if ((opcionUsuario == 1 && opcionOrdenador == 3) || (opcionUsuario == 2 && opcionOrdenador == 1) || (opcionUsuario == 3 && opcionOrdenador == 2)) {
+        } else if ((opcionUsuario == 1 && opcionOrdenador == 3) 
+                    || (opcionUsuario == 2 && opcionOrdenador == 1) 
+                        || (opcionUsuario == 3 && opcionOrdenador == 2)) {
+                            
             System.out.println("HAS GANADO!! :)");
 
         } else {
