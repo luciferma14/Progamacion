@@ -1,166 +1,67 @@
 import java.util.Scanner;
-
+import java.util.Random;
 
 public class EjArray2 {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Random rand = new Random();
 
-        String jugador = "X";
-        String ordenador = "O";
-        int fila;
-        int columna;
+        int fila1;
+        int columna1;
+        int i = 0;
 
-        char[][]a = {{'X'},{'O'},{'X'}};;
-                      
+        char[][] a =  {{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
 
-        for (int i = 1; i <=1; i++){
-            for (int j = 2; j <=2; j++){
-                for (int z = 3; z <= 3; z++){
-                    
-                    System.out.println("   " + i + "  " + j + "  " + z);
-                                
+        while (i < 9) {
+            boolean haspasado = true;
+            //Mostrar matriz
+            System.out.println("  0  1  2");
+            for (int ia = 0; ia < 3; ia++) {
+                for (int j = 0; j < 3; j++) {
+                    if (j <= 0) {
+                        System.out.print(ia + "| ");
+                    }
+                    System.out.print(a[ia][j]);
+                    if (j < 2) {
+                        System.out.print(" | ");
+                    }
+                }
+                System.out.println();
+                if (ia < 2) {
+                    System.out.println("----------");
                 }
             }
-        }
-        
-        System.out.println("1| " + " | " + " | " + " | ");
-        System.out.println(" ----------");
-        System.out.println("2| " + " | " + " | " + " | ");
-        System.out.println(" ----------");
-        System.out.println("3| " + " | " + " | " + " | ");
-
-
-        System.out.println("Empieza el jugador, elige una posición (indicando columna/fila): ");
-        columna = sc.nextInt();
-        fila = sc.nextInt();
-
-        //for (fila = 1; fila <= 1; fila++) {
-        //    for (columna = 1; columna <= 1; columna++) {
-
-        //        System.out.println(jugador);
-        //    }
-        //    }
-
-
-        if (columna == 1) {
-            if (fila == 1) {
-
-                System.out.println("   1   2   3");
-                System.out.println("1| " + "X"+ " | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("3| " + "  | " + "  | " + "  | ");
+            System.out.println("Jugador, elige una posición (indicando columna/fila): ");
+            System.out.print("Columna: ");
+            columna1 = sc.nextInt();
+            System.out.print("Fila: ");
+            fila1 = sc.nextInt();
+            if (a[fila1][columna1] == ' ') {
+                a[fila1][columna1] = 'X';
             }
-
-        }
-            if (columna == 1) {
-                if (fila == 2) {
-
-                System.out.println("   1   2   3");
-                System.out.println("1| " +  "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "X"+" | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("3| " + "  | " + "  | " + "  | ");
+            i++;
+            // Esta es la maquina
+            while (haspasado) {
+                columna1 = (int) (Math.random() * 3);
+                fila1 = (int) (Math.random() * 3);
+                if (a[fila1][columna1] == ' ') {
+                    a[fila1][columna1] = 'O';
+                    haspasado = false;
+                }
+                i++;
             }
-
+                
         }
 
-                if (columna == 1) {
-                    if (fila == 3) {
+        // for (fila = 1; fila <= 1; fila++) {
+        // for (columna = 1; columna <= 1; columna++) {
 
-                System.out.println("   1   2   3");
-                System.out.println("1| " +  "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("3| " +  "X"+ " | " + "  | " + "  | ");
-        }
+        // System.out.println(jugador);
+        // }
+        // }
 
+        System.out.println("Turno del ordenador");
 
     }
-
-                if (columna == 2) {
-                    if (fila == 1) {
-
-                System.out.println("   1   2   3");
-                System.out.println("1| " +  "  | " +  "X"+" | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("3| " +  "  | " + "  | " + "  | ");
-
-                }
-            }
-
-                if (columna == 2) {
-                    if (fila == 2) {
-
-                System.out.println("   1   2   3");
-                System.out.println("1| " +  "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "  | " +   "X"+" | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("3| " +  "  | " + "  | " + "  | ");
-
-                }
-            }
-
-                if (columna == 2) {
-                    if (fila == 3) {
-
-                System.out.println("   1   2   3");
-                System.out.println("1| " +  "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "  | " +   "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("3| " +  "  | " + "X"+" | " + "  | ");
-
-                }
-            }
-
-                if (columna == 3) {
-                    if (fila == 1) {
-
-                System.out.println("   1   2   3");
-                System.out.println("1| " +  "  | " + "  | " + "X"+" | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "  | " +   "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("3| " +  "  | " +  "  | " + "  | ");
-
-                }
-            }
-
-                if (columna == 3) {
-                    if (fila == 2) {
-
-                System.out.println("   1   2   3");
-                System.out.println("1| " +  "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "  | " +   "  | " + "X"+" | ");
-                System.out.println(" -------------");
-                System.out.println("3| " +  "  | " +  "  | " + "  | ");
-
-                }
-            }
-
-                if (columna == 3) {
-                    if (fila == 3) {
-
-                System.out.println("   1   2   3");
-                System.out.println("1| " +  "  | " + "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("2| " + "  | " +   "  | " + "  | ");
-                System.out.println(" -------------");
-                System.out.println("3| " +  "  | " +  "  | " + "X"+" | ");
-
-                }
-            }
-            
-    }
-    }
-
-    
+}
