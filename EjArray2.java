@@ -55,53 +55,57 @@ public class EjArray2 {
                     if (a[fila1][columna1] == ' ') {
                         a[fila1][columna1] = 'O';
                         haspasado = false;
-                    }
-                
+                    }               
                 }
             }
             i++;
             if (hayGanador) {
-                if (a[0][0] == 'X')
+                if (a[0][0] == 'X'){
                     if (a[0][1] == 'X') {
                         if (a[0][2] == 'X') {
                             System.out.println("Has ganado!");
-                    }
+                        }
+                    }   
                 }
             } 
             if (hayGanador) {
-                if (a[1][0] == 'X')
+                if (a[1][0] == 'X'){
                     if (a[1][1] == 'X') {
                         if (a[1][2] == 'X') {
                             System.out.println("Has ganado!");
+                        }   
                     }
                 }
             }
             if (hayGanador) {
-                if (a[2][0] == 'X')
+                if (a[2][0] == 'X'){
                     if (a[2][1] == 'X') {
                         if (a[2][2] == 'X') {
                             System.out.println("Has ganado!");
+                        }   
                     }
                 }
             }
             if (hayGanador) {
-                if (a[0][0] == 'X')
+                if (a[0][0] == 'X') {
                     if (a[1][1] == 'X') {
                         if (a[2][2] == 'X') {
                             System.out.println("Has ganado!");
+                        }
                     }
                 }
             }  
             if (hayGanador) {
-                if (a[2][0] == 'X')
+                if (a[2][0] == 'X') {
                     if (a[1][1] == 'X') {
                         if (a[0][2] == 'X') {
                             System.out.println("Has ganado!");
+                        }
                     }
                 }
             }
             if (hayGanador) {
-                if (a[0][0] == 'X')
+                if (a[0][0] == 'X'){
                     if (a[1][0] == 'X') {
                         if (a[2][0] == 'X') {
                             System.out.println("Has ganado!");
@@ -110,24 +114,30 @@ public class EjArray2 {
                 }
             }
             if (hayGanador) {
-                if (a[0][1] == 'X') 
+                if (a[0][1] == 'X') {
                     if (a[1][1] == 'X') {
                         if (a[2][1] == 'X') {
                             System.out.println("Has ganado!");
-                            
+
+                        
+                        }
                     }
                 }
             }
             if (hayGanador) {
-                if (a[2][2] == 'X')
+                if (a[2][2] == 'X'){
                     if (a[1][2] == 'X') {
                         if (a[0][2] == 'X') {
                             System.out.println("Has ganado!");
+                        }
                     }
                 }
             }else  
                 System.out.println("PC gana!");
-        }
 
+
+
+            
+        }
     }
 }
