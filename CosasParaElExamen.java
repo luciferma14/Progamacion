@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class CosasParaElExamen {
     public static void main(String[] args) {
 
@@ -314,5 +316,51 @@ public class CosasParaElExamen {
 			for (int j=i-1;j>=1;j--) 		System.out.print(j);
 			//Salto de linea
 			System.out.println();
-    }   
+
+			//Usa la cadena de tu nombre completo y aplica los métodos de la clase String (wrapped)
+			//necesarios para separar tu nombre de tus apellidos almacenándolos en variables distintas
+			String nombre = "Lucia Ferrandis Martinez";
+
+			int primerespacio = nombre.indexOf(' ');
+			int segundoespacio = nombre.indexOf(' ',primerespacio+1);
+	
+	
+	
+			System.out.println(nombre.substring(0,primerespacio));
+			System.out.println(nombre.substring(primerespacio+1,segundoespacio)); 
+			System.out.println(nombre.substring(segundoespacio+1)); 
+
+			//Dadas las palabras del ejercicio anterior, utiliza la clase envoltorio para obtener la longitud de
+			//cada palabra.
+			String nombre = "Lucia";
+        	String apellido1 = "Ferrandis";
+        	String apellido2 = "Martinez";
+			
+        	System.out.println(nombre.length());
+        	System.out.println(apellido1.length());
+        	System.out.println(apellido2.length());
+
+			// calcule las raíces de una ecuación de segundo grado. Para ax2+bx+c=0 
+
+			float a;
+        	float b;
+        	float c;
+        	double sqrtdisc;
+
+        	Scanner sc = new Scanner(System.in);
+
+        	System.out.print("Dime a: ");
+        	a = sc.nextFloat();
+        	System.out.print("Dime b: ");
+        	b = sc.nextFloat();
+        	System.out.print("Dime c: ");
+        	c = sc.nextFloat();
+
+        	sqrtdisc = Math.sqrt((b*b-4*a*c));
+
+        	System.out.printf("X1 : %3.2f\n", (-b+sqrtdisc)/2/a);
+        	System.out.printf("X2 : %3.2f\n", (-b-sqrtdisc)/2/a);
+
+        	sc.close();
+    }   	
 }
