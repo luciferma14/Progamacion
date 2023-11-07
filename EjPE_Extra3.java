@@ -10,11 +10,12 @@ public class EjPE_Extra3 {
         int numSecreto;
         int respUsuario = 0;
         boolean continua;
-        int i = 0;
+        int i = 1;
         
         numSecreto = rand.nextInt(100)+1;
         
         while (i <= 5) {
+            i = i + 1;
             continua = true;
 
             System.out.print("El PC ya ha pensado su numero, adivinelo: ");
@@ -25,7 +26,18 @@ public class EjPE_Extra3 {
             }if(numSecreto == respUsuario){
                 continua = false;
             }
+
+            if (respUsuario > numSecreto) {
+                System.out.println("Es menor");
+            }else {
+                System.out.println("Es mayor");
+            }
         }
+        if (respUsuario == numSecreto) {
+                System.out.println("Has acertado");
+            }else {
+                System.out.println("El numero era " + numSecreto);
+            }
         
 
     }
