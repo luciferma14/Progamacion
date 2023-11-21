@@ -1,4 +1,4 @@
-//package libreria;
+package libreria;
 import java.util.Scanner;
 
 public class FNumDAW {
@@ -123,37 +123,36 @@ public class FNumDAW {
 
     public static int posicionDeDigito(int x, int y) {
         int i;
-        int digitos;
 
-        for (i = 0; (i < digitos(x)) && (digitoN(x, i) != y); i++) {};
+        for (i = 0; (i < cuentaDigitos(x)) && (digitoN(x, i) != y); i++) {};
     
-        if (i == digitos(x)) {
+        if (i == cuentaDigitos(x)) {
           return -1;
         } else {
           return i;
         }
     }
 
-    public static int trozoDeNumero(int x, int inicio, int fin) {
+    public static int parteNumero(int x, int inicio, int fin) {
 
-        int digitos;
-        int quitaPorDelante;
-        int quitaPorDetras;
-        int longitud = digitos(x);
+        int num = ' ';
+        int digito;
 
-        x = quitaPorDelante(x, inicio);
+        int longitud = cuentaDigitos(x);
 
-        x = quitaPorDetras(x, longitud - fin - 1);
+        digito = num % 10;
+
+        num = num / 10;
 
         return x;
     }
 
-    public static int juntaNumeros(int x, int y) {
+    public static int pegaNumeros(int x, int y) {
 
-        return (juntaNumeros(x, y));
+        return (pegaNumeros(x, y));
     }
     
-    public static boolean esNumeroKaprekar(int num) {
+    public static boolean kaprekar(int num) {
         
         long cuadrado = (long) num * num;
         String cuadradoStr = String.valueOf(cuadrado);
