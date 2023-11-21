@@ -1,4 +1,4 @@
-package libreria;
+//package libreria;
 import java.util.Scanner;
 
 public class FNumDAW {
@@ -111,19 +111,77 @@ public class FNumDAW {
         return anterior;
     }
 
-    public static int digitoN(int num) {
+    public static int digitoN(int num, int x) {
+        x = voltea(x);
 
-        int posicion;
+        while (num-- > 0) {
+          x = x / 10;
+        }
+    
+        return (int)(x % 10);
+    }
+
+    public static int posicionDeDigito(int x, int y) {
+        int i;
+        int digitos;
+
+        for (i = 0; (i < digitos(x)) && (digitoN(x, i) != y); i++) {};
+    
+        if (i == digitos(x)) {
+          return -1;
+        } else {
+          return i;
+        }
+    }
+
+    public static int trozoDeNumero(int x, int inicio, int fin) {
+
+        int digitos;
+        int quitaPorDelante;
+        int quitaPorDetras;
+        int longitud = digitos(x);
+
+        x = quitaPorDelante(x, inicio);
+
+        x = quitaPorDetras(x, longitud - fin - 1);
+
+        return x;
+    }
+
+    public static int juntaNumeros(int x, int y) {
+
+        return (juntaNumeros(x, y));
+    }
+    
+    public static boolean esNumeroKaprekar(int num) {
+        
+        long cuadrado = (long) num * num;
+        String cuadradoStr = String.valueOf(cuadrado);
+
+        for (int i = 1; i < cuadradoStr.length(); i++) {
+
+            String parte1Str;
+            String parte2Str;
+            long parte1;
+            long parte2;
 
 
-        return;
+            parte1Str = cuadradoStr.substring(0, i);
+            parte2Str = cuadradoStr.substring(i);
+
+            parte1 = parte1Str.isEmpty() ? 0 : Long.parseLong(parte1Str);
+            parte2 = parte2Str.isEmpty() ? 0 : Long.parseLong(parte2Str);
+
+            if (parte1 + parte2 == num) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
-
     public static void main(String[] args){
-
-        
 
     }
      
