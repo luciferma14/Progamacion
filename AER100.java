@@ -8,27 +8,27 @@ public class AER100 {
 
         int casos;
         int tope = 6174;
-        int suma;
-        int numero = 0;
+        int numeros = 0;
+
 
         System.out.print("Casos: ");
         casos = sc.nextInt();
-        sc.nextLine();
+
 
         for (int i = 0; i < casos; i++) {
-            System.out.print("Número: ");
-            numero = sc.nextInt();
-
-            if (numero > FNumDAW.voltea(numero)){
-
-            System.out.println(numero + " - " + FNumDAW.voltea(numero) + " = " + (numero - FNumDAW.voltea(numero)));
-            }else {
-            System.out.println(FNumDAW.voltea(numero) + " - " + numero + " = " + (FNumDAW.voltea(numero) - numero));
-            }
+            System.out.print("Numero: ");
+            numeros = sc.nextInt();
         }
 
-
-
+       
+        for (int i = 0; i < casos; i++) { 
+            if (numeros > FNumDAW.voltea(numeros)){
+                System.out.println(numeros + " - " + FNumDAW.voltea(numeros) + " = " + (numeros - FNumDAW.voltea(numeros)));
+            }else {
+                System.out.println(FNumDAW.voltea(numeros) + " - " + numeros + " = " + (FNumDAW.voltea(numeros) - numeros));
+            }
+        }
+        
         
     }
 }
