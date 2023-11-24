@@ -1,7 +1,8 @@
 package libreria;
-import java.util.Scanner;
 
 public class FNumDAW {
+    
+    //Dada una base y un exponente devuelve la potencia.
     public static double potencia(int base, int exponente) {
 
         double resultado;
@@ -10,6 +11,7 @@ public class FNumDAW {
         return resultado;
     } 
 
+    //Cuenta el número de dígitos de un número entero.
     public static int cuentaDigitos(int num) {
         int digitos;
 
@@ -24,6 +26,7 @@ public class FNumDAW {
         return digitos;
     }
 
+    //Le da la vuelta a un número.
     public static int voltea(int num) {
 
         int numInvertido = 0;
@@ -38,6 +41,7 @@ public class FNumDAW {
         return numInvertido;
     }
 
+    //Devuelve verdadero si el número que se pasa como parámetro es capicúa y falso en caso contrario.
     public static boolean esCapicua(int num){
 
 
@@ -61,6 +65,7 @@ public class FNumDAW {
         return esCapicua;
     }
 
+    //Devuelve verdadero si el número que se pasa como parámetro es primo y falso en caso contrario.
     public static boolean esPrimo(int num) {
 
         int i = 0;
@@ -85,6 +90,7 @@ public class FNumDAW {
         return (i == num);
     }
     
+    //Devuelve el primo que es mayor al número que se pasa como parámetro.
     public static int siguientePrimo(int num){
 
         int siguiente;
@@ -98,6 +104,7 @@ public class FNumDAW {
         return siguiente;
     }
 
+    //Devuelve el primo inmediatamente anterior al número que se pasa como parámetro.
     public static int anteriorPrimo(int num){
 
         int anterior;
@@ -111,6 +118,7 @@ public class FNumDAW {
         return anterior;
     }
 
+    //Devuelve el dígito que está en la posición n de un número entero.
     public static int digitoN(int num, int x) {
         x = voltea(x);
 
@@ -121,6 +129,7 @@ public class FNumDAW {
         return (int)(x % 10);
     }
 
+    //Da la posición de la primera ocurrencia de un dígito dentro de un número entero. 
     public static int posicionDeDigito(int x, int y) {
         int i;
 
@@ -133,6 +142,7 @@ public class FNumDAW {
         }
     }
 
+    //Toma como parámetros las posiciones inicial y final dentro de un número y devuelve el ‘trozo’ correspondiente.
     public static int parteNumero(int x, int inicio, int fin) {
 
         int num = ' ';
@@ -147,41 +157,29 @@ public class FNumDAW {
         return x;
     }
 
+    //Pega dos números para formar uno.
     public static int pegaNumeros(int x, int y) {
 
         return (pegaNumeros(x, y));
     }
     
+    //Dice si un número es de kaprekar
     public static boolean kaprekar(int num) {
-        
+
         long cuadrado = (long) num * num;
         String cuadradoStr = String.valueOf(cuadrado);
 
         for (int i = 1; i < cuadradoStr.length(); i++) {
 
-            String parte1Str;
-            String parte2Str;
-            long parte1;
-            long parte2;
+            int parte1 = cuadradoStr.length()/2;
+            String parte2Str = cuadradoStr.length()/2;
+            int parte2 =  ;
+            
+            parte1 + parte2 == num;
 
-
-            parte1Str = cuadradoStr.substring(0, i);
-            parte2Str = cuadradoStr.substring(i);
-
-            parte1 = parte1Str.isEmpty() ? 0 : Long.parseLong(parte1Str);
-            parte2 = parte2Str.isEmpty() ? 0 : Long.parseLong(parte2Str);
-
-            if (parte1 + parte2 == num) {
-                return true;
-            }
         }
 
         return false;
     }
 
-
-    public static void main(String[] args){
-
-    }
-     
 }
