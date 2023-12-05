@@ -22,7 +22,5 @@ public class AER_369 {
             }
             System.out.println();
         }
-
-
     }
 }
