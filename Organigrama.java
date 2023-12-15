@@ -1,7 +1,15 @@
 package Recursividad;
 
+import java.util.Scanner;
+
 public class Organigrama {
     public static void main (String[] args){
+
+        System.out.println(codEmdelJef(0, 0));
+
+        //Scanner sc = new Scanner(System.in);
+    }
+    public static String codEmdelJef (int codEm, int nivJef){
 
         String [][] lista = {{"1025","Angel","0","0"},
                             {"1066","Victor","2","1749"},
@@ -54,7 +62,29 @@ public class Organigrama {
                             {"1986","Carmen","3","1066"},        
                             {"1997","Oscar","3","1861"}};
 
-        System.out.println(lista[0][1]);
+        //System.out.println(lista[0][1]);
+    
+     
+        // el Código de empleado y el nivel de jefe que buscamos, nos devuelva el código de empleado del jefe.
 
+        Scanner sc = new Scanner(System.in);
+
+        String codEmJef = "";
+
+        codEm = sc.nextInt();
+        nivJef = sc.nextInt();
+
+        for (int i = 0; i < codEm; i++){
+            for (int j = 0; j < nivJef; j++){
+
+                lista[0][codEm] = codEmJef;
+            }
+        }
+
+        
+
+        return codEmJef;
+    
     }
+
 }
