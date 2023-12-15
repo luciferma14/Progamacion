@@ -1,4 +1,4 @@
-package Recurisividad;
+package Recursividad;
 
 public class Organigrama {
     public static void main (String[] args){
@@ -53,6 +53,8 @@ public class Organigrama {
                             {"1973","Quico","4","1465"},        
                             {"1986","Carmen","3","1066"},        
                             {"1997","Oscar","3","1861"}};
+
+        System.out.println(lista[0][1]);
 
     }
 }
