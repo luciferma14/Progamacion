@@ -120,9 +120,9 @@ public class Organigrama {
         nivJef = sc.nextInt();
 
         jeFe = codJef(organigrama, codEmp, nivJef);
-        nomBre = nomEmpl(organigrama, numJefe);
         
-        System.out.println("Nombre del empleado: " + nomEmpl(organigrama, nomBre));
+        int numJefe = ' '; // no se por que da error, por eso lo tengo que incializar.
+        System.out.println("Nombre del empleado: " + nomEmpl(organigrama, numJefe)); 
         System.out.println("Código de empleado del jefe: " + jeFe);
         System.out.println("Nombre del jefe: " + nomJefe(organigrama, jeFe));
     }
