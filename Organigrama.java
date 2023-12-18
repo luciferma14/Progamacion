@@ -54,48 +54,76 @@ public class Organigrama {
                             {"1986","Carmen","3","1066"},
                             {"1997","Oscar","3","1861"}};
 
-    public static int buscarJefe(int empleado, int nivelJefe) {
-        for (String[] empleadoInfo : organigrama) {
-            int num = Integer.parseInt(empleadoInfo[0]);
-            if (num == empleado) {
-                int nivJefe = Integer.parseInt(empleadoInfo[2]);
-                int jefe = Integer.parseInt(empleadoInfo[3]);
-                return (nivJefe == nivelJefe) ? empleado : buscarJefe(jefe, nivelJefe);
+    public static int codJef(String[][] array, int empleado, int nivelJefe) {
+        
+        int cJefe = 0;   
+        int num = 0;
+        int nivJef = 0;
+        int n;
+
+        for (int i = 0; i < array.length; i++){
+            n = Integer.parseInt(array[i][0]);
+            if (n == empleado){
+                nivJef = Integer.parseInt(array[i][2]);
+                cJefe = Integer.parseInt(array[i][3]);
+                i = array.length;
             }
         }
-        return -1;
+        if (nivelJefe == nivJef){
+            num = empleado;
+        } else {
+            num = codJef(array, cJefe, nivelJefe);
+        }
+        return num;
     }
 
-    public static String obtenerNombreEmpleado(int codigoEmpleado) {
-        for (String[] empleadoInfo : organigrama) {
-            int num = Integer.parseInt(empleadoInfo[0]);
-            if (num == codigoEmpleado) {
-                return empleadoInfo[1];
+    public static String nomJefe(String[][] array, int numJefe) {
+        
+        String nom = "";
+        int n;
+        for (int i = 0; i < array.length; i++) {
+            n = Integer.parseInt(array[i][0]);
+            if (n == numJefe) {
+                nom = array[i][1];
+                i = array.length;
             }
         }
-        return null;
+        return nom;
+    }
+    public static String nomEmpl(String[][] array, int numJefe) {
+        
+        String nom = "";
+        int n;
+        for (int i = 0; i < array.length; i++) {
+            n = Integer.parseInt(array[i][0]);
+            if (n == numJefe) {
+                nom = array[i][1];
+                i = array.length;
+            }
+        }
+        return nom;
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        int codEmp;
+        int nivJef;
+        int codJef;
+        int jeFe;
+        int nomBre;
+
         System.out.print("Ingrese el código de empleado: ");
-        int codigoEmpleado = sc.nextInt();
+        codEmp = sc.nextInt();
 
         System.out.print("Ingrese el nivel de jefe buscado: ");
-        int nivelJefe = sc.nextInt();
+        nivJef = sc.nextInt();
 
-        int codigoJefe = buscarJefe(codigoEmpleado, nivelJefe);
-
-        if (codigoJefe != -1) {
-            String nombreEmpleado = obtenerNombreEmpleado(codigoEmpleado);
-            String nombreJefe = obtenerNombreEmpleado(codigoJefe);
-
-            System.out.println("Nombre del empleado: " + nombreEmpleado);
-            System.out.println("Código de empleado del jefe: " + codigoJefe);
-            System.out.println("Nombre del jefe: " + nombreJefe);
-        } else {
-            System.out.println("No se encontró un jefe para el nivel especificado.");
-        }
+        jeFe = codJef(organigrama, codEmp, nivJef);
+        nomBre = nomEmpl(organigrama, numJefe);
+        
+        System.out.println("Nombre del empleado: " + nomEmpl(organigrama, nomBre));
+        System.out.println("Código de empleado del jefe: " + jeFe);
+        System.out.println("Nombre del jefe: " + nomJefe(organigrama, jeFe));
     }
 }
