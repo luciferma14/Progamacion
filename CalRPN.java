@@ -1,7 +1,5 @@
 package EstructuraDinamica;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -25,12 +23,11 @@ public class CalRPN {
         Stack<Double> pila = new Stack<>();
 
         boolean salir = false;
-        double resul = 0;
         String entrada;
 
         while (!salir) {
             mostrarPila(pila);
-            System.out.print(": ");
+            System.out.print("--> ");
             entrada = sc.nextLine();
         
             if (entrada.equalsIgnoreCase("q")) {
