@@ -51,14 +51,14 @@ public class CalRPN {
                                 if (num2 != 0) {
                                     pila.push(num1 / num2);
                                 } else {
-                                    System.out.println("Error: DivisiÛn por cero");
+                                    System.out.println("Error: Divisi√≥n por cero");
                                 }
                                 break;
                             case "-":
                                 pila.push(num1 - num2);
                                 break;
                             default:
-                                System.out.println("OpciÛn no v·lida");
+                                System.out.println("Opci√≥n no v√°lida");
                         }
                     } else {
                         pila.push(num2); // Devolver el valor a la pila si no hay suficientes operandos
