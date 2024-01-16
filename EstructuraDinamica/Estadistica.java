@@ -20,7 +20,7 @@ public class Estadistica {
 
         while (true) {
             
-            System.out.print("Numero: ");
+            System.out.print("Número: ");
             entrada = sc.nextLine();
 
             if (entrada.equalsIgnoreCase("q")) {
@@ -37,7 +37,7 @@ public class Estadistica {
             media = suma / num;
             desviacion = Math.sqrt((sumaCuadrados - num * Math.pow(media, 2)) / num);
 
-            System.out.println("-Media: " + media + "  -Desviacion tipica: " + desviacion);
+            System.out.println("-Media: " + media + "  -Desviación típica: " + desviacion);
         }
     }
 }
