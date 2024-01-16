@@ -13,14 +13,14 @@ public class TurnOmatik {
         String cliente;
 
         do {
-            System.out.println("--------------Menú---------------");
+            System.out.println("--------------MenÃº---------------");
             System.out.println("1. Nuevo cliente");
             System.out.println("2. Atender al siguiente cliente");
             System.out.println("3. Mostrar cola actual");
             System.out.println("0. Salir");
             System.out.println("---------------------------------");
 
-            System.out.print("Elige una opción: ");
+            System.out.print("Elige una opciÃ³n: ");
             opcion = sc.nextInt();
             sc.nextLine(); 
 
@@ -48,11 +48,11 @@ public class TurnOmatik {
                     System.exit(0);
 
                 default:
-                    System.out.println("Opción no válida. Inténtalo de nuevo.");
+                    System.out.println("OpciÃ³n no vÃ¡lida. IntÃ©ntalo de nuevo.");
             }
 
         } while (opcion != 0);
 
-        sc.close(); 
+            sc.close(); 
     }
 }

@@ -56,7 +56,7 @@ public class EjercicioPE_6 {
             case 21: System.out.print("Entre las 21:00h del "); break;
             case 22: System.out.print("Entre las 22:00h del "); break;
             case 23: System.out.print("Entre las 23:00h del "); break;
-            default: System.out.println("Intuduce el número de la hora");
+            default: System.out.println("Introduce el número de la hora");
 
         }
         
@@ -69,7 +69,7 @@ public class EjercicioPE_6 {
             case 5: System.out.print("viernes"); break;
             case 6: System.out.print("sábado"); break;
             case 7: System.out.print("domingo"); break;
-            default: System.out.println("Intuduce el número del dia de la semana");            
+            default: System.out.println("Introduce el número del dia de la semana");            
 
         }
 
@@ -99,7 +99,7 @@ public class EjercicioPE_6 {
             case 21: System.out.print(" y las 21:00h del "); break;
             case 22: System.out.print(" y las 22:00h del "); break;
             case 23: System.out.print(" y las 23:00h del "); break;
-            default: System.out.println("Intuduce el número de la hora");            
+            default: System.out.println("Introduce el número de la hora");            
 
         }
         
@@ -112,8 +112,8 @@ public class EjercicioPE_6 {
             case 5: System.out.print("viernes"); break;
             case 6: System.out.print("sábado"); break;
             case 7: System.out.print("domingo"); break;
-            default: System.out.println("Intuduce el número del dia de la semana");            
-
+            default: System.out.println("Introduce el número del dia de la semana");            
+            
         }
 
         horasTotales = (dia - 1) * 24 + hora;

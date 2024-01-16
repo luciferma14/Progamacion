@@ -1,4 +1,4 @@
-package Recurisividad;
+package Recursividad;
 public class Fibonacci {
 
     public static int fibonacci(int N) {
