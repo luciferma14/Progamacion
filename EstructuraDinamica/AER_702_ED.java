@@ -36,8 +36,11 @@ public class AER_702_ED {
             dia = Integer.parseInt(fecha.split("-")[0]);
             mes = Integer.parseInt(fecha.split("-")[1]);
 
-           
-            saldo += (dinero > 0) ? dinero : -Math.abs(dinero);
+            if (dinero > 0) {
+                saldo += dinero;
+              } else {
+                saldo = saldo - Math.abs(dinero);
+              }
 
             System.out.println(saldo + " ");
         }
