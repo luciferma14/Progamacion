@@ -1,71 +1,72 @@
 package EstructuraDinamica;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Queue;
+import java.util.Scanner;
 
-public class AER_238_ED{
-    public static void main(String[] args){
+public class AER_238_ED {
+    public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        List<List<Integer>> distribucion = new ArrayList<>();
-        List<Integer> numerosPersona = new ArrayList<>();
-        HashMap<Integer, List<Integer>> asignacion = new HashMap<>();
 
-        int botines;
-        int personas;
-        int billete;
-        int cantNum = 0;
-        int cantPers = 0;
+        List<Integer> billetes = new ArrayList<>();
+        List<List<Integer>> personas = new ArrayList<>();
+        List<Integer> numPersona = new ArrayList<>();
+
+        int numBilletes;
+        int numPers;
         int cantNumPers;
-        
-        int[] numeros = new int[cantNum];
+        int totalDinero;
+        int dineroAsignado;
+         
 
-        System.out.print("Botines: ");
-        botines = sc.nextInt();
+        while (true) {
 
-        System.out.print("Personas: ");
-        personas = sc.nextInt();
+            System.out.println("Número de billetes y número de personas (0 0 para salir):");
+            numBilletes = sc.nextInt();
+            numPers = sc.nextInt();
 
-        for (int i = 0; i < botines; i++){
-            System.out.print("Billetes: ");
-            billete = sc.nextInt();     
-        }
-        
-        for (int i = 0; i < cantNum; i++) {
-            numeros[i] = sc.nextInt();
-        }
-
-        for (int i = 0; i < cantPers; i++) {
-            cantNumPers = sc.nextInt();
-            List<Integer> numers = new ArrayList<>();
-            for (int j = 0; j < cantNumPers; j++) {
-                numerosPersona.add(sc.nextInt());
+            if (numBilletes == 0 && numPers == 0) {
+                System. exit(0);
             }
-            distribucion.add(numerosPersona);
-        }
 
-        for (int i = 0; i < cantPers; i++) {
-            for (Integer numero : distribucion.get(i)) {
-                if (!asignacion.containsKey(numero)) {
-                    asignacion.put(numero, new ArrayList<>());
+            System.out.println("Valor billetes:");
+            
+            for (int i = 0; i < numBilletes; i++) {
+                billetes.add(sc.nextInt());
+            }
+
+            System.out.println("Información personas:");
+            
+            for (int i = 0; i < numPers; i++) {
+                System.out.print("Cantidad de billetes para la persona " + (i + 1) + ": ");
+                cantNumPers = sc.nextInt();
+                
+                System.out.println("Valor billetes para la persona  " + (i + 1) + ":");
+                for (int j = 0; j < cantNumPers; j++) {
+                    numPersona.add(sc.nextInt());
                 }
-                asignacion.get(numero).add(i + 1);
+                personas.add(numPersona);
             }
-        }
 
-        for (Map.Entry<Integer, List<Integer>> elemento : asignacion.entrySet()) {
-            System.out.print(elemento.getKey() + ":");
-            for (Integer persona : elemento.getValue()) {
-                System.out.print(" " + persona);
+            totalDinero = 0;
+            for (int i : billetes) {
+                totalDinero = totalDinero + i;
             }
-            System.out.println();
-        }
 
-        System.out.println("---");
+            for (int i = 0; i < numPers; i++) {
+                dineroAsignado = totalDinero / numPers;
+                System.out.print(dineroAsignado + ": ");
+
+                for (int billete : personas.get(i)) {
+                    System.out.print(billete + " ");
+                }
+                System.out.println();
+            }
+
+            System.out.println("---");
+        }
     }
 }
