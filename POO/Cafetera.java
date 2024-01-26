@@ -1,11 +1,10 @@
-package ProgOrienObj;
-
-import java.util.Scanner;
+package POO;
 
 public class Cafetera {
     
     private int capacidadMaxima;
     private int cantidadActual;
+
 
    public Cafetera(){
     this.capacidadMaxima = 1000;
@@ -22,29 +21,35 @@ public class Cafetera {
         this.cantidadActual = cantidadActual;
     }
    }
+
+
    public int getCapacidadMaxima(){
-    return this.capacidadMaxima;
+        return this.capacidadMaxima;
    }
    public int getCantidadActual(){
-    return this.cantidadActual;
+        return this.cantidadActual;
    }
-   public int setCapacidadMaxima(){
-    return this.capacidadMaxima;
+   public void setCapacidadMaxima(int capacidadMaxima){
+        this.capacidadMaxima = capacidadMaxima;
    }
-   public int setCantidadActual(){
-    return this.cantidadActual;
+   public void setCantidadActual(int cantidadActual){
+        this.cantidadActual = cantidadActual;
    }
 
-   public void llenarCafetera(int capacidad){
-    this.cantidadActual = capacidad;
+
+   public void llenarCafetera(){
+        this.cantidadActual = this.capacidadMaxima;
    }
-   public void servirTaza(){
-    
+   public void servirTaza(int capacidad){
+        this.cantidadActual = capacidad;
+        if (this.cantidadActual != this.capacidadMaxima){
+            this.capacidadMaxima -= this.cantidadActual;
+        }
    }
-   public void vaciarCafetera(int cantidadActual){
-    this.cantidadActual = 0;
+   public void vaciarCafetera(){
+        this.cantidadActual = 0;
    }
    public void agregarCafe(int cantidad){
-    this.cantidadActual += cantidad;
+        this.cantidadActual += cantidad;
    }
 }
