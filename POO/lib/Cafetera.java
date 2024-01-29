@@ -1,4 +1,4 @@
-package POO;
+package POO.lib;
 
 public class Cafetera {
     
@@ -17,8 +17,10 @@ public class Cafetera {
    public Cafetera(int capacidadMaxima, int cantidadActual){
     if (cantidadActual > capacidadMaxima){
         this.cantidadActual = capacidadMaxima;
+        this.capacidadMaxima = capacidadMaxima;
     }else {
         this.cantidadActual = cantidadActual;
+        this.capacidadMaxima = capacidadMaxima;
     }
    }
 
