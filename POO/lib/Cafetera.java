@@ -1,7 +1,7 @@
 package POO.lib;
 
 public class Cafetera {
-    
+     
     private int capacidadMaxima;
     private int cantidadActual;
 
@@ -10,17 +10,17 @@ public class Cafetera {
     this.capacidadMaxima = 1000;
     this.cantidadActual = 0;
    }
-   public Cafetera(int capacidadMaxima){
-    this.capacidadMaxima = capacidadMaxima;
-    this.cantidadActual = capacidadMaxima;
+   public Cafetera(int a_capacidadMaxima){
+    this.capacidadMaxima = a_capacidadMaxima;
+    this.cantidadActual = a_capacidadMaxima;
    }
-   public Cafetera(int capacidadMaxima, int cantidadActual){
+   public Cafetera(int a_capacidadMaxima, int a_cantidadActual){
     if (cantidadActual > capacidadMaxima){
-        this.cantidadActual = capacidadMaxima;
-        this.capacidadMaxima = capacidadMaxima;
+        this.cantidadActual = a_capacidadMaxima;
+        this.capacidadMaxima = a_capacidadMaxima;
     }else {
-        this.cantidadActual = cantidadActual;
-        this.capacidadMaxima = capacidadMaxima;
+        this.cantidadActual = a_cantidadActual;
+        this.capacidadMaxima = a_capacidadMaxima;
     }
    }
 
@@ -31,23 +31,27 @@ public class Cafetera {
    public int getCantidadActual(){
         return this.cantidadActual;
    }
-   public void setCapacidadMaxima(int capacidadMaxima){
-        this.capacidadMaxima = capacidadMaxima;
+   public void setCapacidadMaxima(int a_capacidadMaxima){
+        this.capacidadMaxima = a_capacidadMaxima;
    }
-   public void setCantidadActual(int cantidadActual){
-        this.cantidadActual = cantidadActual;
+   public void setCantidadActual(int a_cantidadActual){
+        this.cantidadActual = a_cantidadActual;
    }
 
 
    public void llenarCafetera(){
         this.cantidadActual = this.capacidadMaxima;
    }
-   public void servirTaza(int capacidad){
-        this.cantidadActual = capacidad;
-        if (this.cantidadActual != this.capacidadMaxima){
-            this.capacidadMaxima -= this.cantidadActual;
-        }
-   }
+   public int servirTaza(int capacidad){
+     if (capacidad > cantidadActual){
+          int cantActual = cantidadActual;
+          this.cantidadActual = 0;
+          return cantActual;
+     }else {
+          this.cantidadActual -= capacidad;
+          return capacidad;
+     }
+   } 
    public void vaciarCafetera(){
         this.cantidadActual = 0;
    }

@@ -8,7 +8,7 @@ public class AER_709_ED {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
-
+ 
         Map<String, Integer> VoTos = new HashMap<>();
 
         int votos;

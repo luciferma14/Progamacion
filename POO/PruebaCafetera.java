@@ -1,8 +1,7 @@
-package POO;
 
-import POO.lib.Cafetera;
+import lib.Cafetera;
 
-public class pruebaCafetera {
+public class PruebaCafetera {
     public static void main(String[] args) {
         // Crear una cafetera con la capacidad máxima predeterminada (1000)
         Cafetera cafetera1 = new Cafetera();
