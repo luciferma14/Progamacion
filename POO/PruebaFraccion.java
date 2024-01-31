@@ -1,5 +1,6 @@
+package POO;
 
-import lib.Fraccion;
+import POO.lib.Fraccion;
 
 public class PruebaFraccion {
     public static void main(String[] args) {
