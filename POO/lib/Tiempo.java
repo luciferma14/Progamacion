@@ -1,4 +1,4 @@
-package POO.lib;
+package lib;
 
 public class Tiempo {
 
@@ -15,27 +15,24 @@ public class Tiempo {
     public int getHoras() {
         return horas;
     }
-
     public void setHoras(int horas) {
         this.horas = horas;
     }
-
+// -------------------------------------------
     public int getMins() {
         return mins;
     }
-
     public void setMins(int mins) {
         this.mins = mins;
     }
-
+// -------------------------------------------
     public int getSegundos() {
         return segundos;
     }
-
     public void setSegundos(int segundos) {
         this.segundos = segundos;
     }
-
+// -------------------------------------------
     public Tiempo suma(Tiempo h, Tiempo m, Tiempo s){
         int totalHoras = this.horas + h.getHoras();
         int totalMins = this.mins + m.getMins();
@@ -70,5 +67,9 @@ public class Tiempo {
 
     public String toString(){
         return String.format("%02d:%02d:%02d", horas, mins, segundos);
+    }
+
+    public int compareTo(Tiempo h){
+        return this.horas.compareTo(h.horas), this.mins.compareTo(h.mins), this.segundos.compareTo(h.segundos);
     }
 }    

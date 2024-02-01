@@ -1,4 +1,4 @@
-package POO.lib;
+package lib;
 
 public class Mesa {
 

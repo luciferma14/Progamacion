@@ -1,14 +1,12 @@
-package POO;
-
-import POO.lib.Tiempo;
+import lib.Tiempo;
 
 public class PruebaTiempo {
     
-    Tiempo t = new Tiempo(1,20,30);
+    Tiempo tmp = new Tiempo(1,20,30);
 
-    Tiempo resultadoSuma = t.suma(new Tiempo(1,20,30)); // Sumar 2 horas y 30 minutos
-    System.out.println(resultadoSuma.getHoras, resultadoSuma.getMins, resultadoSuma.getSegundos);
+    Tiempo resulSuma = tmp.suma(new Tiempo(00,20,00)); // Suma 20 mins
+    System.out.println(resulSuma.getHoras, resulSuma.getMins, resulSuma.getSegundos);
 
-    Tiempo resultadoResta = t.resta(new Tiempo(1,20,30)); // Restar 15 minutos
-    System.out.println(resultadoResta.getHoras, resultadoResta.getMins, resultadoResta.getSegundos);
+    Tiempo resulResta = tmp.resta(new Tiempo(00,20,00)); // Restar 20 mins
+    System.out.println(resulResta.getHoras, resulResta.getMins, resulResta.getSegundos);
 }

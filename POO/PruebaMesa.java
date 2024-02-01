@@ -1,6 +1,6 @@
-package POO;
 
-import POO.lib.Mesa;
+
+import lib.Mesa;
 
 public class PruebaMesa{
 
