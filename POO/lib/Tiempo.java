@@ -69,7 +69,13 @@ public class Tiempo {
         return String.format("%02d:%02d:%02d", horas, mins, segundos);
     }
 
-    public int compareTo(Tiempo h){
-        return this.horas.compareTo(h.horas), this.mins.compareTo(h.mins), this.segundos.compareTo(h.segundos);
+    public int compareTo(Tiempo otroTiempo) {
+        if (this.horas != otroTiempo.horas) {
+            return this.horas - otroTiempo.horas;
+        } else if (this.mins != otroTiempo.mins) {
+            return this.mins - otroTiempo.mins;
+        } else {
+            return this.segundos - otroTiempo.segundos;
+        }
     }
 }    
