@@ -1,6 +1,6 @@
 package lib;
 
-public class Tiempo {
+public class Tiempo implements Comparable<Tiempo>{
 
     private int horas;
     private int mins;
@@ -53,28 +53,31 @@ public class Tiempo {
         int totalSeg = this.segundos - s.getSegundos();
 
         //para que los mins y seg no sean negativos
-        if (totalSeg < 0) {
+        if (totalSeg < 0){
             totalMins--;
             totalSeg += 60;
         }
-        if (totalMins < 0) {
+        if (totalMins < 0){
             totalHoras--;
             totalMins += 60;
         }
-
-        return new Tiempo(totalHoras, totalMins, totalSeg);
+        if(totalHoras < 0){
+            return new Tiempo(00, 00, 00);
+        }else {
+            return new Tiempo(totalHoras, totalMins, totalSeg);
+        }
     }
 
     public String toString(){
         return String.format("%02d:%02d:%02d", horas, mins, segundos);
     }
 
-    public int compareTo(Tiempo otroTiempo) {
-        if (this.horas != otroTiempo.horas) {
+    public int compareTo(Tiempo otroTiempo){
+        if (this.horas != otroTiempo.horas){
             return this.horas - otroTiempo.horas;
-        } else if (this.mins != otroTiempo.mins) {
+        }else if (this.mins != otroTiempo.mins){
             return this.mins - otroTiempo.mins;
-        } else {
+        }else {
             return this.segundos - otroTiempo.segundos;
         }
     }
