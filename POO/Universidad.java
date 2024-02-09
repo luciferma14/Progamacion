@@ -21,7 +21,5 @@ public class Universidad{
         for (Persona persona : personas) {
             System.out.println(persona);
         }
-        
-
     }
 }
