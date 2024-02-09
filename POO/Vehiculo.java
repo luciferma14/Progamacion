@@ -1,8 +1,8 @@
 public class Vehiculo {
     
-    public static int vehiculosCreados = 0;
-    public static int kilometrosTotales = 0;
-    public static int kilometrosRecorridos = 0;
+    private static int vehiculosCreados;
+    private static int kilometrosTotales;
+    private  int kilometrosRecorridos;
 
    
     public int anda(int km) {
@@ -20,8 +20,7 @@ public class Vehiculo {
         return kilometrosTotales;
     }
 
-    public static int getKilometrosRecorridos() {
+    public int getKilometrosRecorridos() {
         return kilometrosRecorridos;
     }
-    
 }   

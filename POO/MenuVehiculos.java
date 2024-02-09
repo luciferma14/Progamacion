@@ -9,9 +9,11 @@ public class MenuVehiculos {
         Coche carro = new Coche();
 
         int opc;
+        int biciKM;
+        int cocheKM;
         
         do{
-            System.out.println("              VEHICULOS"); 
+            System.out.println("              VEHÍCULOS"); 
             System.out.println("====================================="); 
             System.out.println("1. Anda en bicicleta"); 
             System.out.println("2. Anda en coche"); 
@@ -26,26 +28,34 @@ public class MenuVehiculos {
 
             switch (opc) {
                 case 1:
-                    bici.anda(10);
-                    System.out.println("Se han sumado 10 km");
+                    System.out.print("Km que quieres sumar: ");
+                    biciKM = sc.nextInt();
+                    bici.anda(biciKM);
+                    System.out.println("Se han sumado " + biciKM + "km");
                     System.out.println(" ");
                     break;
                 case 2:
-                    carro.anda(100);
-                    System.out.println("Se han sumado 100 km");
+                    System.out.print("Km que quieres sumar: ");
+                    cocheKM = sc.nextInt();
+                    carro.anda(cocheKM);
+                    System.out.println("Se han sumado " + cocheKM + "km");
                     System.out.println(" ");
                     break;
                 case 3:
                     System.out.println("Km Bici: " + bici.getKilometrosRecorridos());
+                    System.out.println(" ");
                     break;
                 case 4:
                     System.out.println("Km Coche: " + carro.getKilometrosRecorridos());
+                    System.out.println(" ");
                     break;
                 case 5:
                     System.out.println("Km Totales: " + Vehiculo.getKilometrosTotales());
+                    System.out.println(" ");
                     break;
                 case 6:
-                    System.out.println("Vehiculos: " + Vehiculo.getVehiculosCreados());
+                    System.out.println("Vehículos: " + Vehiculo.getVehiculosCreados());
+                    System.out.println(" ");
                     break;
                 case 7:
                     System. exit(0);
