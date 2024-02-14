@@ -26,7 +26,6 @@ public class Campo extends Objeto {
         for (int y = 1; y < dimy - 1; y++) {
             forma.add(new Posicion(0, y));
             forma.add(new Posicion(dimx - 1, y));
-            System.out.println("Colisiones: " + colisionTriang(getColisiones()));
         }
         return forma;
     }

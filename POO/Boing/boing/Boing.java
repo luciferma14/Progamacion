@@ -15,9 +15,6 @@ public class Boing {
         }
         return colisiones;
     }
-
-    
-
     private static void pintaCampo() {
 
         int x = 0; //Coordenada X que se está tratando
@@ -89,6 +86,14 @@ public class Boing {
                     objs.get(i).colision(objs.get(j));
                 }
             }
+
+            for (Objeto obj : objs) {
+                if (obj instanceof Triangulo) {
+                    Triangulo triangulo = (Triangulo) obj;
+                    System.out.println("Colisiones del Triangulo: " + triangulo.getColisiones());
+                }
+            }      
+                    
 
         }
 
