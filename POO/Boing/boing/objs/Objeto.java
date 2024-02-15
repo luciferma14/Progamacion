@@ -1,6 +1,6 @@
 package boing.objs;
 import java.util.ArrayList;
-public abstract class Objeto {
+public abstract class Objeto extends Object{
 
     private static int n_objetos;
     private int id; //Identificador único del objeto

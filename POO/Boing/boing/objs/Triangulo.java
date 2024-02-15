@@ -7,24 +7,26 @@ public class Triangulo extends Objeto {
 
         super(pos, dirx, diry);
 
-        
+
     }
     public ArrayList<Posicion> forma() {
 
         ArrayList<Posicion> forma = new ArrayList<Posicion>();
-
-        forma.add(new Posicion(0, 0));
-        forma.add(new Posicion(1, 0));
         forma.add(new Posicion(2, 0));
-        forma.add(new Posicion(3, 0));
-        forma.add(new Posicion(4, 0));
-        forma.add(new Posicion(1, -1));
-        forma.add(new Posicion(2, -1));
-        forma.add(new Posicion(3, -1));
-        forma.add(new Posicion(2, -2));
+
+        forma.add(new Posicion(1,1));
+        forma.add(new Posicion(2,1));
+        forma.add(new Posicion(3,1));
+
+        forma.add(new Posicion(0,2));
+        forma.add(new Posicion(1,2));
+        forma.add(new Posicion(2,2));
+        forma.add(new Posicion(3,2));
+        forma.add(new Posicion(4,2));
 
         return forma;
 
     }
+
 
 }

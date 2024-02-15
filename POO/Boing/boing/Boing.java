@@ -3,8 +3,9 @@ import boing.objs.*;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
-public class Boing {
+public class Boing extends Object {
 
+    private static int coli = 0;
     private static ArrayList<Objeto> objs = new ArrayList<Objeto>();
     private static TreeSet<Posicion> campo = new TreeSet<Posicion>();
 
@@ -49,10 +50,11 @@ public class Boing {
                 System.out.print(" ");
             }
             x = pos.getX();
-            System.out.print("*");
+            System.out.print("\u2588");
 
         }
         System.out.println();
+        System.out.println("HOla "+ coli);
     }
     ////////////////////////////////////
     //Método principal (Hay que pasarle un Objeto Campo y un ArrayList de Objetos que se muevan)
@@ -64,8 +66,14 @@ public class Boing {
         for (Objeto obj : objetos) objs.add(obj);
 
         while (true) {
-
+            Triangulo tria = null; 
             pintaCampo();
+
+            for (Object tria2 : objs) {
+                if (tria2 instanceof Triangulo) {
+                    tria = (Triangulo) tria2;
+                }
+            } 
 
             // Pausa
             try {
@@ -78,25 +86,21 @@ public class Boing {
             for (Objeto obj : objs)
                 obj.avanza();
 
+            if (camp.colision(tria)) {
+                coli +=1;
+            }
             // Control colisiones
             for (int i = 1; i < objs.size(); i++) {
-                //Colisión con el campo
+                //Colisión con el campo 
                 camp.colision(objs.get(i));
                 //Colisión con los objetos
-                for (int j = 1 + i; j < objs.size(); j++) {
+                for (int j = 1 + i;j < objs.size(); j++) {
                     objs.get(i).colision(objs.get(j));
+                    if (objs.get(j-1).colision(tria)) {
+                        coli +=1;
+                    }
                 }
-            }
-
-            for (Objeto obj : objs) {
-                if (obj instanceof Triangulo) {
-                    Triangulo triangulo = (Triangulo) obj;
-                    System.out.println("Colisiones del Triangulo: " + triangulo.getColisiones());
-                }
-            }         
-
+            } 
         }
-
     }
-
 }
