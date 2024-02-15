@@ -88,6 +88,13 @@ public class Boing {
                 }
             }
 
+            for (Objeto obj : objs) {
+                if (obj instanceof Triangulo) {
+                    Triangulo triangulo = (Triangulo) obj;
+                    System.out.println("Colisiones del Triangulo: " + triangulo.getColisiones());
+                }
+            }         
+
         }
 
     }
