@@ -16,8 +16,6 @@ public class Boing {
         return colisiones;
     }
 
-    
-
     private static void pintaCampo() {
 
         int x = 0; //Coordenada X que se está tratando

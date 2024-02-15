@@ -7,7 +7,7 @@ public class Triangulo extends Objeto {
 
         super(pos, dirx, diry);
 
-    
+    }
 
     public ArrayList<Posicion> forma() {
 
