@@ -1,7 +1,7 @@
 package Examen22;
 
 
-public class Pedidos extends Formulario{
+public class Pedidos extends Formulario {
     
     private String nombre;
     private String producto;
