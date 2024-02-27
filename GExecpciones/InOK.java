@@ -1,4 +1,4 @@
-package GExecpciones;
+
 import java.util.Scanner;
 
 public class InOK {
@@ -73,19 +73,24 @@ public class InOK {
 
     public static final String[] COMPOSITORES = {"Bach", "Haydn", "Mozart", "Beethoven","Brahms", "Mahler", "Bartok"};
 
-    public static int LeeString() throws ElementoNoExsistente{
+    public static int LeeString(){
 
-        System.out.print("Nombre de un compositor: ");
-            String palabra = sc.nextLine();
+        boolean esta = false;
+
         try{
-            for (int i = 0; i < COMPOSITORES.length; i++) {
-                if (palabra.equals(COMPOSITORES[i])) {
-                  return i;
+            System.out.print("Nombre de un compositor: ");
+            String palabra = sc.next();
+            
+            for (int i = 0; i < COMPOSITORES.length || esta == true; i++) {
+                if (COMPOSITORES[i].equals(palabra)) {
+                    System.out.print("Está en la posición: " + i);
+                    esta = true;
+                }else {
+                    throw new ElementoNoExsistente("El compositor no está en la lista");
                 }
-            }
-            throw new ElementoNoExsistente("Error");
+            }       
         }catch (ElementoNoExsistente e) {
-            System.out.println("Error: El compositor no existe en la lista" + e.getMessage());
+            System.out.println(" Error: " + (e.getMessage() == null ? "" : e.getMessage()));
             sc.nextLine();
         }
         return -1;
