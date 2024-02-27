@@ -1,4 +1,4 @@
-package Execpciones;
+package GExecpciones;
 
 public class PruebaExcepcionRango {
     public static void rango(int num) throws ExcepcionRango {

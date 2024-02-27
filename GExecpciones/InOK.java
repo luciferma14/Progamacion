@@ -1,4 +1,4 @@
-package Execpciones;
+package GExecpciones;
 import java.util.Scanner;
 
 public class InOK {
@@ -11,7 +11,7 @@ public class InOK {
             System.out.print("Número: ");
             int num = sc.nextInt();
         }catch(Exception e){
-            System.out.println("Error, no es número entero");
+            System.out.println("Error: no es número entero");
             sc.nextLine();
         }
     }
@@ -25,7 +25,7 @@ public class InOK {
                 throw new Exception("positivo :(");
             }
         }catch(Exception e){          //Si exepción es == null, pinta nada; sino pinta "positivo :("  
-            System.out.println("Error, no es entero " + (e.getMessage() == null ? "" : e.getMessage()));
+            System.out.println("Error: no es entero " + (e.getMessage() == null ? "" : e.getMessage()));
             sc.nextLine();
         }
     }
@@ -39,7 +39,7 @@ public class InOK {
                 throw new Exception();
             }
         } catch (Exception e) {
-            System.out.println("Error, número fuera de rango (0,100)");
+            System.out.println("Error: número fuera de rango (0,100)");
             sc.nextLine();
         }
     }
@@ -50,7 +50,7 @@ public class InOK {
             System.out.print("Número real: ");
             double num = sc.nextInt();
         }catch(Exception e){
-            System.out.println("Error, no es número real");
+            System.out.println("Error: no es número real");
             sc.nextLine();
         }
     }        
@@ -64,18 +64,40 @@ public class InOK {
                 throw new Exception();
             }
         } catch (Exception e) {
-            System.out.println("Error, número fuera de rango (0,100)");
+            System.out.println("Error: número fuera de rango (0,100)");
             sc.nextLine();
         }
     }
 
+    
 
-    public static void main(String[] args) {
+    public static final String[] COMPOSITORES = {"Bach", "Haydn", "Mozart", "Beethoven","Brahms", "Mahler", "Bartok"};
+
+    public static int LeeString() throws ElementoNoExsistente{
+
+        System.out.print("Nombre de un compositor: ");
+            String palabra = sc.nextLine();
+        try{
+            for (int i = 0; i < COMPOSITORES.length; i++) {
+                if (palabra.equals(COMPOSITORES[i])) {
+                  return i;
+                }
+            }
+            throw new ElementoNoExsistente("Error");
+        }catch (ElementoNoExsistente e) {
+            System.out.println("Error: El compositor no existe en la lista" + e.getMessage());
+            sc.nextLine();
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) throws ElementoNoExsistente {
 
         LeeInt();
         LeeIntPos();
         LeeIntRango();
         LeeDou();
         LeeDouRango();
+        LeeString();
     }
 }
