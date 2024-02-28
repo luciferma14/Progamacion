@@ -1,3 +1,5 @@
+package GExecpciones;
+
 
 import java.util.Scanner;
 
@@ -85,7 +87,7 @@ public class InOK {
                 if (COMPOSITORES[i].equals(palabra)) {
                     System.out.print("Está en la posición: " + i);
                     esta = true;
-                }else {
+                }if (esta = false){
                     throw new ElementoNoExsistente("El compositor no está en la lista");
                 }
             }       
