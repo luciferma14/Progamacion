@@ -1,4 +1,3 @@
-package GExecpciones;
 import java.util.Scanner;
 
 public class Vector {

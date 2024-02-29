@@ -1,5 +1,3 @@
-package GExecpciones;
-
 
 import java.util.Scanner;
 
