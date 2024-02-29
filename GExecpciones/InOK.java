@@ -5,7 +5,10 @@ import java.util.Scanner;
 
 public class InOK {
 
-    static Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
+
+    public static final String[] COMPOSITORES = {"Bach", "Haydn", "Mozart", "Beethoven","Brahms", "Mahler", "Bartok"};
+
 
     public static void LeeInt(){
 
@@ -71,34 +74,32 @@ public class InOK {
         }
     }
 
-    
 
-    public static final String[] COMPOSITORES = {"Bach", "Haydn", "Mozart", "Beethoven","Brahms", "Mahler", "Bartok"};
+    public static void LeeString(){
 
-    public static int LeeString(){
-
-        boolean esta = false;
-
+        int esta = -1;
+      
         try{
-            System.out.print("Nombre de un compositor: ");
-            String palabra = sc.next();
-            
-            for (int i = 0; i < COMPOSITORES.length || esta == true; i++) {
-                if (COMPOSITORES[i].equals(palabra)) {
-                    System.out.print("Está en la posición: " + i);
-                    esta = true;
-                }if (esta = false){
-                    throw new ElementoNoExsistente("El compositor no está en la lista");
-                }
-            }       
-        }catch (ElementoNoExsistente e) {
-            System.out.println(" Error: " + (e.getMessage() == null ? "" : e.getMessage()));
-            sc.nextLine();
+          System.out.print("Nombre de un compositor: ");
+          String palabra = sc.next();
+      
+          for (int i = 0; i < COMPOSITORES.length; i++) {
+            if (COMPOSITORES[i].equals(palabra)) {
+                esta = i;
+            }
         }
-        return -1;
-    }
+        if (esta == -1) {
+            throw new ElementoNoExsistente("El compositor no está en la lista");
+        } else {
+            System.out.println("Está en la posición " + esta);
+        }
+        }catch (Exception e) {
+          System.out.println("Error: " + (e.getMessage() == null ? "" : e.getMessage()));
+          sc.nextLine();
+        }
+      }
 
-    public static void main(String[] args) throws ElementoNoExsistente {
+    public static void main(String[] args) {
 
         LeeInt();
         LeeIntPos();
