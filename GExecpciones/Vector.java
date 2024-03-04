@@ -10,7 +10,7 @@ public class Vector {
         for (int i = 0; i < vector.length; i++) {
             vector[i] = i;
         }
-
+        
         try {
             System.out.print("Posición: ");
             int pos = sc.nextInt();
