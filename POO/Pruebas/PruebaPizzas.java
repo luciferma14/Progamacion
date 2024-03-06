@@ -1,4 +1,4 @@
-import lib.Pizzas;
+import EjerExamenes.lib.Pizzas;
 
 public class PruebaPizzas {
     public static void main(String[] args) {

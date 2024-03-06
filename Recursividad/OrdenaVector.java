@@ -1,5 +1,6 @@
 import java.util.Arrays;
-import lib.QuickSort;
+
+import EjerExamenes.lib.QuickSort;
 
 public class OrdenaVector {
 

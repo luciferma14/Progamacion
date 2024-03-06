@@ -1,5 +1,5 @@
 
-import lib.Cafetera;
+import EjerExamenes.lib.Cafetera;lib.Cafetera;
 
 public class PruebaCafetera {
     public static void main(String[] args) {

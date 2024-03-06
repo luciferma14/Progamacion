@@ -1,3 +1,4 @@
+package EjerExamenes;
 import java.util.Scanner;
 
 import javax.sound.midi.Soundbank;

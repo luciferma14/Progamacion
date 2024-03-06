@@ -1,4 +1,4 @@
-import lib.Tiempo;
+import EjerExamenes.lib.Tiempo;
 
 public class PruebaTiempo {
 

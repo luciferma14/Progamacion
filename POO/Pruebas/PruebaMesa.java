@@ -1,6 +1,6 @@
 
 
-import lib.Mesa;
+import EjerExamenes.lib.Mesa;
 
 public class PruebaMesa{
 

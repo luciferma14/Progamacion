@@ -1,4 +1,4 @@
-package lib;
+package EjerExamenes;
 import java.util.Scanner;
 
 public class Cortesia {

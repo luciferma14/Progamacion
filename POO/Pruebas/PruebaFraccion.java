@@ -1,6 +1,6 @@
 
 
-import lib.Fraccion;
+import EjerExamenes.lib.Fraccion;
 
 public class PruebaFraccion {
     public static void main(String[] args) {
