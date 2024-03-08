@@ -1,0 +1,9 @@
+1. Crear un programa en java (llamado rmj) que permita borrar un
+fichero pasándole el nombre del ficherocomo argumento. El script
+tendrá la forma:
+java rmj fichero.txt
+El programa debe comprobar errores como que el fichero no exista
+o que si es un directorio mostrar mensaje de que es un directorio.
+2. Crear un programa que a partir de un nombre pasado como
+argumento diga si es un fichero o un directorio y muestre la ruta
+absoluta, el tamaño y sus permisos.
