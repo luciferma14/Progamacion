@@ -1,4 +1,6 @@
-public class rmj {
+import java.io.File;
+
+public class Rmj {
     public static void main(String[] args) {
         if (args.length != 1) {
             System.err.println("Usage: java rmj <file>");
