@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class LeerFichero{
+public class LeerFichArgs{
     public static void main(String[] args) {
         try {
                 File f = new File(args[0]);

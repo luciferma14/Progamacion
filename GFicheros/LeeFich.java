@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class prueba3{
+public class LeeFich{
     public static void main(String[] args) {
         try {
                 File f = new File("fichero.txt");

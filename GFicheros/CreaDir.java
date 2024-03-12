@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.IOException;
 
-public class prueba2{
+public class CreaDir{
     public static void main(String[] args) {
     
         try {
