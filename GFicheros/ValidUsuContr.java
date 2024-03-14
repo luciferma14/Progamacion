@@ -12,7 +12,7 @@ public class ValidUsuContr {
         String usu;
         String contr;
         Boolean salir = true;
-
+        
         while (salir) {
 
             try {
