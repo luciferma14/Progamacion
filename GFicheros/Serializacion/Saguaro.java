@@ -20,7 +20,7 @@ public class Saguaro {
 
                 String[] coma = linea.split(",");
 
-                linea = linea.replaceAll(" ", "").replaceAll(";", ",").replaceAll("\"", " ");
+                linea = linea.replace(" ", "").replace(";", ",").replace("\"", " ");
 
                 coma[2].equals("GALXY");
 
