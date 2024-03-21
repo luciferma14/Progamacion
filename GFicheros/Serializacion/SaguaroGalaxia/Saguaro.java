@@ -27,7 +27,7 @@ public class Saguaro {
             String dec;
             String mag;
 
-            File nuevo = new File("sag.bin");
+            File nuevo = new File("SAC.bin");
             FileOutputStream fos = new FileOutputStream(nuevo);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -37,15 +37,15 @@ public class Saguaro {
 
                 type = coma[2].replace("\"","");
 
-                linea = linea.replace(" ", "").replace(";", ",").replace("\"", " ");
+                linea = linea.replace(" ", "").replace(";", ",").replace("\"", "");
 
                 if (type.equals("GALXY")){
 
-                    object = coma[0].replace(" ", "").replace(";", ",").replace("\"", " ");
-                    con = coma[3].replace(" ", "").replace(";", ",").replace("\"", " ");
-                    ra = coma[4].replace(" ", "").replace(";", ",").replace("\"", " ");
-                    dec = coma[5].replace(" ", "").replace(";", ",").replace("\"", " ");
-                    mag = coma[6].replace(" ", "").replace(";", ",").replace("\"", " ");
+                    object = coma[0].replace(" ", "").replace(";", ",").replace("\"", "");
+                    con = coma[3].replace(" ", "").replace(";", ",").replace("\"", "");
+                    ra = coma[4].replace(" ", "").replace(";", ",").replace("\"", "");
+                    dec = coma[5].replace(" ", "").replace(";", ",").replace("\"", "");
+                    mag = coma[6].replace(" ", "").replace(";", ",").replace("\"", "");
                     Galaxia galaxy = new Galaxia(object, con, ra, dec, mag);
                     oos.writeObject(galaxy);
                 }
