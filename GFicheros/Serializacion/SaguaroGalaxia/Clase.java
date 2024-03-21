@@ -63,8 +63,8 @@ public class Clase {
             switch (opc) {
                 case 1:
                     try {
-                        System.out.println("Objeto: ");
-                        objs = sc.nextLine();
+                        System.out.print("Objeto: ");
+                        objs = sc.next();
                         gala = galaxia.get(objs);
                         System.out.println("OBJECT: " + gala.object);
                         System.out.println("CON: " + gala.con);
@@ -72,13 +72,13 @@ public class Clase {
                         System.out.println("DE: " + gala.dec);
                         System.out.println("MA: " + gala.mag);
                     
-                    } catch (NullPointerException e){
+                    } catch (Exception e){
                         System.out.println("No existe ese objeto :(");  
                     }
                 break;
                 case 2:
-                    System.out.println("Constelación: ");
-                    cons = sc.nextLine();
+                    System.out.print("Constelación: ");
+                    cons = sc.next();
                     for (int i = 0; i < galaxiaList.size(); i++){
                         Galaxia galax = galaxiaList.get(i);
                         if  (galax.con.equals(cons)){
@@ -93,7 +93,7 @@ public class Clase {
                     }
                 break;
                 case 3:
-                    System.out.println("Magnitud límite: ");
+                    System.out.print("Magnitud límite: ");
                     mag = sc.nextDouble();
                     try {
                         for (int i = 0; i < galaxiaList.size(); i++){
@@ -108,7 +108,7 @@ public class Clase {
                                 System.out.println("No existe esa magnitud :(");
                             }
                         }
-                    }catch (InputMismatchException e) {
+                    }catch (Exception e) {
                         System.out.println("El número tiene que llevar ','");
                     }
                     sc.nextLine();

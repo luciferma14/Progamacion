@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.FileOutputStream;
+import java.util.InputMismatchException;
 
 public class Saguaro {
     public static void main(String[] args) {
@@ -40,11 +41,11 @@ public class Saguaro {
 
                 if (type.equals("GALXY")){
 
-                    object = coma[0];
-                    con = coma[3];
-                    ra = coma[4];
-                    dec = coma[5];
-                    mag = coma[6];
+                    object = coma[0].replace(" ", "").replace(";", ",").replace("\"", " ");
+                    con = coma[3].replace(" ", "").replace(";", ",").replace("\"", " ");
+                    ra = coma[4].replace(" ", "").replace(";", ",").replace("\"", " ");
+                    dec = coma[5].replace(" ", "").replace(";", ",").replace("\"", " ");
+                    mag = coma[6].replace(" ", "").replace(";", ",").replace("\"", " ");
                     Galaxia galaxy = new Galaxia(object, con, ra, dec, mag);
                     oos.writeObject(galaxy);
                 }
