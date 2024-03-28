@@ -12,14 +12,16 @@ public class ReservaVuelos{
             String vuelos;
 
             //Conexión con la BD
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ReservaVuelos","lucia", "lucia");
+
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
              // Creamos un objeto para enviar sentencias SQL a la BD
             Statement st = con.createStatement();
              // Ejecutamos la consulta SQL y obtenemos el resultado en ResultSet
             //ResultSet rs = st.executeQuery("SELECT NOM, CLIENT_COD FROM CLIENT");
 
-            vuelos =  "CREATE TABLE(" + "id_vuelo INT PRIMARY KEY," + "numero_vuelo INT NOT NULL," + "origen VARCHAR(50) NOT NULL," + "destino VARCHAR(50) NOT NULL," + "fecha DATE NOT NULL," + "capacidad INT NOT NULL)";
-            st.executeUpdate(vuelos);
+            // vuelos =  "CREATE TABLE(" + "id_vuelo INT PRIMARY KEY," + "numero_vuelo INT NOT NULL," + "origen VARCHAR(50) NOT NULL," + "destino VARCHAR(50) NOT NULL," + "fecha DATE NOT NULL," + "capacidad INT NOT NULL)";
+            // st.executeUpdate(vuelos);
 
 
 
