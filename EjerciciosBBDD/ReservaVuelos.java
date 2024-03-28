@@ -36,3 +36,5 @@ public class ReservaVuelos{
 }
 
 //compilar javac -cp :lib/mysql-connector-j-8.3.0.jar ReservaVuelos.java 
+
+// https://gemini.google.com/app/66e4d6161e6022f7
