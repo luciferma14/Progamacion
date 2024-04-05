@@ -140,7 +140,7 @@ public class GestionVuelos{
         String numPasaport;
         int plazasDisp;
         int numAsiento;
-        int filasAñadidas;
+        int filasAnyadidas;
 
 
         try {
@@ -182,9 +182,9 @@ public class GestionVuelos{
             st.setInt(2, pasajero.getId_pasajero());
             st.setInt(3, numAsiento);
 
-            filasAñadidas = st.executeUpdate();
+            filasAnyadidas = st.executeUpdate();
 
-            if (filasAñadidas > 0){
+            if (filasAnyadidas > 0){
                 System.out.println("Reserva  realizada correctamente");
             }else {
                 System.out.println("Error al reservar vuelo");
@@ -246,31 +246,50 @@ public class GestionVuelos{
         
     }
 
-    public static void modificarReserva(Connection con, int idReserva, String nuevoAsiento) throws SQLException {
+    private static void modificarReserva() {
 
-        // Verificar si la reserva existe
-        String sql = "SELECT COUNT(*) AS Número_Reservas FROM Reservas WHERE id_reserva = ?";
-        PreparedStatement st = con.prepareStatement(sql);
-        st.setInt(1, idReserva);
+        Scanner sc  = new Scanner(System.in);
 
-        ResultSet resultSet = st.executeQuery();
+        int idReserva;
+        String nuevoAsiento;
 
-        if (!resultSet.next() || resultSet.getInt("num_reservas") == 0) {
-            throw new IllegalArgumentException("No se encontró una reserva con el ID: " + idReserva);
-        }
+        try {
 
-        // Actualizar el asiento de la reserva
-        sql = "UPDATE Reservas SET asiento = ? WHERE id_reserva = ?";
-        st = con.prepareStatement(sql);
-        st.setString(1, nuevoAsiento);
-        st.setInt(2, idReserva);
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            // Verificar si la reserva existe
+            String sql = "SELECT COUNT(*) AS Número_Reservas FROM Reservas WHERE id_reserva = ?";
+            PreparedStatement st = con.prepareStatement(sql);
 
-        int filasAfectadas = st.executeUpdate();
+            System.out.print("Número de resera: ");
+            idReserva = sc.nextInt();
+            st.setInt(1, idReserva);
 
-        if (filasAfectadas > 0) {
-            System.out.println("Reserva modificada correctamente. Nuevo asiento: " + nuevoAsiento);
-        } else {
-            System.out.println("Error al modificar la reserva.");
+            ResultSet resultSet = st.executeQuery();
+
+            if (!resultSet.next() || resultSet.getInt("num_reservas") == 0) {
+                throw new IllegalArgumentException("No se encontró una reserva con el ID: " + idReserva);
+            }
+
+            // Actualizar el asiento de la reserva
+
+            System.out.print("Número asiento: ");
+            nuevoAsiento = sc.nextLine();
+
+            sql = "UPDATE Reservas SET asiento = ? WHERE id_reserva = ?";
+            st = con.prepareStatement(sql);
+            st.setInt(1,idReserva );
+            st.setString(2, nuevoAsiento);
+
+            int filasAfectadas = st.executeUpdate();
+
+            if (filasAfectadas > 0) {
+                System.out.println("Reserva modificada correctamente. Nuevo asiento: " + nuevoAsiento);
+            } else {
+                System.out.println("Error al modificar la reserva.");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
         }
     }
 
