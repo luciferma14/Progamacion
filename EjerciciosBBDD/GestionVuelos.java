@@ -29,16 +29,23 @@ public class GestionVuelos{
 
             case 1: altaVuelos();
             break;
+
             case 2: altaPasajeros();
             break;
+
             case 3: reservaVuelos();
             break;
+
             case 4: modificarReserva();
             break;
 
+            case 5: bajaReserva();
+            break;
 
             case 6: System.exit(0);
             break;
+
+            default: System.out.println("Opcion no válida");
         }
     }
 
@@ -57,9 +64,10 @@ public class GestionVuelos{
         int comprobacion;
 
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
 
+            //Seleccionar todos los datos
             System.out.print("ID vuelo: ");
             idVuelo = sc.nextInt();
             System.out.print("Número de vuelo:");
@@ -74,6 +82,7 @@ public class GestionVuelos{
             System.out.print("Capacidad: ");
             capacidad = sc.nextInt();
 
+            //Añadir los datos a la SQL
             vueloSql = "INSERT INTO vuelos (id_vuelo, numero_vuelo, origen, destino, fecha, capacidad) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement st = con.prepareStatement(vueloSql);
             st.setInt(1, idVuelo);
@@ -83,6 +92,7 @@ public class GestionVuelos{
             st.setString(5, fecha);
             st.setInt(6, capacidad);
 
+            //Comprobar que todo haya ido bien
             comprobacion = st.executeUpdate();
             if (comprobacion > 0) {
                 System.out.println("Alta correcta");
@@ -105,8 +115,9 @@ public class GestionVuelos{
         int comprobacion;
 
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");            
+            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass"); 
+                      
             System.out.print("ID pasajero: ");
             idPasajero = sc.nextInt();
             System.out.print("Número de pasaporte:");
@@ -140,12 +151,12 @@ public class GestionVuelos{
         String numPasaport;
         int plazasDisp;
         int numAsiento;
-        int filasAnyadidas;
-
+        int comprobarcion;
 
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+
             //Seleccionar vuelo
             System.out.print("Número de vuelo: ");
             numVuelo  = sc.nextLine();
@@ -182,9 +193,9 @@ public class GestionVuelos{
             st.setInt(2, pasajero.getId_pasajero());
             st.setInt(3, numAsiento);
 
-            filasAnyadidas = st.executeUpdate();
+            comprobarcion = st.executeUpdate();
 
-            if (filasAnyadidas > 0){
+            if (comprobarcion > 0){
                 System.out.println("Reserva  realizada correctamente");
             }else {
                 System.out.println("Error al reservar vuelo");
@@ -193,16 +204,16 @@ public class GestionVuelos{
             e.printStackTrace();
         }
     }
-
+    //Función para reservaVuelos
     private static int dameNumReservasVuelos(Connection con, int idVuelo) throws SQLException {
         String sql = "SELECT COUNT(*) AS Número_reservas FROM Vuelos_Pasajeros WHERE id_vuelo = ?";
         PreparedStatement st = con.prepareStatement(sql);
         st.setInt(1, idVuelo);
 
-        ResultSet resultSet = st.executeQuery();
+        ResultSet rs = st.executeQuery();
 
-        if (resultSet.next()) {
-            return resultSet.getInt("num_reservas");
+        if (rs.next()) {
+            return rs.getInt("num_reservas");
         } else {
             return 0;
         }
@@ -213,11 +224,11 @@ public class GestionVuelos{
         PreparedStatement st = con.prepareStatement(sql);
         st.setString(1, numPasaport);
 
-        ResultSet resultSet = st.executeQuery();
+        ResultSet rs = st.executeQuery();
 
-        if (resultSet.next()) {
-            int idPasajero = resultSet.getInt("id_pasajero");
-            String nombre = resultSet.getString("nombre_pasajero");
+        if (rs.next()) {
+            int idPasajero = rs.getInt("id_pasajero");
+            String nombre = rs.getString("nombre_pasajero");
 
             return new Pasajero(idPasajero, numPasaport, nombre);
         } else {
@@ -230,14 +241,14 @@ public class GestionVuelos{
         PreparedStatement st = con.prepareStatement(sql);
         st.setString(1, numVuelo);
 
-        ResultSet resultSet = st.executeQuery();
+        ResultSet rs = st.executeQuery();
 
-        if (resultSet.next()) {
-            int idVuelo = resultSet.getInt("id_vuelo");
-            String origen = resultSet.getString("origen");
-            String destino = resultSet.getString("destino");
-            Date fecha = resultSet.getDate("fecha");
-            int capacidad = resultSet.getInt("capacidad");
+        if (rs.next()) {
+            int idVuelo = rs.getInt("id_vuelo");
+            String origen = rs.getString("origen");
+            String destino = rs.getString("destino");
+            Date fecha = rs.getDate("fecha");
+            int capacidad = rs.getInt("capacidad");
 
             return new Vuelo(idVuelo, numVuelo, origen, destino, fecha, capacidad);
         } else {
@@ -255,8 +266,9 @@ public class GestionVuelos{
 
         try {
 
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+
             // Verificar si la reserva existe
             String sql = "SELECT COUNT(*) AS Número_Reservas FROM Reservas WHERE id_reserva = ?";
             PreparedStatement st = con.prepareStatement(sql);
@@ -265,12 +277,11 @@ public class GestionVuelos{
             idReserva = sc.nextInt();
             st.setInt(1, idReserva);
 
-            ResultSet resultSet = st.executeQuery();
+            ResultSet rs = st.executeQuery();
 
-            if (!resultSet.next() || resultSet.getInt("num_reservas") == 0) {
+            if (!rs.next() || rs.getInt("num_reservas") == 0) {
                 throw new IllegalArgumentException("No se encontró una reserva con el ID: " + idReserva);
             }
-
             // Actualizar el asiento de la reserva
 
             System.out.print("Número asiento: ");
@@ -281,9 +292,9 @@ public class GestionVuelos{
             st.setInt(1,idReserva );
             st.setString(2, nuevoAsiento);
 
-            int filasAfectadas = st.executeUpdate();
+            int comprobacion = st.executeUpdate();
 
-            if (filasAfectadas > 0) {
+            if (comprobacion > 0) {
                 System.out.println("Reserva modificada correctamente. Nuevo asiento: " + nuevoAsiento);
             } else {
                 System.out.println("Error al modificar la reserva.");
@@ -293,4 +304,53 @@ public class GestionVuelos{
         }
     }
 
+    private static void bajaReserva(){
+
+        Scanner sc = new Scanner (System.in);
+
+        String numVuelo;
+        String pasajero;
+        int idPasajero;
+        int comprobacion;
+
+        try{
+            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+
+            System.out.print("Id vuelo que quiere borrar: ");
+            numVuelo = sc.nextLine();
+
+            System.out.print("Nombre pasajero: ");
+            pasajero = sc.nextLine();
+
+            String sql = "SELECT id_pasajero FROM Pasajeros WHERE nombre_pasajero = ?";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, pasajero);
+
+            ResultSet rs = st.executeQuery();
+
+            if (!rs.next()) {
+            System.out.println("No se encontró un pasajero con el nombre: " + pasajero);
+                return;
+            }
+
+            idPasajero = rs.getInt("id_pasajero");
+
+            sql = "DELETE FROM Vuelos_Pasajeros WHERE numero_vuelo = ? AND id_pasajero = ?";
+            st = con.prepareStatement(sql);
+            st.setString(1, numVuelo);
+            st.setInt(2, idPasajero);
+
+            comprobacion = st.executeUpdate();
+
+            if (comprobacion > 0){
+                System.out.println("Reserva borrada correctamente");
+            }else {
+                System.out.println("Error al eliminar la reserva");
+            }
+           
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
