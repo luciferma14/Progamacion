@@ -83,7 +83,7 @@ public class GestionVuelos{
             capacidad = sc.nextInt();
 
             //Añadir los datos a la SQL
-            vueloSql = "INSERT INTO vuelos (id_vuelo, numero_vuelo, origen, destino, fecha, capacidad) VALUES (?, ?, ?, ?, ?, ?)";
+            vueloSql = "INSERT INTO Vuelos (id_vuelo, numero_vuelo, origen, destino, fecha, capacidad) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement st = con.prepareStatement(vueloSql);
             st.setInt(1, idVuelo);
             st.setString(2, numVuelos);
@@ -126,7 +126,7 @@ public class GestionVuelos{
             nombrePasajero = sc.nextLine();
 
 
-            pasaSql = "INSERT INTO pasajeros (id_pasajeros, numero_pasaporte, nombre_pasajero) VALUES (?, ?, ?)";
+            pasaSql = "INSERT INTO Pasajeros (id_pasajeros, numero_pasaporte, nombre_pasajero) VALUES (?, ?, ?)";
             PreparedStatement st = con.prepareStatement(pasaSql);
             st.setInt(1, idPasajero);
             st.setString(2, numPasaporte);
