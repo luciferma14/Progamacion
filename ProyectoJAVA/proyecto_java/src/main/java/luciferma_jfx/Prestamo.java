@@ -1,3 +1,5 @@
+package luciferma_jfx;
+
 import java.util.Date;
 import java.util.List;
 
