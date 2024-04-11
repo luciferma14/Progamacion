@@ -64,8 +64,8 @@ public class GestionVuelos{
         int comprobacion;
 
         try {
-            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
 
             //Seleccionar todos los datos
             System.out.print("ID vuelo: ");
@@ -115,8 +115,8 @@ public class GestionVuelos{
         int comprobacion;
 
         try {
-            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass"); 
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass"); 
                       
             System.out.print("ID pasajero: ");
             idPasajero = sc.nextInt();
@@ -154,8 +154,8 @@ public class GestionVuelos{
         int comprobarcion;
 
         try {
-            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
 
             //Seleccionar vuelo
             System.out.print("Número de vuelo: ");
@@ -266,8 +266,8 @@ public class GestionVuelos{
 
         try {
 
-            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
 
             // Verificar si la reserva existe
             String sql = "SELECT COUNT(*) AS Número_Reservas FROM Reservas WHERE id_reserva = ?";
@@ -314,8 +314,8 @@ public class GestionVuelos{
         int comprobacion;
 
         try{
-            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/reservavuelos","lucia","lucia");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/ReservaVuelos","root", "dbrootpass");
 
             System.out.print("Id vuelo que quiere borrar: ");
             numVuelo = sc.nextLine();
