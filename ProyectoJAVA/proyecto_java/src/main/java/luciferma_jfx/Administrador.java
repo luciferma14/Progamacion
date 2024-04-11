@@ -1,3 +1,4 @@
+package luciferma_jfx;
 public class Administrador{
 
     public static void agregarUsu(Usuarios usuario){

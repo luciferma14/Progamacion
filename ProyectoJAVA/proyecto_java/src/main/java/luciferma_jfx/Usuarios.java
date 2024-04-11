@@ -1,3 +1,4 @@
+package luciferma_jfx;
 public class Usuarios {
     private int id;
     private String nombre;
