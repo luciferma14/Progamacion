@@ -85,21 +85,31 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="174.0" layoutY="30.0" text="Tu Mundo En Palabras" textAlignment="CENTER" textOverrun="CLIP">
+            <Label layoutX="156.0" layoutY="95.0" prefHeight="39.0" prefWidth="326.0" text="Tu Mundo En Palabras" textAlignment="CENTER" textOverrun="CLIP">
                <font>
-                  <Font name="Noto Serif Regular" size="27.0" />
+                  <Font name="Serif Regular" size="34.0" />
                </font>
             </Label>
-            <Button layoutX="492.0" layoutY="7.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="64.0" text="Iniciar sesión">
+            <Button fx:id="idInicarSesion" layoutX="437.0" layoutY="9.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="96.0" text="Iniciar sesión">
                <font>
-                  <Font size="7.0" />
+                  <Font size="13.0" />
                </font>
             </Button>
-            <Button layoutX="569.0" layoutY="7.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="64.0" text="Resgistarse">
+            <Button fx:id="idRegirtar" layoutX="546.0" layoutY="9.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" text="Resgistrarse">
                <font>
-                  <Font size="7.0" />
+                  <Font size="13.0" />
                </font>
             </Button>
+            <Label layoutX="126.0" layoutY="147.0" prefHeight="39.0" prefWidth="388.0" text="Donde encotrarás todos los libros que quieras" textAlignment="CENTER" textOverrun="CLIP">
+               <font>
+                  <Font name="Serif Regular" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="130.0" layoutY="199.0" prefHeight="39.0" prefWidth="378.0" text="Inicia sesión o Regístrate si ya tienes una cuenta con nosotros" textAlignment="CENTER" textOverrun="CLIP">
+               <font>
+                  <Font name="Serif Regular" size="15.0" />
+               </font>
+            </Label>
          </children>
     </AnchorPane>
   </children>
