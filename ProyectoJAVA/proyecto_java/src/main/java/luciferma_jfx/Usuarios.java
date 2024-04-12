@@ -18,7 +18,10 @@ public class Usuarios {
             Connection con = ConexionBD.getConnection();
 
             String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
-            
+
+        }catch (SQLException e) {
+            // Manejar la excepción de SQL (código previo)
+            e.printStackTrace();
         }
         return null; //de momento
     }
