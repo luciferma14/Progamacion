@@ -1,10 +1,16 @@
 package luciferma_jfx;
 
+import java.util.Scanner;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Usuarios {
+
+    Scanner sc = new Scanner(System.in);
+
     private int id;
     private String nombre;
     private String apellido;
@@ -15,12 +21,16 @@ public class Usuarios {
     public static Usuarios login(String email, String password){
         //Consultar en la base de datos el usuario con el email y password
         try{
+            String sql;
             Connection con = ConexionBD.getConnection();
+            PreparedStatement st = con.prepareStatement(sql);
 
-            String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
+            sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
+            st.setString(1, email);
+            st.setString(2, password);
+            ResultSet rs = st.executeQuery();
 
         }catch (SQLException e) {
-            // Manejar la excepción de SQL (código previo)
             e.printStackTrace();
         }
         return null; //de momento
