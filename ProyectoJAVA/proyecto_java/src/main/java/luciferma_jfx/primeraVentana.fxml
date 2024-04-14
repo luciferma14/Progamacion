@@ -100,12 +100,12 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Label layoutX="126.0" layoutY="147.0" prefHeight="39.0" prefWidth="388.0" text="Donde encotrarás todos los libros que quieras" textAlignment="CENTER" textOverrun="CLIP">
+            <Label layoutX="121.0" layoutY="147.0" prefHeight="39.0" prefWidth="398.0" text="Donde encontrarás todos los libros que quieras" textAlignment="CENTER" textOverrun="CLIP">
                <font>
                   <Font name="Serif Regular" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="130.0" layoutY="199.0" prefHeight="39.0" prefWidth="378.0" text="Inicia sesión o Regístrate si ya tienes una cuenta con nosotros" textAlignment="CENTER" textOverrun="CLIP">
+            <Label layoutX="131.0" layoutY="187.0" prefHeight="39.0" prefWidth="378.0" text="Inicia sesión o Regístrate si ya tienes una cuenta con nosotros" textAlignment="CENTER" textOverrun="CLIP">
                <font>
                   <Font name="Serif Regular" size="15.0" />
                </font>
