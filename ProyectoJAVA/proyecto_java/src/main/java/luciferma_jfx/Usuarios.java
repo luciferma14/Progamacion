@@ -23,9 +23,9 @@ public class Usuarios {
         try{
             String sql;
             Connection con = ConexionBD.getConnection();
-            PreparedStatement st = con.prepareStatement(sql);
-
+            
             sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
+            PreparedStatement st = con.prepareStatement(sql);
             st.setString(1, email);
             st.setString(2, password);
             ResultSet rs = st.executeQuery();
@@ -36,13 +36,13 @@ public class Usuarios {
         return null; //de momento
     }
 
-    // public void registar(){
-    //     //Insertar el nuevo usuario en la base de datos
-    // }
+    public void registar(){
+        //Insertar el nuevo usuario en la base de datos
+    }
 
-    // public void modPerfil(){
-    //     //Actualizar la información del usuario en la base de datos
-    // }
+    public void modPerfil(){
+        //Actualizar la información del usuario en la base de datos
+    }
 
 
     //conexión con la base de datos
