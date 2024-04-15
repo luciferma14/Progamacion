@@ -3,6 +3,7 @@ module luciferma_jfx {
     requires javafx.fxml;
     requires java.sql;
     requires javafx.base;
+    requires javafx.graphics;
 
     opens luciferma_jfx to javafx.fxml;
     exports luciferma_jfx;

@@ -96,7 +96,7 @@
                   <Font size="13.0" />
                </font>
             </Button>
-            <Button fx:id="idRegirtar" layoutX="546.0" layoutY="9.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" text="Resgistrarse">
+            <Button fx:id="idRegistar" layoutX="546.0" layoutY="9.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="89.0" text="Resgistrarse">
                <font>
                   <Font size="13.0" />
                </font>
