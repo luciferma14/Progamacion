@@ -1,3 +1,5 @@
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,6 +36,7 @@ public class LoginController implements Initializable {
             // Credenciales incorrectas: mostrar mensaje de error
             mensajeLabel.setText("Correo electrónico o contraseña incorrectos");
         }
+        App.setRoot("secondary");
     }
 
     private boolean validarCredenciales(String correoElectronico, String contraseña) {
