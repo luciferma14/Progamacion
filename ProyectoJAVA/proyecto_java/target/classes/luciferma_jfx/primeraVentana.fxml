@@ -61,7 +61,7 @@
                         <Font name="Serif Regular" size="34.0" />
                      </font>
                   </Label>
-                  <Button fx:id="idInicarSesion" layoutX="405.0" layoutY="11.0" onAction="#inicoSesion" text="Iniciar sesión">
+                  <Button fx:id="idInicarSesion" layoutX="405.0" layoutY="11.0" onAction="#cambiarAInicioSesion" text="Iniciar sesión">
                      <font>
                         <Font size="13.0" />
                      </font>

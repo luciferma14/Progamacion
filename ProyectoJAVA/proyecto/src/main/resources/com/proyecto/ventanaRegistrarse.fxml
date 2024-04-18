@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="ventanaRegistrarse" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #a2e6f5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.ventanaRegistrarseController">
+   <children>
+      <MenuBar style="-fx-background-color: #73ddf5;">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Close" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Delete" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Label layoutX="158.0" layoutY="192.0" prefHeight="16.0" prefWidth="243.0" text="Nombre usuario / correo electrónico" textFill="#2c178d" />
+      <TextField fx:id="idUser" layoutX="158.0" layoutY="214.0" onAction="#cambiaAPrimeraVentana" prefHeight="24.0" prefWidth="284.0" promptText="Escriba su usuario / email..." style="-fx-background-color: #e3dff7; -fx-border-color: #2c178d;" />
+      <Label layoutX="158.0" layoutY="248.0" prefHeight="16.0" prefWidth="80.0" text="Contraseña" textFill="#2c178d" />
+      <PasswordField fx:id="idPass" layoutX="158.0" layoutY="270.0" onAction="#cambiaAPrimeraVentana" prefHeight="24.0" prefWidth="284.0" promptText="Contraseña..." style="-fx-background-color: #e3dff7; -fx-border-color: #2c178d;" />
+      <Button fx:id="idVolver" layoutX="62.0" layoutY="327.0" mnemonicParsing="false" onAction="#cambiaAPrimeraVentana" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" AnchorPane.bottomAnchor="49.0" />
+      <Label layoutX="158.0" layoutY="76.0" prefHeight="16.0" prefWidth="60.0" text="Nombre" textFill="#2c178d" />
+      <TextField fx:id="idNombre" layoutX="158.0" layoutY="99.0" onAction="#cambiaAPrimeraVentana" prefHeight="24.0" prefWidth="284.0" promptText="Escriba su nombre..." style="-fx-background-color: #e3dff7; -fx-border-color: #2c178d;" />
+      <Label layoutX="158.0" layoutY="130.0" prefHeight="16.0" prefWidth="60.0" text="Apellido" textFill="#2c178d" />
+      <TextField fx:id="idApellido" layoutX="158.0" layoutY="152.0" onAction="#cambiaAPrimeraVentana" prefHeight="24.0" prefWidth="284.0" promptText="Escriba su apellido..." style="-fx-background-color: #e3dff7; -fx-border-color: #2c178d;" />
+      <Button fx:id="idRegistrar" layoutX="431.0" layoutY="327.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="106.0" style="-fx-background-color: #bbb0f7;" text="Registrarse" textFill="#2c178d" />
+   </children>
+</AnchorPane>

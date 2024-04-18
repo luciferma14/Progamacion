@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.primeraVentanaController">
+  <children>
+    <MenuBar style="-fx-background-color: #73ddf5;">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+             <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <VBox fx:id="primeraVentana" VBox.vgrow="ALWAYS">
+         <children>
+          <AnchorPane fx:id="primeraVentana" maxHeight="-1.0" maxWidth="-1.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #a2e6f5;">
+               <children>
+                  <Label layoutX="110.0" layoutY="52.0" prefHeight="41.0" prefWidth="421.0" text="Tu Mundo En Palabras" textAlignment="CENTER" textFill="#3f1ea4" textOverrun="CLIP">
+                     <font>
+                        <Font name="Serif Regular" size="34.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="idInicarSesion" layoutX="405.0" layoutY="11.0" onAction="#cambiarAInicioSesion" style="-fx-background-color: #bbb0f7;" text="Iniciar sesión" textFill="#2c178d">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="idRegistar" layoutX="531.0" layoutY="11.0" onAction="#cambiarARegistrarse" style="-fx-background-color: #bbb0f7;" text="Resgistrarse" textFill="#2c178d">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="93.0" layoutY="101.0" prefHeight="39.0" prefWidth="455.0" text="Donde encontrarás todos los libros que quieras" textAlignment="CENTER" textFill="#3d1fa1" textOverrun="CLIP">
+                     <font>
+                        <Font name="Serif Regular" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="132.0" layoutY="320.0" prefHeight="39.0" prefWidth="378.0" text="Regístrate o Inicia Sesión si ya tienes una cuenta con nosotros" textAlignment="CENTER" textFill="#3d1fa1" textOverrun="CLIP">
+                     <font>
+                        <Font name="Serif Regular" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="41.0" layoutY="171.0" text="Buscar tu libro" textFill="#3d1fa1" />
+                  <TextField fx:id="idBusca" layoutX="149.0" layoutY="167.0" promptText="Escriba su libro..." style="-fx-border-color: #3d1fa1; -fx-background-color: #e3dff7;" />
+                  <Label layoutX="41.0" layoutY="227.0" text="Reserva tu libro" textFill="#3d1fa1" />
+                  <TextField fx:id="idReseva" layoutX="149.0" layoutY="222.0" promptText="Escriba su libro..." style="-fx-border-color: #3d1fa1; -fx-background-color: #e3dff7;" />
+               </children>
+          </AnchorPane>
+         </children>
+      </VBox>
+  </children>
+</VBox>
