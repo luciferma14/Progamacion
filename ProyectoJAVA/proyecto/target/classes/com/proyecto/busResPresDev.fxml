@@ -13,6 +13,6 @@
          </font>
       </Label>
       <Label layoutX="54.0" layoutY="152.0" text="Buscar" textFill="#3f1ea4" />
-      <TextField fx:id="busca" layoutX="114.0" layoutY="148.0" promptText="Escribe tu libro..." />
+      <TextField fx:id="busca" layoutX="114.0" layoutY="148.0" promptText="Escribe tu libro..." style="-fx-background-color: #e3dff7; -fx-border-color: #2c178d;" />
    </children>
 </AnchorPane>
