@@ -35,6 +35,6 @@
       <Label layoutX="158.0" layoutY="178.0" prefHeight="16.0" prefWidth="80.0" text="Contraseña" textFill="#2c178d" />
       <PasswordField fx:id="idPass" layoutX="158.0" layoutY="200.0" onAction="#cambiaAPrimeraVentana" prefHeight="24.0" prefWidth="284.0" promptText="Contraseña..." style="-fx-border-color: #2c178d; -fx-background-color: #e3dff7;" />
       <Button fx:id="idVolver" layoutX="60.0" layoutY="327.0" mnemonicParsing="false" onAction="#cambiaAPrimeraVentana" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
-      <Button fx:id="idIniciar" layoutX="412.0" layoutY="327.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="106.0" style="-fx-background-color: #bbb0f7;" text="Iniciar Sesión" textFill="#2c178d" />
+      <Button fx:id="idIniciar" layoutX="412.0" layoutY="327.0" mnemonicParsing="false" onAction="#cambiaABusResPresDev" prefHeight="24.0" prefWidth="106.0" style="-fx-background-color: #bbb0f7;" text="Iniciar Sesión" textFill="#2c178d" />
    </children>
 </AnchorPane>
