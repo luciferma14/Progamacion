@@ -9,4 +9,9 @@ public class ventanaInicioSesionController {
     private void cambiaAPrimeraVentana() throws IOException {
         App.setRoot("primeraVentana");
     }
+
+    @FXML
+    private void cambiaABusResPresDev() throws IOException {
+        App.setRoot("busResPresDev");
+    }
 }
