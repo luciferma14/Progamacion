@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="busResPresDev" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #a2e6f5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="tittulo" layoutX="54.0" layoutY="57.0" text="Aquí busca, reserva, presta y devuelve los libros" textFill="#3f1ea4">
+         <font>
+            <Font name="Serif Regular" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="152.0" text="Buscar" textFill="#3f1ea4" />
+      <TextField layoutX="114.0" layoutY="148.0" promptText="Escribe tu libro..." />
+   </children>
+</AnchorPane>
