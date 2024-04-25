@@ -22,6 +22,6 @@
             <MenuItem fx:id="idDevolver" mnemonicParsing="false" text="Devolver" />
         </items>
       </MenuButton>
-      <Button layoutX="80.0" layoutY="312.0" mnemonicParsing="false" onAction="#cambiaAPrimeraVentana" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
+      <Button fx:id="idVolver" layoutX="80.0" layoutY="312.0" mnemonicParsing="false" onAction="#cambiaAPrimeraVentana" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
    </children>
 </AnchorPane>

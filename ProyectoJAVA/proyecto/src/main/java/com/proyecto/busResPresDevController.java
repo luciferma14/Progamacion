@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 public class busResPresDevController {
 
     @FXML
-    private void cambiaAPrimeraVentana() throws IOException {
-        App.setRoot("primeraVentana");
+    private void cambiaAOpciones() throws IOException {
+        App.setRoot("busResPresDev");
     }
 
     @FXML

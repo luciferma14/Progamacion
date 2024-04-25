@@ -33,18 +33,18 @@ public class Database {
 		public static Connection getDBConnection() throws SQLException {
 			Connection connection = null;
 
-			try {
-				Class.forName(DB_DRIVER);
-			} catch (ClassNotFoundException exception) {
-				logger.log(Level.SEVERE, exception.getMessage());
-			}
+			// try {
+			// 	Class.forName(driv);
+			// } catch (ClassNotFoundException exception) {
+			// 	logger.log(Level.SEVERE, exception.getMessage());
+			// }
 
-			try {
-				connection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-				return connection;
-			} catch (SQLException exception) {
-				logger.log(Level.SEVERE, exception.getMessage());
-			}
+			// try {
+			// 	connection = DriverManager.getConnection(bibl, usr, pass);
+			// 	return connection;
+			// } catch (SQLException exception) {
+			// 	logger.log(Level.SEVERE, exception.getMessage());
+			// }
 
 			return connection;
 		}
