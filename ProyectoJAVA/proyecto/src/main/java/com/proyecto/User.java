@@ -17,6 +17,11 @@ public class User implements Serializable {
 	public SimpleStringProperty nom = new SimpleStringProperty();
 	public SimpleStringProperty pas = new SimpleStringProperty();
 
+	idUser.setText("");
+	idPass.setText("");
+	idNombre.setText("");
+	idApellido.setText("");
+
 
 	public int getId() {
 		return id;

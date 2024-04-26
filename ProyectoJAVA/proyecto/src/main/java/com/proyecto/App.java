@@ -36,8 +36,5 @@ public class App extends Application {
         launch();
     }
 
-    public static ObservableList<User> getUsers() {
-        return null;
-    }
 
 }

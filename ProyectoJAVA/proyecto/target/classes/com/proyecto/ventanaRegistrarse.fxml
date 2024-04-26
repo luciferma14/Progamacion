@@ -38,7 +38,7 @@
       <TextField fx:id="idNombre" layoutX="158.0" layoutY="99.0" onAction="#cambiaAPrimeraVentana" prefHeight="24.0" prefWidth="284.0" promptText="Escriba su nombre..." style="-fx-background-color: #e3dff7; -fx-border-color: #2c178d;" />
       <Label layoutX="158.0" layoutY="130.0" prefHeight="16.0" prefWidth="60.0" text="Apellido" textFill="#2c178d" />
       <TextField fx:id="idApellido" layoutX="158.0" layoutY="152.0" onAction="#cambiaAPrimeraVentana" prefHeight="24.0" prefWidth="284.0" promptText="Escriba su apellido..." style="-fx-background-color: #e3dff7; -fx-border-color: #2c178d;" />
-      <Button fx:id="idRegistrar" layoutX="431.0" layoutY="327.0" mnemonicParsing="false" onAction="#cambiaABusResPresDev" prefHeight="24.0" prefWidth="106.0" style="-fx-background-color: #bbb0f7;" text="Registrarse" textFill="#2c178d" />
+      <Button fx:id="idRegistrar" layoutX="431.0" layoutY="327.0" mnemonicParsing="false" onAction="#registrar" prefHeight="24.0" prefWidth="106.0" style="-fx-background-color: #bbb0f7;" text="Registrarse" textFill="#2c178d" />
       <Button fx:id="idVolver" layoutX="62.0" layoutY="327.0" mnemonicParsing="false" onAction="#cambiaAPrimeraVentana" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" AnchorPane.bottomAnchor="49.0" />
 
    </children>

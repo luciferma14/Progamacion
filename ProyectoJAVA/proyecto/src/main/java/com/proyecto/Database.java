@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database{
-    private static String driv = "com.mysql.cj.jdbc.Driver";
+    private static String driv = "com.mysql.jdbc.Driver";
     private static String bibl = "jdbc:mysql:33006/Biblioteca";
     private static String usr= "root";
     private static String pass = "dbrootpass";	
@@ -21,21 +21,20 @@ public class Database{
         }
     }
     public static Connection getDBConnection() throws SQLException {
-        Connection connection = null;
+        Connection con = DriverManager.getConnection(bibl,usr,pass);
 
         try {
         	Class.forName(driv);
 
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (ClassNotFoundException exception) {
         }
 
         try {
-        	connection = DriverManager.getConnection(bibl, usr, pass);
-        	return connection;
+        	con = DriverManager.getConnection(bibl, usr, pass);
+        	return con;
         } catch (SQLException e) {
     
-            return connection;
+            return con;
         
         }
     }

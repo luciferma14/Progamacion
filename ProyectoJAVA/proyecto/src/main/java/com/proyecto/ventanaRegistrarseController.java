@@ -1,6 +1,12 @@
 package com.proyecto;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
 
 import javax.swing.Action;
 
@@ -16,11 +22,6 @@ public class ventanaRegistrarseController {
     private void cambiaAPrimeraVentana() throws IOException {
         App.setRoot("primeraVentana");
     }
-    
-    @FXML
-    private void cambiaABusResPresDev() throws IOException {
-        App.setRoot("busResPresDev");
-    }
 
     @FXML
 	private TextField idUser;
@@ -31,23 +32,50 @@ public class ventanaRegistrarseController {
 	@FXML
 	private TextField idApellido;
 
+    private static String driv = "com.mysql.jdbc.Driver";
+    private static String bibl = "jdbc:mysql:33006/Biblioteca";
+    private static String usr= "root";
+    private static String pass = "dbrootpass";	
+
 
 	@FXML
-	public void registrar(ActionEvent event) {
+	public int registrar(ActionEvent event) throws IOException, SQLException {
 
-        idUser.setText("");
-        idPass.setText("");
-        idNombre.setText("");
-        idApellido.setText("");
+        App.setRoot("busResPresDev");        
 
-        User user = new User();
-        ObservableList<User> users;
-        users = App.getUsers();
-        user.usr.set(idUser.getText());
-        user.pas.set(idPass.getText());
-        user.nom.set(idNombre.getText());
-        user.apell.set(idApellido.getText());
-        users.add(user);
-        
-	}
+        //Ferrandis
+        //luciferma14@gmail.com
+        //hola
+        //Lucia
+
+		try {
+            Connection con = DriverManager.getConnection(bibl,usr,pass);
+            try {
+				Class.forName(driv);
+			} catch (ClassNotFoundException e) {
+                System.out.println(e.getMessage());
+			}
+			String query = "INSERT INTO usuarios(email, apellido, nombre, password) VALUES(?, ?, ?, ?)";
+			PreparedStatement st = con.prepareStatement(query);
+
+            User user = new User();
+
+            ResultSet rs = st.executeQuery();
+
+			st.setString(1, user.getUser());
+			st.setString(2, user.getApellido());
+			st.setString(3, user.getNombre());
+			st.setString(4, user.getPass());
+			st.executeUpdate();
+			con.commit();
+			rs = st.getGeneratedKeys();
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+		}
+        return 0;
+    }
 }
