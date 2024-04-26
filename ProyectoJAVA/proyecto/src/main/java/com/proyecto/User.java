@@ -2,13 +2,21 @@ package com.proyecto;
 
 import java.io.Serializable;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class User implements Serializable {
 
 	private int id;
-	private String user;
-	private String apellido;
-	private String nombre;
-	private String pass;
+	// private String usr;
+	// private String apell;
+	// private String nom;
+	// private String pas;
+	
+	public SimpleStringProperty usr = new SimpleStringProperty();
+	public SimpleStringProperty apell = new SimpleStringProperty();
+	public SimpleStringProperty nom = new SimpleStringProperty();
+	public SimpleStringProperty pas = new SimpleStringProperty();
+
 
 	public int getId() {
 		return id;
@@ -19,35 +27,35 @@ public class User implements Serializable {
 	}
 
 	public String getUser() {
-		return user;
+		return usr.get();
 	}
 
-	public void setUser(String user) {
-		this.user = user;
-	}
+	// public void setUser(String user) {
+	// 	this.usr = user;
+	// }
 
 	public String getApellido() {
-		return apellido;
+		return apell.get();
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+	// public void setApellido(String apellido) {
+	// 	this.apell = apellido;
+	// }
 
 	public String getNombre() {
-		return nombre;
+		return nom.get();
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	// public void setNombre(String nombre) {
+	// 	this.nom= nombre;
+	// }
 
 	public String getPass() {
-		return pass;
+		return pas.get();
 	}
 
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
+	// public void setPass(String pass) {
+	// 	this.pas = pass;
+	// }
 
 }

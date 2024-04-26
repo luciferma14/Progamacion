@@ -10,15 +10,29 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
 
 class UserDao {
 
 	private static final Logger logger = Logger.getLogger(UserDao.class.getName());
 
+
 	public boolean userExists(String username) throws SQLException {
 		Connection con = null;
 		PreparedStatement st = null;
 		List<User> users = new ArrayList<>();
+
+		
+		TextField idUser = new TextField("Email");;
+		
+		PasswordField idPass = new PasswordField();
+		
+		TextField idNombre = new TextField("Nombre");
+		
+		TextField idApellido = new TextField("Apellido");  
 
 		try {
 			con = Database.getDBConnection();
@@ -30,11 +44,11 @@ class UserDao {
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				User user = new User();
-				user.setId(rs.getInt(1));
-				user.setUser(rs.getString(2));
-				user.setApellido(rs.getString(3));
-				user.setNombre(rs.getString(4));
-				user.setPass(rs.getString(5));
+				user.usr.set(idUser.getText());
+				user.pas.set(idPass.getText());
+				user.nom.set(idNombre.getText());
+				user.apell.set(idApellido.getText());
+				users.add(user);
 				users.add(user);
 			}
 
