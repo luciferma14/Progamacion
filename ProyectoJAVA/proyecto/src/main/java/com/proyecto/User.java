@@ -2,19 +2,13 @@ package com.proyecto;
 
 import java.io.Serializable;
 
-/**
- * Domain model
- * 
- * @author Julian Jupiter
- *
- */
 public class User implements Serializable {
 
 	private int id;
-	private String username;
-	private String lastName;
-	private String firstName;
-	private String password;
+	private String user;
+	private String apellido;
+	private String nombre;
+	private String pass;
 
 	public int getId() {
 		return id;
@@ -24,36 +18,36 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUser() {
+		return user;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUser(String user) {
+		this.user = user;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPass() {
+		return pass;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPass(String pass) {
+		this.pass = pass;
 	}
 
 }

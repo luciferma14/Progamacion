@@ -26,7 +26,8 @@ public class Database{
         try {
         	Class.forName(driv);
 
-        } catch (ClassNotFoundException exception) {
+        } catch (ClassNotFoundException e) {
+            System.out.println(e.getMessage());
         }
 
         try {
