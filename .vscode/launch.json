@@ -6,10 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "EjercicioPE_7",
+            "request": "launch",
+            "mainClass": "EjercicioPE_7",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "com.proyecto/com.proyecto.App",
-            "projectName": "proyecto"
+            "projectName": "proyecto",
+            "noDebug": false,
+            "__progressId": "e0aeac97-f2b9-44b1-8291-32b966896a16",
+            "__origin": "internal"
         },
         {
             "type": "java",
