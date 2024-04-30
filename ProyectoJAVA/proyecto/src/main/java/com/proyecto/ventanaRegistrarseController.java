@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class ventanaRegistrarseController {
@@ -21,14 +19,14 @@ public class ventanaRegistrarseController {
     @FXML
 	private TextField idUser;
 	@FXML
-	private PasswordField idPass;
+	private TextField idPass;
 	@FXML
 	private TextField idNombre;
 	@FXML
 	private TextField idApellido;
 
     private static String driv = "com.mysql.jdbc.Driver";
-    private static String bibl = "jdbc:mysql:33006/Biblioteca";
+    private static String bibl = "jdbc:mysql:33006/biblioteca";
     private static String usr= "root";
     private static String pass = "dbrootpass";	
 
@@ -36,41 +34,34 @@ public class ventanaRegistrarseController {
 	@FXML
 	public int registrar(ActionEvent event) throws IOException, SQLException {
 
-        App.setRoot("busResPresDev");        
-
-        //Ferrandis
-        //luciferma14@gmail.com
-        //hola
-        //Lucia
+		App.setRoot("busResPresDev");
 
 		try {
-            Connection con = DriverManager.getConnection(bibl,usr,pass);
-            try {
+			Connection con = DriverManager.getConnection(bibl,usr,pass);
+			
+			try {
 				Class.forName(driv);
 			} catch (ClassNotFoundException e) {
-                System.out.println(e.getMessage());
+				System.out.println(e.getMessage());
 			}
+				
 			String query = "INSERT INTO usuarios(email, apellido, nombre, password) VALUES(?, ?, ?, ?)";
-			PreparedStatement st = con.prepareStatement(query);
 
-            User user = new User();
+			try (PreparedStatement st = con.prepareStatement(query)) {
 
-            ResultSet rs = st.executeQuery();
+				st.setString(1, String.valueOf(idUser));
+				st.setString(2, String.valueOf(idApellido));
+				st.setString(3, String.valueOf(idNombre));
+				st.setString(4, String.valueOf(idPass));
+		
+				st.executeUpdate();
 
-			st.setString(1, user.getUser());
-			st.setString(2, user.getApellido());
-			st.setString(3, user.getNombre());
-			st.setString(4, user.getPass());
-			st.executeUpdate();
-			con.commit();
-			rs = st.getGeneratedKeys();
-			if (rs.next()) {
-				return rs.getInt(1);
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-            System.out.println(e.getMessage());
+			return 0;	
+		}finally{
 
 		}
-        return 0;
-    }
+	}
 }

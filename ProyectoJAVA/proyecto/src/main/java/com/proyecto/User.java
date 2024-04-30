@@ -2,53 +2,55 @@ package com.proyecto;
 
 import java.io.Serializable;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
 public class User implements Serializable {
 
-	private int id;
-	private String usr;
-	private String apell;
-	private String nom;
-	private String pas;
+	@FXML
+	private String idUser;
 
+	@FXML
+	private String idPass;
 
-	public int getId() {
-		return id;
-	}
+	@FXML
+	private String idNombre;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	@FXML
+	private String idApellido;
+
 
 	public String getUser() {
-		return usr;
+		return idUser;
 	}
 
-	public void setUser(String user) {
-		this.usr = user;
+	public void setUser(String idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getApellido() {
-		return apell;
+		return idApellido;
 	}
 
-	public void setApellido(String apellido) {
-	 	this.apell = apellido;
+	public void setApellido(String idApellido) {
+	 	this.idApellido = idApellido;
 	}
 
 	public String getNombre() {
-		return nom;
+		return idNombre;
 	}
 
-	public void setNombre(String nombre) {
-	 	this.nom= nombre;
+	public void setNombre(String idNombre) {
+	 	this.idNombre= idNombre;
 }
 
 	public String getPass() {
-		return pas;
+		return idPass;
 	}
 
-	 void setPass(String pass) {
-		this.pas = pass;
+	 void setPass(String idPass) {
+		this.idPass = idPass;
 	}
 
 }
