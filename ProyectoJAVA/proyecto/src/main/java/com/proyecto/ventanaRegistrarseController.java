@@ -60,8 +60,9 @@ public class ventanaRegistrarseController {
 				e.printStackTrace();
 			}
 			return 0;	
-		}finally{
-
+		} catch (SQLException e){
+			e.printStackTrace();
 		}
+		return 0;
 	}
 }

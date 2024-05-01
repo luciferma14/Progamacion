@@ -46,49 +46,5 @@ class UserDao {
 				con.close();
 			}
 		}
-
 	}
-
-	public int saveUser(User user) throws SQLException {
-		Connection con = null;
-		PreparedStatement st = null;
-		ResultSet rs = null;
-		try {
-			con = Database.getDBConnection();
-			con.setAutoCommit(false);
-			String query = "INSERT INTO usuarios(email, apellido, nombre, password) VALUES(?, ?, ?, ?)";
-			st = con.prepareStatement(query, st.RETURN_GENERATED_KEYS);
-			int counter = 1;
-			st.setString(counter++, user.getUser());
-			st.setString(counter++, user.getApellido());
-			st.setString(counter++, user.getApellido());
-			st.setString(counter++, user.getPass());
-			st.executeUpdate();
-			con.commit();
-			rs = st.getGeneratedKeys();
-			if (rs.next()) {
-				return rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			logger.log(Level.SEVERE, e.getMessage());
-			if (null != con) {
-				con.rollback();
-			}
-		} finally {
-			if (null != rs) {
-				rs.close();
-			}
-
-			if (null != st) {
-				st.close();
-			}
-
-			if (null != con) {
-				con.close();
-			}
-		}
-
-		return 0;
-	}
-
 }
