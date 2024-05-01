@@ -45,7 +45,7 @@ public class ventanaRegistrarseController {
 				System.out.println(e.getMessage());
 			}
 				
-			String query = "INSERT INTO usuarios(email, apellido, nombre, password) VALUES(?, ?, ?, ?)";
+			String query = "INSERT INTO usuarios(email, apellido, nombre, password, idRol) VALUES(?, ?, ?, ?)";
 
 			try (PreparedStatement st = con.prepareStatement(query)) {
 
