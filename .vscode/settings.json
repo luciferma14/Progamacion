@@ -1,5 +1,5 @@
 {
     "vscode-pets.throwBallWithMouse": true,
     "vscode-pets.petSize": "small",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "disabled"
 }
