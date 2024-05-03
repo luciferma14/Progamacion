@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class login {
+	
 
 	@FXML
 	private ComboBox idRol;
@@ -19,9 +20,9 @@ public class login {
 	@FXML
 	private TextField idUser;
 
-
 	public PreparedStatement ps;
 	public ResultSet rs;
+	
 
     private static String driv = "com.mysql.jdbc.Driver";
     private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
@@ -36,8 +37,9 @@ public class login {
 
     @FXML
     private void cambiaABusResPresDev() throws IOException {
-        App.setRoot("busResPresDev");
+        
     }
+
 
     @FXML
 	public void initialize() {

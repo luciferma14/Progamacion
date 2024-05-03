@@ -1,77 +1,69 @@
-// package com.proyecto;
+package com.proyecto;
 
-// import java.io.IOException;
-// import java.sql.Connection;
-// import java.sql.DriverManager;
-// import java.sql.PreparedStatement;
-// import java.sql.ResultSet;
-// import java.sql.SQLException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-// import javafx.beans.property.SimpleStringProperty;
-// import javafx.event.ActionEvent;
-// import javafx.fxml.FXML;
-// import javafx.scene.control.ComboBox;
-// import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
 
-// public class ventanaInicioSesionController {
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
-//     @FXML
-// 	private ComboBox idRol;
-// 	@FXML
-// 	private TextField idUser;
-// 	@FXML
-// 	private TextField idPass;
+public class ventanaInicioSesionController {
 
-//     private static String driv = "com.mysql.jdbc.Driver";
-//     private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
-//     private static String usr= "root";
-//     private static String pass = "dbrootpass";	
+    @FXML
+	private ComboBox idRol;
+	@FXML
+	private TextField idUser;
+	@FXML
+	private TextField idPass;
+
+    public PreparedStatement ps;
+	public ResultSet rs;
+
+    private static String driv = "com.mysql.jdbc.Driver";
+    private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
+    private static String usr= "root";
+    private static String pass = "dbrootpass";	
 
 
-//     @FXML
-//     private void cambiaAPrimeraVentana() throws IOException {
-//         App.setRoot("primeraVentana");
-//     }
+    @FXML
+    private void cambiaAPrimeraVentana() throws IOException {
+        App.setRoot("primeraVentana");
+    }
 
-//     @FXML
-//     private void cambiaABusResPresDev() throws IOException {
-//         App.setRoot("busResPresDev");
-//     }
+    @FXML
+	public void initialize() {
+		idRol.getItems().addAll("Usuario", "Administrador");
+	}
 
-//     @FXML
-// 	public void initialize() {
-// 		idRol.getItems().addAll("Usuario", "Administrador");
-// 	}
+    @FXML
+    public void Ingresar(ActionEvent event) throws SQLException, IOException {
 
-//     @FXML
-// 	public int login(ActionEvent event) throws IOException, SQLException {
+        App.setRoot("busResPresDev");
 
-// 		App.setRoot("busResPresDev");
+        try {
+            Connection con = DriverManager.getConnection(bibl,usr,pass);
 
-// 		try {
-// 			Connection con = DriverManager.getConnection(bibl,usr,pass);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
-//         }
-//         public login(idUser, String contraseña) { 
-//             this.usuario = new SimpleStringProperty(usuario);
-//             this.contraseña = new SimpleStringProperty(contraseña);
-//         }
+        login log= new login();
         
-    
-//         public int ingresarUs(Connection connection) {  
+        int result= log.ingresarUs();
+        
 
-//             try{
-//                 String sql = "SELECT * FROM usuarios WHERE usuario = ? and contraseña = ?";
-
-//                 instruccion = connection.prepareStatement(sql);
-//                 instruccion.setString(1, usuario.get());
-//                 instruccion.setString(2, contraseña.get());
-//                 resultado = instruccion.executeQuery();
-
-//             }catch(Exception e){
-//                 e.printStackTrace();
-//             }
-//                     return 0;     
-//         }
-//     }
-// }
+        if(result ==1){
+            JOptionPane.showMessageDialog(null, "Ingreso exitoso");
+        }else{
+            JOptionPane.showMessageDialog(null, "Ingreso Fallido");
+        }
+    }
+}

@@ -10,9 +10,6 @@ public class Database{
     private static String usr= "root";
     private static String pass = "dbrootpass";	
 
-    private Database(){
-
-    }
 
     private void conect(){
         try{
