@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.primeraVentanaController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.login">
   <children>
     <MenuBar prefHeight="27.0" prefWidth="656.0" style="-fx-background-color: #73ddf5;">
         <menus>
@@ -39,7 +39,7 @@
                         <Font name="Serif Regular" size="34.0" />
                      </font>
                   </Label>
-                  <Button fx:id="idInicarSesion" layoutX="405.0" layoutY="11.0" onAction="#cambiarAInicioSesion" style="-fx-background-color: #bbb0f7;" text="Iniciar sesión" textFill="#2c178d">
+                  <Button fx:id="idInicarSesion" layoutX="405.0" layoutY="11.0" onAction="#IngresoApp" style="-fx-background-color: #bbb0f7;" text="Iniciar sesión" textFill="#2c178d">
                      <font>
                         <Font size="13.0" />
                      </font>

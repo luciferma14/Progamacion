@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Database{
     private static String driv = "com.mysql.jdbc.Driver";
-    private static String bibl = "jdbc:mysql:33006/Biblioteca";
+    private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
     private static String usr= "root";
     private static String pass = "dbrootpass";	
 
