@@ -25,6 +25,7 @@ public class ventanaInicioSesionController {
 	private TextField idPass;
 
     public PreparedStatement ps;
+
 	public ResultSet rs;
 
     private static String driv = "com.mysql.jdbc.Driver";
@@ -58,8 +59,7 @@ public class ventanaInicioSesionController {
         login log= new login();
         
         int result= log.ingresarUs();
-        
-
+    
         if(result ==1){
             JOptionPane.showMessageDialog(null, "Ingreso exitoso");
         }else{
