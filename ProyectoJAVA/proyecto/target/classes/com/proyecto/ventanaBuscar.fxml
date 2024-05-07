@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #a2e6f5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.busResPresDevController">
    <children>
-      <Button fx:id="idVolver" layoutX="90.0" layoutY="322.0" mnemonicParsing="false" onAction="#cambiaAOpciones" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
+      <Button fx:id="idVolver" layoutX="73.0" layoutY="322.0" mnemonicParsing="false" onAction="#cambiaAOpciones" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
       <Label layoutX="106.0" layoutY="74.0" text="Busca aquí tus libro favoritos" textFill="#3f1ea4">
          <font>
             <Font name="Serif Regular" size="26.0" />
@@ -23,5 +23,6 @@
       <TextField layoutX="73.0" layoutY="229.0" promptText="ISBN..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
       <Label layoutX="394.0" layoutY="207.0" text="Género" textFill="#3f1ea4" />
       <TextField layoutX="332.0" layoutY="229.0" promptText="Género..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
+      <Button fx:id="buscar" layoutX="445.0" layoutY="322.0" mnemonicParsing="false" onAction="#cambiaAOpciones" style="-fx-background-color: #bbb0f7;" text="Buscar" textFill="#2c178d" />
    </children>
 </AnchorPane>
