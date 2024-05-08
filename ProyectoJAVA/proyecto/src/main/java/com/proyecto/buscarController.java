@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
 public class buscarController {
