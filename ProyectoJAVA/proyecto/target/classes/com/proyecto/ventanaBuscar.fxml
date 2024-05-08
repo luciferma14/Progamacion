@@ -14,8 +14,9 @@
             <Font name="Serif Regular" size="26.0" />
          </font>
       </Label>
-      <Label layoutX="132.0" layoutY="143.0" text="Autor" textFill="#3f1ea4" />
       <TextField fx:id="FAutor" layoutX="73.0" layoutY="166.0" promptText="Autor..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
+      <Label layoutX="132.0" layoutY="143.0" text="Autor" textFill="#3f1ea4" />
+      <Label layoutX="388.0" layoutY="143.0" />
       <Label layoutX="399.0" layoutY="143.0" text="Título" textFill="#3f1ea4" />
       <TextField fx:id="FTitulo" layoutX="332.0" layoutY="166.0" promptText="Título..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
       <Label layoutX="132.0" layoutY="207.0" text="ISBN" textFill="#3f1ea4" />
