@@ -47,23 +47,36 @@ public class ventanaInicioSesionController {
     @FXML
     public void Ingresar(ActionEvent event) throws SQLException, IOException {
 
-        App.setRoot("busResPresDev");
+        String username = idUser.getText();
+        String password = idPass.getText();
 
         try {
-            Connection con = DriverManager.getConnection(bibl,usr,pass);
+            Connection con = DriverManager.getConnection(bibl, usr, pass);
 
+            String query = "SELECT email, password FROM usuarios WHERE email = ? AND password = ?";
+
+            try (PreparedStatement st = con.prepareStatement(query)) {
+
+                st.setString(1, username);
+                st.setString(2, password);
+
+                ResultSet rs = st.executeQuery();
+
+                if (rs.next()) {
+                  
+                    JOptionPane.showMessageDialog(null, "Ingreso exitoso");
+                    
+                    App.setRoot("busResPresDev");
+                } else {
+                    
+                    JOptionPane.showMessageDialog(null, "Ingreso Fallido");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        login log= new login();
-        
-        int result= log.ingresarUs();
-    
-        if(result ==1){
-            JOptionPane.showMessageDialog(null, "Ingreso exitoso");
-        }else{
-            JOptionPane.showMessageDialog(null, "Ingreso Fallido");
         }
     }
 }
