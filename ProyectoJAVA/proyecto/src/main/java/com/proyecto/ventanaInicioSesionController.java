@@ -6,19 +6,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class ventanaInicioSesionController {
 
-    @FXML
-	private ComboBox idRol;
 	@FXML
 	private TextField idUser;
 	@FXML
@@ -40,11 +36,6 @@ public class ventanaInicioSesionController {
     }
 
     @FXML
-	public void initialize() {
-		idRol.getItems().addAll("Usuario", "Administrador");
-	}
-
-    @FXML
     public void Ingresar(ActionEvent event) throws SQLException, IOException {
 
         String username = idUser.getText();
@@ -63,13 +54,12 @@ public class ventanaInicioSesionController {
                 ResultSet rs = st.executeQuery();
 
                 if (rs.next()) {
-                  
-                    JOptionPane.showMessageDialog(null, "Ingreso exitoso");
                     
                     App.setRoot("busResPresDev");
+
                 } else {
                     
-                    JOptionPane.showMessageDialog(null, "Ingreso Fallido");
+                    JOptionPane.showMessageDialog(null, "No tenemos ninguna cuenta con esas características." +'\n' + "Inténtelo otra vez");
                 }
 
             } catch (SQLException e) {
