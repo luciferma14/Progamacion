@@ -32,10 +32,10 @@
          </font></Label>
       <TableView fx:id="tabla" layoutX="13.0" layoutY="200.0" prefHeight="106.0" prefWidth="575.0" style="-fx-background-color: #e3dff7;">
          <columns>
-            <TableColumn fx:id="FTitulo" prefWidth="144.0" style="-fx-background-color: #bbb0f7;" text="Título" />
-            <TableColumn fx:id="FAutor" prefWidth="142.0" style="-fx-background-color: #bbb0f7;" text="Autor" />
-            <TableColumn fx:id="FISBN" prefWidth="163.0" style="-fx-background-color: #bbb0f7;" text="ISBN" />
-            <TableColumn fx:id="FGenero" prefWidth="123.0" style="-fx-background-color: #bbb0f7;" text="Género" />
+            <TableColumn fx:id="Titulo" prefWidth="144.0" style="-fx-background-color: #bbb0f7;" text="Título" />
+            <TableColumn fx:id="Autor" prefWidth="142.0" style="-fx-background-color: #bbb0f7;" text="Autor" />
+            <TableColumn fx:id="ISBN" prefWidth="163.0" style="-fx-background-color: #bbb0f7;" text="ISBN" />
+            <TableColumn fx:id="Genero" prefWidth="123.0" style="-fx-background-color: #bbb0f7;" text="Género" />
          </columns>
       </TableView>
    </children>

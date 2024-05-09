@@ -1,7 +1,5 @@
 package com.proyecto;
 
-import javafx.scene.control.TableColumn;
-
 public class Libro {
 
     private String titulo;

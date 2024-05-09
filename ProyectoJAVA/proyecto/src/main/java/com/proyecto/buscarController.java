@@ -36,13 +36,13 @@ public class buscarController {
     @FXML
     private TableView<Libro> tabla; 
     @FXML
-    private TableColumn<Libro, String> titulo; 
+    private TableColumn<Libro, String> Titulo; 
     @FXML
-    private TableColumn<Libro, String> autor;
+    private TableColumn<Libro, String> Autor;
     @FXML
-    private TableColumn<Libro, Integer> isbn;
+    private TableColumn<Libro, Integer> Isbn;
     @FXML
-    private TableColumn<Libro, String> genero;
+    private TableColumn<Libro, String> Genero;
 
     public PreparedStatement ps;
 
@@ -60,60 +60,58 @@ public class buscarController {
     }
 
     @FXML
-private void FindLibros() throws SQLException, IOException {
+    private void FindLibros() throws SQLException, IOException {
 
-    String tit = FTitulo.getText();
-    String aut = FAutor.getText();
+        String tit = FTitulo.getText();
+        String aut = FAutor.getText();
 
-    try {
-        Connection con = DriverManager.getConnection(bibl, usr, pass);
+        try {
+            Connection con = DriverManager.getConnection(bibl, usr, pass);
 
-        String query1 = "SELECT titulo, autor, isbn, genero FROM libros WHERE titulo LIKE ?";
-        String query2 = "SELECT titulo, autor, isbn, genero FROM libros WHERE autor LIKE ?";
+            String query1 = "SELECT titulo FROM libros WHERE titulo LIKE ?";
+            String query2 = "SELECT autor FROM libros WHERE autor LIKE ?";
 
-        PreparedStatement st = null;
-        ResultSet rs = null;
+            PreparedStatement st = null;
+            ResultSet rs = null;
 
-        if (!tit.isEmpty() || !aut.isEmpty()) {
-            if (!tit.isEmpty()) {
-                st = con.prepareStatement(query1);
-                st.setString(1, "%" + tit + "%");
-                rs = st.executeQuery();
-            } else if (!aut.isEmpty()) {
-                st = con.prepareStatement(query2);
-                st.setString(1, "%" + aut + "%");
-                rs = st.executeQuery();
+            if (!tit.isEmpty() && !aut.isEmpty()) {
+                if (!tit.isEmpty()) {
+                    st = con.prepareStatement(query1);
+                    st.setString(1, "%" + tit + "%");
+                    rs = st.executeQuery();
+
+                } else if (!aut.isEmpty()) {
+                    st = con.prepareStatement(query2);
+                    st.setString(1, "%" + aut + "%");
+                    rs = st.executeQuery();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
             }
 
-            App.setRoot("encontrarLibros");
-        } else {
-            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
-        }
+            ObservableList<Libro> lib = FXCollections.observableArrayList();
 
-        ObservableList<Libro> lib = FXCollections.observableArrayList();
+            if (rs != null) {
+                while (rs.next()) {
+                    String titulo = rs.getString("titulo");
+                    String autor = rs.getString("autor");
+                    int isbn = rs.getInt("ISBN");
+                    String genero = rs.getString("genero");
 
-        if (rs != null) {
-            while (rs.next()) {
-                String titulo = rs.getString("titulo");
-                String autor = rs.getString("autor");
-                int isbn = rs.getInt("isbn");
-                String genero = rs.getString("genero");
-
-                Libro libro = new Libro(titulo, autor, isbn, genero);
-                lib.add(libro);
+                    Libro libro = new Libro(titulo, autor, isbn, genero);
+                    lib.add(libro);
+                }
             }
-        }
 
-        titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
-        autor.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
-        isbn.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("isbn"));
-        genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
+            Titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
+            Autor.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
+            Isbn.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("ISBN"));
+            Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
 
-        tabla.setItems(lib);
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } 
-        }
+            tabla.setItems(lib);
     
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } 
+    }   
 }
