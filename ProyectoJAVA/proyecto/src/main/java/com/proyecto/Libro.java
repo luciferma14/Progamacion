@@ -1,36 +1,19 @@
 package com.proyecto;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TableColumn;
 
 public class Libro {
 
     private String titulo;
     private String autor;
-    private String isbn;
+    private int isbn;
     private String genero;
 
-    @FXML
-    private TextField FTitulo;
-    @FXML
-    private TextField FAutor;
-    @FXML
-    private TextField FISBN;
-    @FXML
-    private TextField FGenero;
-
-    public Libro(String titulo, String autor, String isbn, String genero) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.isbn = isbn;
-        this.genero = genero;
-    }
-
-    public Libro(TextField FTitulo, TextField FAutor, TextField FISBN, TextField FGenero) {
-        this.FTitulo = FTitulo;
-        this.FAutor = FAutor;
-        this.FISBN = FISBN;
-        this.FGenero = FGenero;
+    public Libro(String titulo2, String autor2, int isbn2, String genero2) {
+        this.titulo = titulo2;
+        this.autor = autor2;
+        this.isbn = isbn2;
+        this.genero = genero2;
     }
 
     public String getTitulo() {
@@ -49,11 +32,11 @@ public class Libro {
         this.autor = autor;
     }
 
-    public String getIsbn() {
+    public int getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public void setIsbn(int isbn) {
         this.isbn = isbn;
     }
 

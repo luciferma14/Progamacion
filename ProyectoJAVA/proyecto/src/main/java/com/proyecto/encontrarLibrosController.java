@@ -43,21 +43,18 @@ public class encontrarLibrosController {
     @FXML
     private TableColumn<Libro, String> genero;
 
-    @FXML
-    private TextField FTitulo;
-    @FXML
-    private TextField FAutor;
-    @FXML
-    private TextField FISBN;
-    @FXML
-    private TextField FGenero;
 
     @FXML
     private void initialize() { 
-        try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-            String query = "SELECT titulo, autor, isbn, genero FROM libros";
 
-            new Libro(FTitulo, FAutor, FISBN, FGenero);
+        Libro Li = buscarController.getLibro();
+
+        try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+            // String query = "SELECT titulo, autor, isbn, genero FROM libros";
+            String query = "SELECT titulo FROM libros";
+
+            Libro libro = new Libro(query, query, 0, query);
+
 
             ObservableList<Libro> lib = FXCollections.observableArrayList();
 
@@ -70,17 +67,6 @@ public class encontrarLibrosController {
             genero.setCellValueFactory(new PropertyValueFactory<Libro,String>("genero"));
 
             tabla.setItems(lib);
-
-            // while (rs.next()) {
-            //     String titulo = rs.getString("titulo");
-            //     String autor = rs.getString("autor");
-            //     String isbn = rs.getString("isbn");
-            //     String genero = rs.getString("genero");
-
-                // Libro libro = new Libro(titulo, autor, isbn, genero);
-
-                // lib.add(libro);
-            // }
 
         } catch (SQLException e) {
             e.printStackTrace();
