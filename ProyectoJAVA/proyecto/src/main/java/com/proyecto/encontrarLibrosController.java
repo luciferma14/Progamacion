@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 
@@ -43,9 +44,20 @@ public class encontrarLibrosController {
     private TableColumn<Libro, String> genero;
 
     @FXML
+    private TextField FTitulo;
+    @FXML
+    private TextField FAutor;
+    @FXML
+    private TextField FISBN;
+    @FXML
+    private TextField FGenero;
+
+    @FXML
     private void initialize() { 
         try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
             String query = "SELECT titulo, autor, isbn, genero FROM libros";
+
+            new Libro(FTitulo, FAutor, FISBN, FGenero);
 
             ObservableList<Libro> lib = FXCollections.observableArrayList();
 
@@ -65,12 +77,11 @@ public class encontrarLibrosController {
             //     String isbn = rs.getString("isbn");
             //     String genero = rs.getString("genero");
 
-                Libro libro = new Libro(titulo, autor, isbn, genero);
+                // Libro libro = new Libro(titulo, autor, isbn, genero);
 
-                lib.add(libro);
+                // lib.add(libro);
             // }
 
-            tabla.setItems(lib); 
         } catch (SQLException e) {
             e.printStackTrace();
 

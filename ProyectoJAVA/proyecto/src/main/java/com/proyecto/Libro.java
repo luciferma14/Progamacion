@@ -1,5 +1,8 @@
 package com.proyecto;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+
 public class Libro {
 
     private String titulo;
@@ -7,11 +10,27 @@ public class Libro {
     private String isbn;
     private String genero;
 
+    @FXML
+    private TextField FTitulo;
+    @FXML
+    private TextField FAutor;
+    @FXML
+    private TextField FISBN;
+    @FXML
+    private TextField FGenero;
+
     public Libro(String titulo, String autor, String isbn, String genero) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
         this.genero = genero;
+    }
+
+    public Libro(TextField FTitulo, TextField FAutor, TextField FISBN, TextField FGenero) {
+        this.FTitulo = FTitulo;
+        this.FAutor = FAutor;
+        this.FISBN = FISBN;
+        this.FGenero = FGenero;
     }
 
     public String getTitulo() {
