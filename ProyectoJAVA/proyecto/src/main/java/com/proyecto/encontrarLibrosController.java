@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
 public class encontrarLibrosController {
@@ -45,23 +46,31 @@ public class encontrarLibrosController {
     private void initialize() { 
         try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
             String query = "SELECT titulo, autor, isbn, genero FROM libros";
-            ObservableList<Libro> librosObservableList = FXCollections.observableArrayList();
+
+            ObservableList<Libro> lib = FXCollections.observableArrayList();
 
             PreparedStatement st = con.prepareStatement(query);
             ResultSet rs = st.executeQuery();
 
-            while (rs.next()) {
-                String titulo = rs.getString("titulo");
-                String autor = rs.getString("autor");
-                String isbn = rs.getString("isbn");
-                String genero = rs.getString("genero");
+            titulo.setCellValueFactory(new PropertyValueFactory<Libro,String>("titulo"));
+            autor.setCellValueFactory(new PropertyValueFactory<Libro,String>("autor"));
+            isbn.setCellValueFactory(new PropertyValueFactory<Libro,Integer>("isbn"));
+            genero.setCellValueFactory(new PropertyValueFactory<Libro,String>("genero"));
+
+            tabla.setItems(lib);
+
+            // while (rs.next()) {
+            //     String titulo = rs.getString("titulo");
+            //     String autor = rs.getString("autor");
+            //     String isbn = rs.getString("isbn");
+            //     String genero = rs.getString("genero");
 
                 Libro libro = new Libro(titulo, autor, isbn, genero);
 
-                librosObservableList.add(libro);
-            }
+                lib.add(libro);
+            // }
 
-            tabla.setItems(librosObservableList); 
+            tabla.setItems(lib); 
         } catch (SQLException e) {
             e.printStackTrace();
 

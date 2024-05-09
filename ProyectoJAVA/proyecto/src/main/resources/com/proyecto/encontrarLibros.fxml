@@ -16,12 +16,12 @@
          </font>
       </Label>
       <Label layoutX="388.0" layoutY="143.0" />
-      <TableView fx:id="tabla" layoutX="14.0" layoutY="80.0" prefHeight="241.0" prefWidth="573.0" style="-fx-background-color: #e3dff7;">
+      <TableView fx:id="tabla" layoutX="14.0" layoutY="80.0" onSort="#initialize" prefHeight="241.0" prefWidth="573.0" style="-fx-background-color: #e3dff7;">
         <columns>
-         <TableColumn fx:id="titulo" prefWidth="164.0" style="-fx-background-color: #bbb0f7;" text="Título" />
-         <TableColumn fx:id="autor" prefWidth="144.0" style="-fx-background-color: #bbb0f7;" text="Autor" />
-         <TableColumn fx:id="isbn" prefWidth="160.0" style="-fx-background-color: #bbb0f7;" text="ISBN" />
-         <TableColumn fx:id="genero" prefWidth="104.0" style="-fx-background-color: #bbb0f7;" text="Género" />
+         <TableColumn fx:id="titulo" prefWidth="144.0" style="-fx-background-color: #bbb0f7;" text="Título" />
+         <TableColumn fx:id="autor" prefWidth="142.0" style="-fx-background-color: #bbb0f7;" text="Autor" />
+         <TableColumn fx:id="isbn" prefWidth="163.0" style="-fx-background-color: #bbb0f7;" text="ISBN" />
+         <TableColumn fx:id="genero" prefWidth="123.0" style="-fx-background-color: #bbb0f7;" text="Género" />
         </columns>
       </TableView>
    </children>
