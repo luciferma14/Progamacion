@@ -59,19 +59,19 @@ public class buscarController {
 
             try{
                 PreparedStatement st1 = con.prepareStatement(query1);
-                    st1.setString(1, tit);
+                    st1.setString(1, "%" + tit + "%");
                     ResultSet rs = st1.executeQuery();
 
                 PreparedStatement st2 = con.prepareStatement(query2);
-                    st2.setString(1, aut);
+                    st2.setString(1, "%" + aut + "%");
                     rs = st2.executeQuery();
                 
                 PreparedStatement st3 = con.prepareStatement(query3);
-                    st3.setString(1, isbn);
+                    st3.setString(1, "%" + isbn + "%");
                     rs = st3.executeQuery();
 
                 PreparedStatement st4 = con.prepareStatement(query4);
-                    st4.setString(1, gen);
+                    st4.setString(1, "%" + gen + "%");
                     rs = st4.executeQuery();
 
                 if (rs.next()) {
