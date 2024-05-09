@@ -1,5 +1,6 @@
 package com.proyecto;
 
+import java.beans.Statement;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,17 +46,19 @@ public class encontrarLibrosController {
 
 
     try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-        String query = "SELECT titulo, autor, ISBN, genero FROM libros";
-        PreparedStatement stmt = con.prepareStatement(query);
-        ResultSet rs = stmt.executeQuery();
+        String query = "SELECT titulo, autor, isbn, genero FROM libros";
+        ObservableList<Tab> data = FXCollections.observableArrayList();  
+
+        PreparedStatement st = con.prepareStatement(query);
+        ResultSet rs = st.executeQuery();
 
         while (rs.next()) {
             String titulo = rs.getString("titulo");
             String autor = rs.getString("autor");
-            String ISBN = rs.getString("ISBN");
+            String isbn = rs.getString("isbn");
             String genero = rs.getString("genero");
-
         }
+
     }catch(SQLException e){
         e.printStackTrace();
     }
