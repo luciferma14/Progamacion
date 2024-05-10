@@ -53,7 +53,7 @@ public class encontrarLibrosController {
             // String query = "SELECT titulo, autor, isbn, genero FROM libros";
             String query = "SELECT titulo FROM libros";
 
-            Libro libro = new Libro(query, query, 0, query);
+            //Libro libro = new Libro(query, query, 0, query);
 
 
             ObservableList<Libro> lib = FXCollections.observableArrayList();

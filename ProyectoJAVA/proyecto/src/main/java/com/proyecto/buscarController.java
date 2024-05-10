@@ -38,7 +38,7 @@ public class buscarController {
     @FXML
     private TableColumn<Libro, String> Autor;
     @FXML
-    private TableColumn<Libro, Integer> ISBN;
+    private TableColumn<Libro, Long> ISBN;
     @FXML
     private TableColumn<Libro, String> Genero;
 
@@ -58,61 +58,105 @@ public class buscarController {
     }
 
     @FXML
+
     private void FindLibros() throws SQLException, IOException {
 
-        //String tit = FTitulo.getText();
+        String tit = FTitulo.getText();
+
         String aut = FAutor.getText();
 
-        try {
+        String isb = FISBN.getText();
 
-            String tit = FTitulo.getText();
-            Connection con = DriverManager.getConnection(bibl, usr, pass);
+        String gen = FGenero.getText();
 
-            String query1 = "SELECT * FROM libros WHERE titulo = ?";
-            //String query2 = "SELECT * FROM libros WHERE autor = ?";
 
-            PreparedStatement st = null;
-            ResultSet rs = null;
+        if (tit != null || !aut.isEmpty()) {
 
-            //if (!tit.isEmpty() || !aut.isEmpty()) { 
-                if (tit == null) {
-                    st = con.prepareStatement(query1);
+            try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+
+                String query = "Select * From libros";
+                // String query1 = "SELECT * FROM libros WHERE titulo LIKE ? ";
+                 PreparedStatement st = null;
+                // st.setString(1, "%" + tit + "%");
+
+                // String query2 = "SELECT * FROM libros WHERE autor LIKE ?";
+                // st = con.prepareStatement(query2);
+                // st.setString(1, "%" + aut + "%");
+
+                // String query3 = "SELECT * FROM libros WHERE ISBN LIKE ?";
+                // st = con.prepareStatement(query3);
+                // st.setString(1, "%" + isb + "%");
+
+                // String query4 = "SELECT * FROM libros WHERE genero LIKE ?";
+                // st= con.prepareStatement(query4);
+                // st.setString(1, "%" + gen + "%");
+                
+            
+                if (!tit.equals("")) {
+                    query = "SELECT * FROM libros WHERE titulo LIKE ?";
+                    st = con.prepareStatement(query);
                     st.setString(1, "%" + tit + "%");
-                    rs = st.executeQuery();
+                    System.out.println("Hago la query de titulos");
 
-                // } else if (!aut.isEmpty()) {
-                //     st = con.prepareStatement(query2);
-                //     st.setString(1, "%" + aut + "%");
-                //     rs = st.executeQuery();
-                // }
-            } else {
-                JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
-            }
+                } else if (!aut.equals("")) {
 
-                ObservableList<Libro> lib = FXCollections.observableArrayList();
+                    query = "SELECT * FROM libros WHERE autor LIKE ? ";
+                    st = con.prepareStatement(query);
+                    st.setString(1, "%" + aut + "%");
+                    System.out.println("Hago la query de autores");
 
-                if (rs != null) {
+                } else if (!isb.equals("")) {
+
+                    query = "SELECT * FROM libros WHERE ISBN LIKE ? ";
+                    st = con.prepareStatement(query);
+                    st.setString(1, "%" + isb + "%");
+                    System.out.println("Hago la query de ISBN");
+
+                } else if (!gen.equals("")) {
+
+                    query = "SELECT * FROM libros WHERE genero LIKE ?";
+                    st = con.prepareStatement(query);
+                    st.setString(1, "%" + gen + "%");
+                    System.out.println("Hago la query de genero");
+
+                }else{
+                    System.out.println("Ninguno estrito");
+                    st= con.prepareStatement(query);
+                }
+
+                try (ResultSet rs = st.executeQuery()) {
+
+                    ObservableList<Libro> lib = FXCollections.observableArrayList();
+
                     while (rs.next()) {
+
                         String titulo = rs.getString("titulo");
                         String autor = rs.getString("autor");
-                        int isbn = rs.getInt("ISBN");
+                        long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
 
                         Libro libro = new Libro(titulo, autor, isbn, genero);
+
                         lib.add(libro);
                     }
+
+                    Titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
+                    Autor.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
+                    ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
+                    Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
+
+                    tabla.setItems(lib);
                 }
 
-                Titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
-                Autor.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
-                ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("ISBN"));
-                Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
+                
 
-                tabla.setItems(lib);
+            } catch (SQLException e) {
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } 
-        
-    }   
+                e.printStackTrace();
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
+        }
+    }
 }

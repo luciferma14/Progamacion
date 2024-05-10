@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #a2e6f5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.buscarController">
    <children>
-      <Button fx:id="idVolver" layoutX="70.0" layoutY="334.0" mnemonicParsing="false" onAction="#cambiaAOpciones" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
+      <Button fx:id="idVolver" layoutX="33.0" layoutY="346.0" mnemonicParsing="false" onAction="#cambiaAOpciones" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
       <Label layoutX="100.0" layoutY="14.0" text="Busca aquí tus libros favoritos" textFill="#3f1ea4">
          <font>
             <Font name="Serif Regular" size="26.0" />
@@ -25,12 +25,12 @@
       <TextField fx:id="FISBN" layoutX="63.0" layoutY="138.0" promptText="ISBN..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
       <Label layoutX="396.0" layoutY="119.0" text="Género" textFill="#3f1ea4" />
       <TextField fx:id="FGenero" layoutX="333.0" layoutY="138.0" promptText="Género..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
-      <Button fx:id="buscar" layoutX="443.0" layoutY="334.0" mnemonicParsing="false" onAction="#FindLibros" style="-fx-background-color: #bbb0f7;" text="Buscar" textFill="#2c178d" />
+      <Button fx:id="buscar" layoutX="487.0" layoutY="346.0" mnemonicParsing="false" onAction="#FindLibros" style="-fx-background-color: #bbb0f7;" text="Buscar" textFill="#2c178d" />
       <Label layoutX="190.0" layoutY="61.0" text="*Reñena los campos que quieras*" textFill="#3f1ea4">
          <font>
             <Font size="11.0" />
          </font></Label>
-      <TableView fx:id="tabla" layoutX="13.0" layoutY="200.0" prefHeight="106.0" prefWidth="575.0" style="-fx-background-color: #e3dff7;">
+      <TableView fx:id="tabla" layoutX="13.0" layoutY="177.0" prefHeight="161.0" prefWidth="575.0" style="-fx-background-color: #e3dff7;">
          <columns>
             <TableColumn fx:id="Titulo" prefWidth="144.0" style="-fx-background-color: #bbb0f7;" text="Título" />
             <TableColumn fx:id="Autor" prefWidth="142.0" style="-fx-background-color: #bbb0f7;" text="Autor" />
