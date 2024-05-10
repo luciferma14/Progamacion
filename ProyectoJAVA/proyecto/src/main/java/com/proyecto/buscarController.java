@@ -6,9 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -62,20 +60,22 @@ public class buscarController {
     @FXML
     private void FindLibros() throws SQLException, IOException {
 
-        String tit = FTitulo.getText();
+        //String tit = FTitulo.getText();
         String aut = FAutor.getText();
 
         try {
+
+            String tit = FTitulo.getText();
             Connection con = DriverManager.getConnection(bibl, usr, pass);
 
-            String query1 = "SELECT titulo FROM libros WHERE titulo LIKE ?";
-            //String query2 = "SELECT autor FROM libros WHERE autor LIKE ?";
+            String query1 = "SELECT * FROM libros WHERE titulo = ?";
+            //String query2 = "SELECT * FROM libros WHERE autor = ?";
 
             PreparedStatement st = null;
             ResultSet rs = null;
 
-            if (!tit.isEmpty()){ //|| !aut.isEmpty()) { ----->>> DESCOMENTAR ESTO (ERAN PRUEBAS)
-                if (!tit.isEmpty()) {
+            //if (!tit.isEmpty() || !aut.isEmpty()) { 
+                if (tit == null) {
                     st = con.prepareStatement(query1);
                     st.setString(1, "%" + tit + "%");
                     rs = st.executeQuery();
@@ -85,9 +85,9 @@ public class buscarController {
                 //     st.setString(1, "%" + aut + "%");
                 //     rs = st.executeQuery();
                 // }
-                } else {
-                    JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
-                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
+            }
 
                 ObservableList<Libro> lib = FXCollections.observableArrayList();
 
@@ -109,9 +109,10 @@ public class buscarController {
                 Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
 
                 tabla.setItems(lib);
-            } 
-        }catch (SQLException e) {
+
+        } catch (SQLException e) {
             e.printStackTrace();
         } 
+        
     }   
 }
