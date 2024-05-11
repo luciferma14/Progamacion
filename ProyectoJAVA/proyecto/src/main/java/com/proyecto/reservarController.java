@@ -6,22 +6,27 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class buscarController {
+public class reservarController {
+
+    //----------IDEA PRINCIPAL-----------
 
     @FXML
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
     }
-
+ 
     @FXML
     private TextField FTitulo;
     @FXML
@@ -33,7 +38,13 @@ public class buscarController {
 
 
     @FXML
-    private TableView<Libro> tabla; 
+    private Button buscar;
+    @FXML
+    private Button reservar;
+
+
+    @FXML
+    private TableView<Libro> tablaLibros;
     @FXML
     private TableColumn<Libro, String> Titulo; 
     @FXML
@@ -44,7 +55,7 @@ public class buscarController {
     private TableColumn<Libro, String> Genero;
     @FXML
     private TableColumn<Libro, Boolean> Disponible;
-    
+
 
     public PreparedStatement ps;
 
@@ -154,7 +165,7 @@ public class buscarController {
                     Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
                     Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
 
-                    tabla.setItems(lib);
+                    tablaLibros.setItems(lib);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

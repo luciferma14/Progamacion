@@ -8,6 +8,11 @@ public class busResPresDevController {
     private void cambiaABuscar() throws IOException {
         App.setRoot("ventanaBuscar");
     }
+
+    @FXML
+    private void cambiaAReservar() throws IOException {
+        App.setRoot("ventanaReservar");
+    }
     
     @FXML
     private void cambiaAPrimeraVentana() throws IOException {

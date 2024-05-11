@@ -12,7 +12,7 @@
       <MenuButton fx:id="opc" layoutX="254.0" layoutY="149.0" mnemonicParsing="false" style="-fx-background-color: #bbb0f7;" text="Opciones" textAlignment="CENTER" textFill="#2c178d">
          <items>
             <MenuItem fx:id="idBusca" mnemonicParsing="false" onAction="#cambiaABuscar" onMenuValidation="#cambiaABuscar" text="Buscar " />
-            <MenuItem fx:id="idReserva" mnemonicParsing="false" text="Resevar " />
+            <MenuItem fx:id="idReserva" mnemonicParsing="false" onAction="#cambiaAReservar" text="Resevar " />
             <MenuItem fx:id="IdPresta" mnemonicParsing="false" text="Prestar" />
             <MenuItem fx:id="idDevolver" mnemonicParsing="false" text="Devolver" />
          </items>
