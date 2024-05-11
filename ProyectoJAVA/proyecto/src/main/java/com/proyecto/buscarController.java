@@ -70,27 +70,32 @@ public class buscarController {
         String gen = FGenero.getText();
 
 
-        if (tit != null || !aut.isEmpty()) {
+        if (tit != null || aut != null || isb != null || gen != null) {
 
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
 
-                String query = "Select * From libros";
-                // String query1 = "SELECT * FROM libros WHERE titulo LIKE ? ";
-                 PreparedStatement st = null;
-                // st.setString(1, "%" + tit + "%");
+                PreparedStatement st = null;
 
-                // String query2 = "SELECT * FROM libros WHERE autor LIKE ?";
-                // st = con.prepareStatement(query2);
-                // st.setString(1, "%" + aut + "%");
+                // Para hacer la query de buscar con todos los campos
+                String query = "SELECT * FROM libros WHERE ";
 
-                // String query3 = "SELECT * FROM libros WHERE ISBN LIKE ?";
-                // st = con.prepareStatement(query3);
-                // st.setString(1, "%" + isb + "%");
+                if(tit == null && aut == null && isb == null && gen == null){
 
-                // String query4 = "SELECT * FROM libros WHERE genero LIKE ?";
-                // st= con.prepareStatement(query4);
-                // st.setString(1, "%" + gen + "%");
-                
+                    if ( !tit.equals("") ) {
+                        query += "titulo = '" + tit + "' AND ";
+                    }
+                    if ( !isb.equals("") ) {
+                        query += "isbn = '" + isb + "' AND ";
+                    }
+                    if ( !gen.equals("") ) {
+                        query += "genero = '" + gen + "' AND ";
+                    }
+                    if ( !aut.equals("") ) {
+                        query += "autor = '" + aut + "' ";
+                    }
+                    // Eliminar el último "AND" si hay al final para que no de error en la query
+                    query = query.replaceAll(" AND $", "");
+                }
             
                 if (!tit.equals("")) {
                     query = "SELECT * FROM libros WHERE titulo LIKE ?";
@@ -121,7 +126,7 @@ public class buscarController {
 
                 }else{
                     System.out.println("Ninguno estrito");
-                    st= con.prepareStatement(query);
+                    JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar libros");
                 }
 
                 try (ResultSet rs = st.executeQuery()) {
