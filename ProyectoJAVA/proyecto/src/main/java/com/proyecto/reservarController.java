@@ -20,8 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class reservarController {
 
-    //----------IDEA PRINCIPAL-----------
-
     @FXML
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
@@ -35,13 +33,6 @@ public class reservarController {
     private TextField FISBN;
     @FXML
     private TextField FGenero;
-
-
-    @FXML
-    private Button buscar;
-    @FXML
-    private Button reservar;
-
 
     @FXML
     private TableView<Libro> tablaLibros;
@@ -185,36 +176,26 @@ public class reservarController {
 
         if (libro != null) {
 
-            // Check if the book is available
             if (libro.getDisponible()) {
 
-                // Update the "Disponible" value in the database to false
                 try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
 
                     PreparedStatement st = con.prepareStatement("UPDATE libros SET disponible = ?");
                     st.setString(1, libro.getDisponible() ? "Si" : "No");                   
                     st.executeUpdate();
 
-                    // PreparedStatement st = con.prepareStatement("UPDATE libros SET Disponible = false WHERE ISBN = ?");
-                    // st.setLong(1, libro.getIsbn()); // Set ISBN for filtering
-                    // st.executeUpdate();
-
-                    // Update the "disponible" property of the selected book object
                     libro.setDisponible(false);
 
-                    // Refresh the table to reflect the updated availability
                     tablaLibros.refresh();
-
                     JOptionPane.showMessageDialog(null, "Libro reservado con éxito!");
+
                 } catch (SQLException e) {
                     e.printStackTrace();
                     JOptionPane.showMessageDialog(null, "Error al reservar el libro.");
                 }
-
             } else {
                 JOptionPane.showMessageDialog(null, "El libro no está disponible para reservar.");
             }
-
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un libro para reservar.");
         }
