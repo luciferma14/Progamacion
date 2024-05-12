@@ -153,8 +153,9 @@ public class reservarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
+                        boolean disponible = rs.getString("disponible").equals("Si"); // Lo combierte a boolean
 
-                        Libro libro = new Libro(titulo, autor, isbn, genero);
+                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible);
 
                         lib.add(libro);
                     }
@@ -173,6 +174,45 @@ public class reservarController {
 
         } else {
             JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
+        }
+    }
+
+    @FXML
+    private void reservarLibro() throws SQLException {
+
+        // Get the selected book from the table
+        Libro libro = tablaLibros.getSelectionModel().getSelectedItem();
+
+        if (libro != null) {
+
+            // Check if the book is available
+            if (libro.getDisponible()) {
+
+                // Update the "Disponible" value in the database to false
+                try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+
+                    PreparedStatement st = con.prepareStatement("UPDATE libros SET disponible = ?");
+                    st.setString(1, libro.getDisponible() ? "Si" : "No");                   
+                    st.executeUpdate();
+
+                    // Update the "disponible" property of the selected book object
+                    libro.setDisponible(false);
+
+                    // Refresh the table to reflect the updated availability
+                    tablaLibros.refresh();
+
+                    JOptionPane.showMessageDialog(null, "Libro reservado con éxito!");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Error al reservar el libro.");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El libro no está disponible para reservar.");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un libro para reservar.");
         }
     }
 }
