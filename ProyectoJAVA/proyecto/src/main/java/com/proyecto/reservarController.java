@@ -195,6 +195,10 @@ public class reservarController {
                     st.setString(1, libro.getDisponible() ? "Si" : "No");                   
                     st.executeUpdate();
 
+                    // PreparedStatement st = con.prepareStatement("UPDATE libros SET Disponible = false WHERE ISBN = ?");
+                    // st.setLong(1, libro.getIsbn()); // Set ISBN for filtering
+                    // st.executeUpdate();
+
                     // Update the "disponible" property of the selected book object
                     libro.setDisponible(false);
 
