@@ -144,7 +144,7 @@ public class reservarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
-                        boolean disponible = rs.getString("disponible").equals("Si"); // Lo combierte a boolean
+                        String disponible = rs.getString("disponible"); // Lo combierte a boolean
 
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible);
 
@@ -176,15 +176,15 @@ public class reservarController {
 
         if (libro != null) {
 
-            if (libro.getDisponible()) {
+            if (libro != null) {
 
                 try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
 
-                    PreparedStatement st = con.prepareStatement("UPDATE libros SET disponible = ?");
-                    st.setString(1, libro.getDisponible() ? "Si" : "No");                   
+                    PreparedStatement st = con.prepareStatement("UPDATE libros SET disponible = ?"); //AÑADIR PARA QUE LEA CADA COLUMNA
+                    st.setString(1, "No");                   
                     st.executeUpdate();
 
-                    libro.setDisponible(false);
+                    //libro.setDisponible(false);
 
                     tablaLibros.refresh();
                     

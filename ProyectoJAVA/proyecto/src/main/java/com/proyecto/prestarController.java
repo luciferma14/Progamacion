@@ -165,7 +165,7 @@ public class prestarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
-                        boolean disponible = rs.getString("disponible").equals("Si"); // Lo combierte a boolean
+                        String disponible = rs.getString("disponible"); // Lo combierte a boolean
 
 
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible);

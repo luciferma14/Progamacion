@@ -77,6 +77,6 @@ public class Libro {
 
     // Comprueba la disponibilidad en un formato fácil de usar
     public String getDisponibilidadTexto() {
-        return disponible ? "Si" : "No";
+        return disponible;
     }
 }
