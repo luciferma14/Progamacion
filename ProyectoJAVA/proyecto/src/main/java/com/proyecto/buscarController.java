@@ -146,7 +146,7 @@ public class buscarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
-                        String disponible = rs.getString(gen); // Lo combierte a boolean
+                        String disponible = rs.getString("disponible"); // Lo combierte a boolean
 
 
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible);
