@@ -6,25 +6,22 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javax.swing.JOptionPane;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class reservarController {
+public class prestarController {
 
     @FXML
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
     }
- 
+
     @FXML
     private TextField FTitulo;
     @FXML
@@ -35,7 +32,15 @@ public class reservarController {
     private TextField FGenero;
 
     @FXML
-    private TableView<Libro> tablaLibros;
+    private TextField FNombre;
+    @FXML
+    private TextField FApellido;
+    @FXML
+    private TextField FUser;
+
+
+    @FXML
+    private TableView<Libro> tablaLibros; 
     @FXML
     private TableColumn<Libro, String> Titulo; 
     @FXML
@@ -47,6 +52,16 @@ public class reservarController {
     @FXML
     private TableColumn<Libro, Boolean> Disponible;
 
+
+    @FXML
+    private TableView<Usuario> tablaUsers; 
+    @FXML
+    private TableColumn<Usuario, String> Nombre; 
+    @FXML
+    private TableColumn<Usuario, String> Apellido;
+    @FXML
+    private TableColumn<Usuario, String> User;
+    
 
     public PreparedStatement ps;
 
@@ -61,6 +76,12 @@ public class reservarController {
 
     public static Libro getLibro() {
         return li;
+    }
+
+    private static Usuario us = null;
+
+    public static Usuario getUsuario() {
+        return us;
     }
 
     @FXML
@@ -146,6 +167,7 @@ public class reservarController {
                         String genero = rs.getString("genero");
                         boolean disponible = rs.getString("disponible").equals("Si"); // Lo combierte a boolean
 
+
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible);
 
                         lib.add(libro);
@@ -169,36 +191,93 @@ public class reservarController {
     }
 
     @FXML
-    private void reservarLibro() throws SQLException {
+    private void FindUsers() throws SQLException, IOException {
 
-        // Coge el libro selecionado de la tabla
-        Libro libro = tablaLibros.getSelectionModel().getSelectedItem();
+        String nom = FNombre.getText();
 
-        if (libro != null) {
+        String ape = FApellido.getText();
 
-            if (libro.getDisponible()) {
+        String use = FUser.getText();
 
-                try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
 
-                    PreparedStatement st = con.prepareStatement("UPDATE libros SET disponible = ?");
-                    st.setString(1, libro.getDisponible() ? "Si" : "No");                   
-                    st.executeUpdate();
+        if (nom != null || ape != null || use != null ) {
 
-                    libro.setDisponible(false);
+            try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
 
-                    tablaLibros.refresh();
-                    
-                    JOptionPane.showMessageDialog(null, "Libro reservado con éxito!");
+                PreparedStatement st = null;
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error al reservar el libro.");
+                // Para hacer la query de buscar con todos los campos
+                String query = "SELECT nombre, apellido, email FROM usuarios WHERE ";
+
+                if(nom == null && ape == null && use == null ){
+
+                    if ( !nom.equals("") ) {
+                        query += "nombre = '" + nom + "' AND ";
+                    }
+                    if ( !ape.equals("") ) {
+                        query += "apellido = '" + ape + "' AND ";
+                    }
+                    if ( !use.equals("") ) {
+                        query += "email = '" + use + "' AND ";
+                    }
+                    // Eliminar el último "AND" si hay al final para que no de error en la query
+                    query = query.replaceAll(" AND $", "");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "El libro no está disponible para reservar.");
+            
+                if (!nom.equals("")) {
+                    query = "SELECT * FROM usuarios WHERE nombre LIKE ?";
+                    st = con.prepareStatement(query);
+                    st.setString(1, "%" + nom + "%");
+                    System.out.println("Hago la query de nombres");
+
+                } else if (!ape.equals("")) {
+
+                    query = "SELECT * FROM usuarios WHERE apellido LIKE ? ";
+                    st = con.prepareStatement(query);
+                    st.setString(1, "%" + ape + "%");
+                    System.out.println("Hago la query de apellido");
+
+                } else if (!use.equals("")) {
+
+                    query = "SELECT * FROM usuarios WHERE email LIKE ? ";
+                    st = con.prepareStatement(query);
+                    st.setString(1, "%" + use + "%");
+                    System.out.println("Hago la query de email");
+
+                }else{
+                    System.out.println("Ninguno estrito");
+                    JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar usuarios");
+                }
+
+                try (ResultSet rs = st.executeQuery()) {
+
+                    ObservableList<Usuario> user = FXCollections.observableArrayList();
+
+                    while (rs.next()) {
+
+                        String nombre = rs.getString("nombre");
+                        String apellido = rs.getString("apellido");
+                        String email = rs.getString("email");
+
+                        Usuario usuario = new Usuario(nombre, apellido, email);
+
+                        user.add(usuario);
+                    }
+
+                    Nombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nombre"));
+                    Apellido.setCellValueFactory(new PropertyValueFactory<Usuario, String>("apellido"));
+                    User.setCellValueFactory(new PropertyValueFactory<Usuario, String>("email"));
+
+                    tablaUsers.setItems(user);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+
         } else {
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione un libro para reservar.");
+            JOptionPane.showMessageDialog(null, "No tenemos ningún usuario con esas características." +'\n' + "Inténtelo otra vez.");
         }
     }
+
+
 }
