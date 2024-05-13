@@ -1,5 +1,6 @@
 package com.proyecto;
 
+import java.sql.Statement;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -75,64 +76,67 @@ public class buscarController {
 
         if (tit != null || aut != null || isb != null || gen != null) {
 
-            try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+            try (
+                Connection con = DriverManager.getConnection(bibl, usr, pass)) {
 
-                PreparedStatement st = null;
+                Statement st = con.createStatement();
 
                 // Para hacer la query de buscar con todos los campos
                 String query = "SELECT * FROM libros WHERE ";
 
-                if(tit == null && aut == null && isb == null && gen == null){
 
                     if ( !tit.equals("") ) {
-                        query += "titulo = '" + tit + "' AND ";
+                        query = query+"titulo LIKE  '%" + tit + "%' AND ";
                     }
                     if ( !isb.equals("") ) {
-                        query += "isbn = '" + isb + "' AND ";
+                        query += "isbn LIKE '%" + isb + "%' AND ";
                     }
                     if ( !gen.equals("") ) {
-                        query += "genero = '" + gen + "' AND ";
+                        query += "genero LIKE '%" + gen + "%' AND ";
                     }
                     if ( !aut.equals("") ) {
-                        query += "autor = '" + aut + "' ";
+                        query = query+"autor LIKE '%" + aut + "%' ;";
                     }
+
+                    query = query.replaceAll(" AND $", ";");
+
+                    System.out.println(query);
                     // Eliminar el último "AND" si hay al final para que no de error en la query
-                    query = query.replaceAll(" AND $", "");
-                }
             
-                if (!tit.equals("")) {
-                    query = "SELECT * FROM libros WHERE titulo LIKE ?";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + tit + "%");
-                    System.out.println("Hago la query de titulos");
+                // if (!tit.equals("")) {
+                //     query = "SELECT * FROM libros WHERE titulo LIKE ?";
+                //     st = con.prepareStatement(query);
+                //     st.setString(1, "%" + tit + "%");
+                //     System.out.println("Hago la query de titulos");
 
-                } else if (!aut.equals("")) {
+                // } else if (!aut.equals("")) {
 
-                    query = "SELECT * FROM libros WHERE autor LIKE ? ";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + aut + "%");
-                    System.out.println("Hago la query de autores");
+                //     query = "SELECT * FROM libros WHERE autor LIKE ? ";
+                //     st = con.prepareStatement(query);
+                //     st.setString(1, "%" + aut + "%");
+                //     System.out.println("Hago la query de autores");
 
-                } else if (!isb.equals("")) {
+                // } else if (!isb.equals("")) {
 
-                    query = "SELECT * FROM libros WHERE ISBN LIKE ? ";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + isb + "%");
-                    System.out.println("Hago la query de ISBN");
+                //     query = "SELECT * FROM libros WHERE ISBN LIKE ? ";
+                //     st = con.prepareStatement(query);
+                //     st.setString(1, "%" + isb + "%");
+                //     System.out.println("Hago la query de ISBN");
 
-                } else if (!gen.equals("")) {
+                // } else if (!gen.equals("")) {
 
-                    query = "SELECT * FROM libros WHERE genero LIKE ?";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + gen + "%");
-                    System.out.println("Hago la query de genero");
+                //     query = "SELECT * FROM libros WHERE genero LIKE ?";
+                //     st = con.prepareStatement(query);
+                //     st.setString(1, "%" + gen + "%");
+                //     System.out.println("Hago la query de genero");
 
-                }else{
-                    System.out.println("Ninguno estrito");
-                    JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar libros");
-                }
+                // }else{
+                //     System.out.println("Ninguno estrito");
+                //     JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar libros");
+                // }
 
-                try (ResultSet rs = st.executeQuery()) {
+                try (
+                    ResultSet rs = st.executeQuery(query)) {
 
                     ObservableList<Libro> lib = FXCollections.observableArrayList();
 
@@ -142,7 +146,7 @@ public class buscarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
-                        boolean disponible = rs.getString("disponible").equals("Si"); // Lo combierte a boolean
+                        String disponible = rs.getString(gen); // Lo combierte a boolean
 
 
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible);

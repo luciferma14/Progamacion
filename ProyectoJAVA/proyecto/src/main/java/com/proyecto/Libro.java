@@ -6,7 +6,7 @@ public class Libro {
     private String autor;
     private long isbn;
     private String genero;
-    private boolean disponible;
+    private String disponible;
     private String isbnString;
 
     public Libro(String titulo, String autor, long isbn, String genero) {
@@ -17,7 +17,7 @@ public class Libro {
         this.isbnString = String.valueOf(isbn);
     }
 
-    public Libro(String titulo, String autor, long isbn, String genero, boolean disponible) {
+    public Libro(String titulo, String autor, long isbn, String genero, String disponible) {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;
@@ -66,12 +66,12 @@ public class Libro {
         this.isbnString = isbnString;
     }
 
-    public boolean setDisponible(boolean disponible){
+    public String setDisponible(String disponible){
         this.disponible = disponible;
         return disponible;
     }
 
-    public boolean getDisponible(){
+    public String getDisponible(){
         return disponible;
     }
 
