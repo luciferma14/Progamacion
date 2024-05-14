@@ -11,12 +11,6 @@ public class Database{
     private static String pass = "dbrootpass";	
 
 
-    private void conect(){
-        try{
-            Connection con = DriverManager.getConnection(bibl,usr,pass);	
-        }catch(SQLException e){
-        }
-    }
     public static Connection getDBConnection() throws SQLException {
         Connection con = DriverManager.getConnection(bibl,usr,pass);
 

@@ -5,13 +5,18 @@ import javafx.fxml.FXML;
 public class busResPresDevController {
 
     @FXML
-    private void cambiaAOpciones() throws IOException {
-        App.setRoot("busResPresDev");
+    private void cambiaABuscar() throws IOException {
+        App.setRoot("ventanaBuscar");
     }
 
     @FXML
-    private void cambiaABuscar() throws IOException {
-        App.setRoot("ventanaBuscar");
+    private void cambiaAReservar() throws IOException {
+        App.setRoot("ventanaReservar");
+    }
+
+    @FXML
+    private void cambiaAPrestar() throws IOException {
+        App.setRoot("ventanaPrestar");
     }
     
     @FXML

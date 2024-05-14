@@ -6,19 +6,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 public class ventanaInicioSesionController {
 
-    @FXML
-	private ComboBox idRol;
 	@FXML
 	private TextField idUser;
 	@FXML
@@ -40,30 +36,37 @@ public class ventanaInicioSesionController {
     }
 
     @FXML
-	public void initialize() {
-		idRol.getItems().addAll("Usuario", "Administrador");
-	}
-
-    @FXML
     public void Ingresar(ActionEvent event) throws SQLException, IOException {
 
-        App.setRoot("busResPresDev");
+        String username = idUser.getText();
+        String password = idPass.getText();
 
         try {
-            Connection con = DriverManager.getConnection(bibl,usr,pass);
+            Connection con = DriverManager.getConnection(bibl, usr, pass);
 
+            String query = "SELECT email, password FROM usuarios WHERE email = ? AND password = ?";
+
+            try (PreparedStatement st = con.prepareStatement(query)) {
+
+                st.setString(1, username);
+                st.setString(2, password);
+
+                ResultSet rs = st.executeQuery();
+
+                if (rs.next()) {
+                    
+                    App.setRoot("busResPresDev");
+
+                } else {
+                    
+                    JOptionPane.showMessageDialog(null, "No tenemos ninguna cuenta con esas características." +'\n' + "Inténtelo otra vez");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        login log= new login();
-        
-        int result= log.ingresarUs();
-    
-        if(result ==1){
-            JOptionPane.showMessageDialog(null, "Ingreso exitoso");
-        }else{
-            JOptionPane.showMessageDialog(null, "Ingreso Fallido");
         }
     }
 }
