@@ -14,4 +14,8 @@ public class busResPresDevController {
         App.setRoot("ventanaBuscar");
     }
     
+    @FXML
+    private void cambiaAPrimeraVentana() throws IOException {
+        App.setRoot("primeraVentana");
+    }
 }
