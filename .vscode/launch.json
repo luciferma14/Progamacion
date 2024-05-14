@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Ejer1",
+            "request": "launch",
+            "mainClass": "Ejer1",
+            "projectName": "Programacion_4f8c73aa"
+        },
+        {
+            "type": "java",
             "name": "listarDirectorio",
             "request": "launch",
             "mainClass": "listarDirectorio",
