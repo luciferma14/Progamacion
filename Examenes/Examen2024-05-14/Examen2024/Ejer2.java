@@ -21,11 +21,16 @@ public class Ejer2 {
 
         Scanner scanner = new Scanner(System.in);
 
+        double subtotal = 0.0;
+        double total = 0.0;
+        double iva = 0.0;
+        double importePagar = 0.0;
+
         System.out.print("Introduce el código de cliente: ");
         int codCliente = scanner.nextInt();
 
-        String queryCab1 = "SELECT NombreCliente, LineaDireccion1, Ciudad, CodigoPostal, Pais, Telefono FROM clientes WHERE CodigoCliente = " + codCliente;
-        String queryPed = "SELECT CodigoPedido, FechaPedido, Estado, Comentarios FROM pedidos WHERE CodigoCliente = " + codCliente + "ORDER BY FechaPedido";
+        String queryCab1 = "SELECT NombreCliente, LineaDireccion1, Ciudad, CodigoPostal, Pais, Telefono FROM exdaw.clientes WHERE CodigoCliente = " + codCliente;
+        String queryPed = "SELECT CodigoPedido, FechaPedido, Estado, Comentarios FROM exdaw.pedidos WHERE CodigoCliente = " + codCliente + "ORDER BY FechaPedido";
         String queryDet = "SELECT CodigoProducto, Nombre, Cantidad, PrecioUnidad FROM detallepedidos NATURAL JOIN exdaw.productos WHERE CodigoPedido = " + codCliente + "ORDER BY NumeroLinea";
 
         try {
@@ -49,11 +54,6 @@ public class Ejer2 {
                 escr.println(rsCab1.getString("NombreCliente") + " " + rsCab1.getString("LineaDireccion1") + " " + rsCab1.getString("Ciudad") + " " + rsCab1.getString("CodigoPostal") + " " + rsCab1.getString("Pais") + " " + rsCab1.getString("Telefono"));
                 escr.println("------------------------------------------------------------------");
             }
-
-            double subtotal = 0.0;
-            double total = 0.0;
-            double iva = 0.0;
-            double importePagar = 0.0;
 
             while (rsPed.next()) {
                 escr.println(rsPed.getInt("CodigoPedido") + " " + rsPed.getDate("FechaPedido") + " " + rsPed.getString("Estado") + " " + rsPed.getString("Comentarios"));
@@ -82,8 +82,6 @@ public class Ejer2 {
             escr.println("IVA: " + new DecimalFormat("#.##").format(iva));
             escr.println("Importe a Pagar: " + new DecimalFormat("#.##").format(importePagar));
             escr.close();
-
-            System.out.println("La factura se ha generado correctamente en el archivo Factura_" + codCliente + ".txt");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
