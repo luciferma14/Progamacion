@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "listarDirectorio",
+            "request": "launch",
+            "mainClass": "listarDirectorio",
+            "projectName": "Programacion_a68fa78e"
+        },
+        {
+            "type": "java",
             "name": "EjercicioPE_7",
             "request": "launch",
             "mainClass": "EjercicioPE_7",
@@ -18,7 +25,7 @@
             "mainClass": "com.proyecto/com.proyecto.App",
             "projectName": "proyecto",
             "noDebug": false,
-            "__progressId": "e0aeac97-f2b9-44b1-8291-32b966896a16",
+            "__progressId": "b288e794-bf38-4443-81da-56a8f298d6fa",
             "__origin": "internal"
         },
         {
