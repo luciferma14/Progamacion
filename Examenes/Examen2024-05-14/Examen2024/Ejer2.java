@@ -38,11 +38,11 @@ public class Ejer2 {
 //			Connection con = DriverManager.getConnection(bibl,usr,pass);
             Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
 
-            // try {
-			// 	Class.forName(driv);
-			// } catch (ClassNotFoundException e) {
-			// 	System.out.println(e.getMessage());
-			// }
+            try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
             
             Statement st = con.createStatement();
 
