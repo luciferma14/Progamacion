@@ -40,7 +40,9 @@ public class Ejer1 {
 				System.out.println(e.getMessage());
 			}
 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/exdaw","root", "dbrootpass");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/exdaw","root", "dbrootpass");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
+
 
             String crearTabla = "CREATE TABLE exdaw.Empleados (" +
                     "`CodigoEmpleado` int NOT NULL, " +
@@ -79,7 +81,9 @@ public class Ejer1 {
 			} catch (ClassNotFoundException e) {
 				System.out.println(e.getMessage());
 			}
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/exdaw","root", "dbrootpass");
+//            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/exdaw","root", "dbrootpass");
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
+
 
             String insertar = "INSERT INTO exdaw.Empleados (`CodigoEmpleado`,`Nombre`,`Apellido1`,`Apellido2`,`Extension`,`Email`,`CodigoJefe`,`Puesto`) VALUES ('4','Maria','Solis','Jerez','2847','msolis@jardineria.es',2,'Secretaria');";
             PreparedStatement st = con.prepareStatement(insertar);

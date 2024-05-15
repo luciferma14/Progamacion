@@ -14,10 +14,11 @@ import java.util.Scanner;
 public class Ejer2 {
     public static void main(String[] args) throws SQLException {
 
-        String driv = "com.mysql.jdbc.Driver";
-        String bibl = "jdbc:mysql://localhost:33006/exdaw";
-        String usr= "root";
-        String pass = "dbrootpass";
+        // String driv = "com.mysql.jdbc.Driver";
+        // String bibl = "jdbc:mysql://localhost:33006/exdaw";
+        // String usr= "root";
+        // String pass = "dbrootpass";
+
 
         Scanner scanner = new Scanner(System.in);
 
@@ -34,12 +35,14 @@ public class Ejer2 {
         String queryDet = "SELECT CodigoProducto, Nombre, Cantidad, PrecioUnidad FROM detallepedidos NATURAL JOIN exdaw.productos WHERE CodigoPedido = " + codCliente + "ORDER BY NumeroLinea";
 
         try {
-			Connection con = DriverManager.getConnection(bibl,usr,pass);
-            try {
-				Class.forName(driv);
-			} catch (ClassNotFoundException e) {
-				System.out.println(e.getMessage());
-			}
+//			Connection con = DriverManager.getConnection(bibl,usr,pass);
+            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
+
+            // try {
+			// 	Class.forName(driv);
+			// } catch (ClassNotFoundException e) {
+			// 	System.out.println(e.getMessage());
+			// }
             
             Statement st = con.createStatement();
 
