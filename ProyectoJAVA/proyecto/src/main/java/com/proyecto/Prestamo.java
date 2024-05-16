@@ -1,5 +1,8 @@
 package com.proyecto;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Prestamo {
@@ -14,7 +17,7 @@ public class Prestamo {
         this.libro = libro;
         this.usuario = usuario;
         this.fechaPrestamo = fechaPrestamo;
-        this.fechaDevolucion = null; // Book not returned yet by default
+        this.fechaDevolucion = null; 
     }
 
 
@@ -50,5 +53,21 @@ public class Prestamo {
         this.fechaDevolucion = fechaDevolucion;
     }
 
+
+    public void registrarPrestamo(Connection con) throws SQLException {
+
+        String query = "INSERT INTO prestamos (idLibro, idUsuario, fecha_prestamo) VALUES (?, ?,CURRENT_DATE())";
+        PreparedStatement st = con.prepareStatement(query);
+        st.setLong(1, libro.getIdLibro());
+        st.setInt(2, usuario.getIdUsuario());
+        st.executeUpdate();
+        st.close();
+
+        String updateQuery = "UPDATE libros SET Disponible = false WHERE ISBN = ?";
+        st = con.prepareStatement(updateQuery);
+        st.setLong(1, libro.getIsbn());
+        st.executeUpdate();
+        st.close();
+    }
     
 }

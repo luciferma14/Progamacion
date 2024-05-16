@@ -2,6 +2,7 @@ package com.proyecto;
 
 public class Usuario {
     
+    private int idUsuario;
     private String nombre;
     private String apellido;
     private String email;
@@ -10,6 +11,10 @@ public class Usuario {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+    }
+
+    public int getIdUsuario(){
+        return idUsuario;
     }
 
     public String getNombre() {

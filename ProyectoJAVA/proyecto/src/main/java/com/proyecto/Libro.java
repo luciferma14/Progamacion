@@ -2,6 +2,7 @@ package com.proyecto;
 
 public class Libro {
 
+    private int idLibro;
     private String titulo;
     private String autor;
     private long isbn;
@@ -24,6 +25,10 @@ public class Libro {
         this.genero = genero;
         this.isbnString = String.valueOf(isbn);
         this.disponible = disponible;
+    }
+
+    public int getIdLibro(){
+        return idLibro;
     }
 
     public String getTitulo() {

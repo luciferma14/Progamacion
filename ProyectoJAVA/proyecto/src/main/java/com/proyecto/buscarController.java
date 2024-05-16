@@ -103,38 +103,6 @@ public class buscarController {
                     System.out.println(query);
                     // Eliminar el último "AND" si hay al final para que no de error en la query
             
-                // if (!tit.equals("")) {
-                //     query = "SELECT * FROM libros WHERE titulo LIKE ?";
-                //     st = con.prepareStatement(query);
-                //     st.setString(1, "%" + tit + "%");
-                //     System.out.println("Hago la query de titulos");
-
-                // } else if (!aut.equals("")) {
-
-                //     query = "SELECT * FROM libros WHERE autor LIKE ? ";
-                //     st = con.prepareStatement(query);
-                //     st.setString(1, "%" + aut + "%");
-                //     System.out.println("Hago la query de autores");
-
-                // } else if (!isb.equals("")) {
-
-                //     query = "SELECT * FROM libros WHERE ISBN LIKE ? ";
-                //     st = con.prepareStatement(query);
-                //     st.setString(1, "%" + isb + "%");
-                //     System.out.println("Hago la query de ISBN");
-
-                // } else if (!gen.equals("")) {
-
-                //     query = "SELECT * FROM libros WHERE genero LIKE ?";
-                //     st = con.prepareStatement(query);
-                //     st.setString(1, "%" + gen + "%");
-                //     System.out.println("Hago la query de genero");
-
-                // }else{
-                //     System.out.println("Ninguno estrito");
-                //     JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar libros");
-                // }
-
                 try (
                     ResultSet rs = st.executeQuery(query)) {
 
