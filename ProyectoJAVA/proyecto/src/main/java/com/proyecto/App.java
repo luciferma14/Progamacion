@@ -32,5 +32,15 @@ public class App extends Application {
         launch();
     }
 
+    private static Libro li = null;
 
+    public static Libro getLibro() {
+        return li;
+    }
+
+    private static Usuario us = null;
+
+    public static Usuario getUsuario() {
+        return us;
+    }
 }

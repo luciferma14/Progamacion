@@ -2,17 +2,6 @@ package com.proyecto;
 
 import java.time.LocalDate;
 
-// -----------MYSQL-----------
-// CREATE TABLE reservas (
-//   id_reserva INT PRIMARY KEY AUTO_INCREMENT,
-//   id_libro INT NOT NULL,
-//   id_usuario INT NOT NULL,
-//   fecha_reserva DATE NOT NULL,
-//   FOREIGN KEY (id_libro) REFERENCES libros(id),
-//   FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
-// );
-//---------------------------------
-
 public class Reserva {
     
     private int idLibro;

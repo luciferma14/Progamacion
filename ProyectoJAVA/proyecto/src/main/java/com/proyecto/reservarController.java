@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 
@@ -169,36 +170,26 @@ public class reservarController {
     }
 
     @FXML
-    private void reservarLibro() throws SQLException {
-
-        // Coge el libro selecionado de la tabla
+    private void reservarLibros() throws SQLException {
         Libro libro = tablaLibros.getSelectionModel().getSelectedItem();
+        
+        if (libro!= null) {
+            
+            Usuario currentUser = App.getUsuario();
 
-        if (libro != null) {
-
-            if (libro != null) {
-
-                try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-
-                    PreparedStatement st = con.prepareStatement("UPDATE libros SET disponible = ?"); //AÑADIR PARA QUE LEA CADA COLUMNA
-                    st.setString(1, "No");                   
-                    st.executeUpdate();
-
-                    //libro.setDisponible(false);
-
-                    tablaLibros.refresh();
-                    
-                    JOptionPane.showMessageDialog(null, "Libro reservado con éxito!");
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error al reservar el libro.");
+            try {
+                if (currentUser != null) {
+                    String query = "INSERT INTO reservas (idLibro, idUsuario, fecha_reserva) VALUES (?,?, CURRENT_DATE())";
+                    try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+                        PreparedStatement st = con.prepareStatement(query);
+                        st.setLong(1, libro.getIdLibro());
+                        st.setLong(2, currentUser.getIdUsuario());
+                        st.executeUpdate();
+                    }
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "El libro no está disponible para reservar.");
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione un libro para reservar.");
         }
     }
-}
+}   

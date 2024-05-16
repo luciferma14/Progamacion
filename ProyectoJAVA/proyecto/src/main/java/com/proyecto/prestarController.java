@@ -325,17 +325,6 @@ public class prestarController {
                 String query = querySacarIdUsu.toString();
                 PreparedStatement st = con.prepareStatement(query);
 
-                int parameterIndex = 0;
-                if (!nom.isEmpty()) {
-                    st.setString(parameterIndex++, nom);
-                }
-                if (!ape.isEmpty()) {
-                    st.setString(parameterIndex++, ape);
-                }
-                if (!use.isEmpty()) {
-                    st.setString(parameterIndex++, use);
-                }
-
                 if (tit != null || aut != null || isb != null || gen != null) {
         
                     // Para hacer la query de buscar con todos los campos
@@ -362,20 +351,6 @@ public class prestarController {
     
                     String query2 = querySacarIdLib.toString();
                     PreparedStatement st2 = con.prepareStatement(query2);
-    
-                    int parameterIndex2 = 0;
-                    if (!tit.isEmpty()) {
-                        st2.setString(parameterIndex2++, tit);
-                    }
-                    if (!aut.isEmpty()) {
-                        st2.setString(parameterIndex2++, aut);
-                    }
-                    if (!isb.isEmpty()) {
-                        st2.setString(parameterIndex2++, isb);
-                    }
-                    if (!gen.isEmpty()) {
-                        st2.setString(parameterIndex2++, gen);
-                    }
     
                     ResultSet rs = st.executeQuery();
                     ResultSet rs2 = st2.executeQuery();
