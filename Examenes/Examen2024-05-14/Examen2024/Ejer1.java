@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Ejer1 {
@@ -31,41 +32,29 @@ public class Ejer1 {
 
     private static void creaTabla(){
 
-        int comprobacion;
+        ResultSet comprobacion;
         try {          
 
-            try {
-				Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				System.out.println(e.getMessage());
-			}
 
-            //Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/exdaw","root", "dbrootpass");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/exdaw","root", "dbrootpass");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
 
 
-            String crearTabla = "CREATE TABLE exdaw.Empleados (" +
-                    "`CodigoEmpleado` int NOT NULL, " +
-                    "`Nombre` varchar(50) NOT NULL, " +
-                    "`Apellido1` varchar(50) NOT NULL, " +
-                    "`Apellido2` varchar(50) DEFAULT NULL, " +
-                    "`Extension` varchar(10) NOT NULL," +
-                    "`Email` varchar(100) NOT NULL," +
-                    "`Email` varchar(100) NOT NULL," +
-                    "`CodigoJefe` int DEFAULT NULL," +
-                    "`Puesto` varchar(50) DEFAULT NULL," +
-                    "PRIMARY KEY (`CodigoEmpleado`)," +
-                    "KEY `Empleados_EmpleadosFK` (`CodigoJefe`)" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;\" ";
+            String crearTabla = " CREATE TABLE exdaw.Empleados (\n" + //
+                                "  `CodigoEmpleado` int NOT NULL,\n" + //
+                                "  `Nombre` varchar(50) NOT NULL,\n" + //
+                                "  `Apellido1` varchar(50) NOT NULL,\n" + //
+                                "  `Apellido2` varchar(50) DEFAULT NULL,\n" + //
+                                "  `Extension` varchar(10) NOT NULL,\n" + //
+                                "  `Email` varchar(100) NOT NULL,\n" + //
+                                "  `CodigoJefe` int DEFAULT NULL,\n" + //
+                                "  `Puesto` varchar(50) DEFAULT NULL,\n" + //
+                                "  PRIMARY KEY (`CodigoEmpleado`),\n" + //
+                                "  KEY `Empleados_EmpleadosFK` (`CodigoJefe`)\n" + //
+                                ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
             PreparedStatement st = con.prepareStatement(crearTabla);
-            st.executeUpdate();
 
-            comprobacion = st.executeUpdate();
-            if (comprobacion > 0) {
-                System.out.println("Alta correcta");
-            }else {
-                System.out.println("Error en la alta");
-            }
+            st.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,15 +64,8 @@ public class Ejer1 {
 
         int comprobacion;
         try {
-
-            try {
-				Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				System.out.println(e.getMessage());
-			}
-//            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/exdaw","root", "dbrootpass");
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
-
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:33006/exdaw","root", "dbrootpass");
+            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
 
             String insertar = "INSERT INTO exdaw.Empleados (`CodigoEmpleado`,`Nombre`,`Apellido1`,`Apellido2`,`Extension`,`Email`,`CodigoJefe`,`Puesto`) VALUES ('4','Maria','Solis','Jerez','2847','msolis@jardineria.es',2,'Secretaria');";
             PreparedStatement st = con.prepareStatement(insertar);

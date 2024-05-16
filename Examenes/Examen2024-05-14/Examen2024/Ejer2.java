@@ -14,10 +14,10 @@ import java.util.Scanner;
 public class Ejer2 {
     public static void main(String[] args) throws SQLException {
 
-        // String driv = "com.mysql.jdbc.Driver";
-        // String bibl = "jdbc:mysql://localhost:33006/exdaw";
-        // String usr= "root";
-        // String pass = "dbrootpass";
+         String driv = "com.mysql.jdbc.Driver";
+         String bibl = "jdbc:mysql://localhost:33006/exdaw";
+         String usr= "root";
+         String pass = "dbrootpass";
 
 
         Scanner scanner = new Scanner(System.in);
@@ -31,19 +31,14 @@ public class Ejer2 {
         int codCliente = scanner.nextInt();
 
         String queryCab1 = "SELECT NombreCliente, LineaDireccion1, Ciudad, CodigoPostal, Pais, Telefono FROM exdaw.clientes WHERE CodigoCliente = " + codCliente;
-        String queryPed = "SELECT CodigoPedido, FechaPedido, Estado, Comentarios FROM exdaw.pedidos WHERE CodigoCliente = " + codCliente + "ORDER BY FechaPedido";
-        String queryDet = "SELECT CodigoProducto, Nombre, Cantidad, PrecioUnidad FROM detallepedidos NATURAL JOIN exdaw.productos WHERE CodigoPedido = " + codCliente + "ORDER BY NumeroLinea";
+        String queryPed = "SELECT CodigoPedido, FechaPedido, Estado, Comentarios FROM exdaw.pedidos WHERE CodigoCliente = '" + codCliente + "'ORDER BY FechaPedido";
+        String queryDet = "SELECT CodigoProducto, Nombre, Cantidad, PrecioUnidad FROM detallepedidos NATURAL JOIN exdaw.productos WHERE CodigoPedido = '" + codCliente + "'ORDER BY NumeroLinea";
 
         try {
-//			Connection con = DriverManager.getConnection(bibl,usr,pass);
-            Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
+			Connection con = DriverManager.getConnection(bibl,usr,pass);
+            //Connection con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/exdaw","lucia","lucia");
 
-            try {
-				Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				System.out.println(e.getMessage());
-			}
-            
+
             Statement st = con.createStatement();
 
             ResultSet rsCab1 = st.executeQuery(queryCab1);
