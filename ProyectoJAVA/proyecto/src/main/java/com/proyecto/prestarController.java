@@ -377,9 +377,6 @@ public class prestarController {
         }
     }
 }
-
-
-
                     // String updateQuery = "UPDATE libros SET Disponible = false WHERE ISBN = ?";
                         // st = con.prepareStatement(updateQuery);
                         // st.setLong(1, libro.getIsbn());
