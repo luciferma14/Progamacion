@@ -7,10 +7,16 @@ public class Usuario {
     private String apellido;
     private String email;
 
-    public Usuario (String nombre, String apellido, String email){
+    public Usuario (int idUsuario,String nombre, String email){
+        this.idUsuario = idUsuario;
         this.nombre = nombre;
-        this.apellido = apellido;
         this.email = email;
+    }
+
+    public Usuario(String nombre2, String apellido2, String email2) {
+        this.nombre = nombre2;
+        this.apellido = apellido2;
+        this.email = email2;
     }
 
     public int getIdUsuario(){

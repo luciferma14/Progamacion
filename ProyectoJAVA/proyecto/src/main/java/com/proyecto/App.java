@@ -11,6 +11,7 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    private static Usuario usuarioAutenticado;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -38,9 +39,12 @@ public class App extends Application {
         return li;
     }
 
-    private static Usuario us = null;
+    public static void autenticarUsuario(Usuario usuario) {
+        usuarioAutenticado = usuario;
+    }
 
+    // Este método retorna el usuario actualmente autenticado
     public static Usuario getUsuario() {
-        return us;
+        return usuarioAutenticado;
     }
 }

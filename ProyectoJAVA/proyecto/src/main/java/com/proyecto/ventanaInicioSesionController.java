@@ -41,27 +41,30 @@ public class ventanaInicioSesionController {
         String username = idUser.getText();
         String password = idPass.getText();
 
-        try {
-            Connection con = DriverManager.getConnection(bibl, usr, pass);
-
-            String query = "SELECT email, password FROM usuarios WHERE email = ? AND password = ?";
-
+        try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+            String query = "SELECT idUsuario, nombre, email FROM usuarios WHERE email = ? AND password = ?";
+            
             try (PreparedStatement st = con.prepareStatement(query)) {
-
                 st.setString(1, username);
                 st.setString(2, password);
 
                 ResultSet rs = st.executeQuery();
 
                 if (rs.next()) {
-                    
+
+                    Integer idUsuario = rs.getInt("idUsuario");
+                    String nombre = rs.getString("nombre");
+                    String email = rs.getString("email");
+
+                    Usuario usuario = new Usuario(idUsuario, nombre, email);
+
+                    App.autenticarUsuario(usuario);
+
                     App.setRoot("busResPresDev");
 
                 } else {
-                    
                     JOptionPane.showMessageDialog(null, "No tenemos ninguna cuenta con esas características." +'\n' + "Inténtelo otra vez");
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
