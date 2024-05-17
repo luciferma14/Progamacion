@@ -186,7 +186,6 @@ public class reservarController {
         tablaLibros.setItems(lib);
 
     }
-                        // AÑADIR ID EN LA TABLA Y COGERLO CON GETIDLIBRO Y AÑADIRLO ABAJO
 
     @FXML
     private void reservarLibros() {
