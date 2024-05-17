@@ -18,7 +18,8 @@ public class Libro {
         this.isbnString = String.valueOf(isbn);
     }
 
-    public Libro(String titulo, String autor, long isbn, String genero, String disponible) {
+    public Libro(String titulo, String autor, long isbn, String genero, String disponible, int idLibro) {
+        this.idLibro = idLibro;
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = isbn;

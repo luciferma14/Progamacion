@@ -48,7 +48,7 @@ public class reservarController {
     @FXML
     private TableColumn<Libro, Boolean> Disponible;
     @FXML
-    private TableColumn<Libro, Integer> Id;
+    private TableColumn<Libro, Integer> IdLibro;
 
 
     public PreparedStatement ps;
@@ -147,9 +147,10 @@ public class reservarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
-                        String disponible = rs.getString("disponible"); // Lo combierte a boolean
+                        String disponible = rs.getString("disponible");
+                        int idLibro = rs.getInt("idLibro");
 
-                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible);
+                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible, idLibro);
 
                         lib.add(libro);
                     }
@@ -159,7 +160,7 @@ public class reservarController {
                     ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
                     Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
                     Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
-                    Id.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
+                    IdLibro.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
                     
 
                     tablaLibros.setItems(lib);
@@ -177,63 +178,55 @@ public class reservarController {
     private void initialize() {
         // Configuración de las columnas de la tabla
         Titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
+        IdLibro.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
+
 
         // Añadir algunos libros de ejemplo (reemplazar con tus datos reales)
         ObservableList<Libro> lib = FXCollections.observableArrayList();
         tablaLibros.setItems(lib);
 
-        // Configurar el manejador de eventos para la selección de la tabla
-        tablaLibros.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                // Seleccionar el libro
-                System.out.println("Libro seleccionado: " + newSelection.getTitulo());
-                // Aquí puedes hacer lo que necesites con el libro seleccionado
-            }
-        });
     }
                         // AÑADIR ID EN LA TABLA Y COGERLO CON GETIDLIBRO Y AÑADIRLO ABAJO
 
-
     @FXML
-    private void reservarLibros() throws SQLException {
-
-        Connection con = DriverManager.getConnection(bibl, usr, pass);
-
+    private void reservarLibros() {
         Libro libroSeleccionado = tablaLibros.getSelectionModel().getSelectedItem();
         if (libroSeleccionado != null) {
             // Procesar la reserva del libro seleccionado
             System.out.println("Reservando el libro: " + libroSeleccionado.getTitulo());
+            realizarReserva(libroSeleccionado);
         } else {
-            System.out.println("No se ha seleccionado ningún libro.");
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún libro." +'\n' + "Inténtelo otra vez.");
         }
-
-        if (libroSeleccionado != null) {
-            System.out.println("Libro seleccionado: " + libroSeleccionado.getIdLibro());
-            
-            Usuario currentUser = App.getUsuario();
-
+    }
+    
+    private void realizarReserva(Libro libroSeleccionado) {
+        Usuario currentUser = App.getUsuario();
+        if (currentUser != null) {
+            System.out.println("Usuario autenticado: " + currentUser.getIdUsuario());
+            Connection con = null;
             try {
-                if (currentUser != null) {
-                    System.out.println("Usuario autenticado: " + currentUser.getIdUsuario());
-
-                    String query2 = "INSERT INTO reservas (idLibro, idUsuario, fecha_reserva) VALUES (?, ?, CURRENT_DATE())";
-
-                    try (con ;
-                        PreparedStatement st = con.prepareStatement(query2)) {
-                        st.setLong(1, libroSeleccionado.getIdLibro());
-                        st.setLong(2, currentUser.getIdUsuario());
-
-                        st.executeUpdate();
-                        System.out.println("Reserva realizada con éxito.");
-                    }
-                } else {
-                    System.out.println("No hay un usuario autenticado.");
+                con = DriverManager.getConnection(bibl, usr, pass);
+                String query2 = "INSERT INTO reservas (idLibro, idUsuario, fecha_reserva) VALUES (?, ?, CURRENT_DATE())";
+                try (PreparedStatement st = con.prepareStatement(query2)) {
+                    st.setLong(1, libroSeleccionado.getIdLibro());
+                    st.setLong(2, currentUser.getIdUsuario());
+                    st.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Reserva realizada con éxito :)");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    if (con != null) {
+                        con.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
-            System.out.println("No se ha seleccionado ningún libro.");
+            System.out.println("No hay un usuario autenticado.");
         }
     }
 }   

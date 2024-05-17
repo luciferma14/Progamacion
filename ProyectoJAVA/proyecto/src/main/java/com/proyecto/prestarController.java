@@ -51,6 +51,8 @@ public class prestarController {
     private TableColumn<Libro, String> Genero;
     @FXML
     private TableColumn<Libro, Boolean> Disponible;
+    @FXML
+    private TableColumn<Libro, Integer> Id;
 
 
     @FXML
@@ -165,10 +167,10 @@ public class prestarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
-                        String disponible = rs.getString("disponible"); // Lo combierte a boolean
+                        String disponible = rs.getString("disponible");
+                        int id = rs.getInt("idLibro");
 
-
-                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible);
+                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible, id); 
 
                         lib.add(libro);
                     }
@@ -178,6 +180,8 @@ public class prestarController {
                     ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
                     Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
                     Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
+                    Id.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
+
 
                     tablaLibros.setItems(lib);
                 }

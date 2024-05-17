@@ -45,6 +45,8 @@ public class buscarController {
     private TableColumn<Libro, String> Genero;
     @FXML
     private TableColumn<Libro, Boolean> Disponible;
+    @FXML
+    private TableColumn<Libro, Integer> Id;
     
 
     public PreparedStatement ps;
@@ -114,10 +116,11 @@ public class buscarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
-                        String disponible = rs.getString("disponible"); // Lo combierte a boolean
+                        String disponible = rs.getString("disponible");
+                        int id = rs.getInt("idLibro");
 
 
-                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible);
+                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible, id);
 
                         lib.add(libro);
                     }
