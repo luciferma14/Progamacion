@@ -176,12 +176,9 @@ public class reservarController {
 
     @FXML
     private void initialize() {
-        // Configuración de las columnas de la tabla
         Titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
         IdLibro.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
 
-
-        // Añadir algunos libros de ejemplo (reemplazar con tus datos reales)
         ObservableList<Libro> lib = FXCollections.observableArrayList();
         tablaLibros.setItems(lib);
 
@@ -189,27 +186,27 @@ public class reservarController {
 
     @FXML
     private void reservarLibros() {
-        Libro libroSeleccionado = tablaLibros.getSelectionModel().getSelectedItem();
-        if (libroSeleccionado != null) {
+        Libro libroSelecc = tablaLibros.getSelectionModel().getSelectedItem();
+        if (libroSelecc != null) {
             // Procesar la reserva del libro seleccionado
-            System.out.println("Reservando el libro: " + libroSeleccionado.getTitulo());
-            realizarReserva(libroSeleccionado);
+            System.out.println("Reservando el libro: " + libroSelecc.getTitulo());
+            realizarReserva(libroSelecc);
         } else {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún libro." +'\n' + "Inténtelo otra vez.");
         }
     }
     
-    private void realizarReserva(Libro libroSeleccionado) {
-        Usuario currentUser = App.getUsuario();
-        if (currentUser != null) {
-            System.out.println("Usuario autenticado: " + currentUser.getIdUsuario());
+    private void realizarReserva(Libro libroSelecc) {
+        Usuario usuarioInicio = App.getUsuario();
+        if (usuarioInicio != null) {
+            System.out.println("Usuario autenticado: " + usuarioInicio.getIdUsuario());
             Connection con = null;
             try {
                 con = DriverManager.getConnection(bibl, usr, pass);
                 String query2 = "INSERT INTO reservas (idLibro, idUsuario, fecha_reserva) VALUES (?, ?, CURRENT_DATE())";
                 try (PreparedStatement st = con.prepareStatement(query2)) {
-                    st.setLong(1, libroSeleccionado.getIdLibro());
-                    st.setLong(2, currentUser.getIdUsuario());
+                    st.setLong(1, libroSelecc.getIdLibro());
+                    st.setLong(2, usuarioInicio.getIdUsuario());
                     st.executeUpdate();
                     JOptionPane.showMessageDialog(null, "Reserva realizada con éxito :)");
                 }
