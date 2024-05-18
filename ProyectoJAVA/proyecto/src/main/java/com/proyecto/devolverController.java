@@ -1,5 +1,6 @@
 package com.proyecto;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,34 +21,40 @@ public class devolverController {
     @FXML
     private TableColumn<Prestamo, String> tituloColumn;
     @FXML
-    private TableColumn<Prestamo, String> usuarioPrestadorColumn;
+    private TableColumn<Prestamo, String> usuarioReceptorColumn;
     @FXML
     private TableColumn<Prestamo, String> fechaPrestamoColumn;
 
-    private static String driv = "com.mysql.jdbc.Driver";
     private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
     private static String usr = "root";
     private static String pass = "dbrootpass";
 
-    private static Usuario usuarioActual = null;
-
-    public static void setUsuarioActual(Usuario usuario) {
-        usuarioActual = usuario;
+        @FXML
+    private void cambiaAOpciones() throws IOException {
+        App.setRoot("busResPresDev");
     }
+
+    Usuario usuarioActual = App.getUsuario();
+
 
     @FXML
     private void initialize() {
         cargarPrestamos();
     }
 
-    private void cargarPrestamos() {
+    // CAMBIAR NOMBRE DE LOS USUARIOS DE LA TABLA PRESTAMOS (idUsuarioPrestador y idUsuarioReceptor) Y RELACIONAR LAS CLAVES FORÁNEAS
+    // BORRAR COLUMNA DE LA FECHA DE LA DEVOLUCIÓN
+
+
+    public void cargarPrestamos(){
         if (usuarioActual != null) {
+
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-                String query = "SELECT libros.titulo, usuarios.email, prestamos.fecha_prestamo " +
-                               "FROM prestamos " +
-                               "INNER JOIN libros ON prestamos.idLibro = libros.idLibro " +
-                               "INNER JOIN usuarios ON prestamos.idUsuarioPrestador = usuarios.idUsuario " +
-                               "WHERE prestamos.idUsuarioReceptor = ?";
+                String query = "SELECT L.titulo, U.email, P.fecha_prestamo " +
+                                "FROM prestamos P " + // Agrega espacio aquí
+                                "INNER JOIN libros L USING(idLibro) " + // Agrega espacio aquí
+                                "INNER JOIN usuarios U ON P.idUsuarioPrestador = U.idUsuario " +
+                                "WHERE P.idUsuarioReceptor = ?";
                 PreparedStatement st = con.prepareStatement(query);
                 st.setInt(1, usuarioActual.getIdUsuario());
                 ResultSet rs = st.executeQuery();
@@ -55,14 +62,14 @@ public class devolverController {
                 ObservableList<Prestamo> prestamos = FXCollections.observableArrayList();
                 while (rs.next()) {
                     String titulo = rs.getString("titulo");
-                    String usuarioPrestador = rs.getString("email");
+                    String usuarioReceptor = rs.getString("email");
                     String fechaPrestamo = rs.getString("fecha_prestamo");
 
-                    prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaPrestamo));
+                    prestamos.add(new Prestamo(titulo, usuarioReceptor, fechaPrestamo));
                 }
 
                 tituloColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("titulo"));
-                usuarioPrestadorColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("usuarioPrestador"));
+                usuarioReceptorColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("usuarioReceptor"));
                 fechaPrestamoColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("fechaPrestamo"));
 
                 tablaPrestamos.setItems(prestamos);
