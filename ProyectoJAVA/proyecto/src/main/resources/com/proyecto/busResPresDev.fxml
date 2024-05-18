@@ -14,7 +14,7 @@
             <MenuItem fx:id="idBusca" mnemonicParsing="false" onAction="#cambiaABuscar" onMenuValidation="#cambiaABuscar" text="Buscar " />
             <MenuItem fx:id="idReserva" mnemonicParsing="false" onAction="#cambiaAReservar" onMenuValidation="#cambiaAReservar" text="Resevar " />
             <MenuItem fx:id="IdPresta" mnemonicParsing="false" onAction="#cambiaAPrestar" onMenuValidation="#cambiaAPrestar" text="Prestar" />
-            <MenuItem fx:id="idDevolver" mnemonicParsing="false" text="Devolver" />
+            <MenuItem fx:id="idDevolver" mnemonicParsing="false" onAction="#cambiaADevolver" text="Devolver" />
          </items>
       </MenuButton>
       <Label layoutX="137.0" layoutY="82.0" text="Elige la opción que quieras" textFill="#3f1ea4">

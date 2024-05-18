@@ -6,14 +6,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 import javax.swing.JOptionPane;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,7 +23,7 @@ public class reservarController {
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
     }
- 
+
     @FXML
     private TextField FTitulo;
     @FXML
@@ -38,7 +36,7 @@ public class reservarController {
     @FXML
     private TableView<Libro> tablaLibros;
     @FXML
-    private TableColumn<Libro, String> Titulo; 
+    private TableColumn<Libro, String> Titulo;
     @FXML
     private TableColumn<Libro, String> Autor;
     @FXML
@@ -51,11 +49,6 @@ public class reservarController {
     private TableColumn<Libro, Integer> IdLibro;
 
 
-    public PreparedStatement ps;
-
-    public ResultSet rs;
-
-    private static String driv = "com.mysql.jdbc.Driver";
     private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
     private static String usr = "root";
     private static String pass = "dbrootpass";
@@ -68,43 +61,32 @@ public class reservarController {
 
     @FXML
     private void FindLibros() throws SQLException, IOException {
-
         String tit = FTitulo.getText();
-
         String aut = FAutor.getText();
-
         String isb = FISBN.getText();
-
         String gen = FGenero.getText();
 
-
         if (tit != null || aut != null || isb != null || gen != null) {
-
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-
                 PreparedStatement st = null;
 
-                // Para hacer la query de buscar con todos los campos
                 String query = "SELECT * FROM libros WHERE ";
-
-                if(tit == null && aut == null && isb == null && gen == null){
-
-                    if ( !tit.equals("") ) {
+                if (tit == null && aut == null && isb == null && gen == null) {
+                    if (!tit.equals("")) {
                         query += "titulo = '" + tit + "' AND ";
                     }
-                    if ( !isb.equals("") ) {
+                    if (!isb.equals("")) {
                         query += "isbn = '" + isb + "' AND ";
                     }
-                    if ( !gen.equals("") ) {
+                    if (!gen.equals("")) {
                         query += "genero = '" + gen + "' AND ";
                     }
-                    if ( !aut.equals("") ) {
+                    if (!aut.equals("")) {
                         query += "autor = '" + aut + "' ";
                     }
-                    // Eliminar el último "AND" si hay al final para que no de error en la query
                     query = query.replaceAll(" AND $", "");
                 }
-            
+
                 if (!tit.equals("")) {
                     query = "SELECT * FROM libros WHERE titulo LIKE ?";
                     st = con.prepareStatement(query);
@@ -112,37 +94,32 @@ public class reservarController {
                     System.out.println("Hago la query de titulos");
 
                 } else if (!aut.equals("")) {
-
                     query = "SELECT * FROM libros WHERE autor LIKE ? ";
                     st = con.prepareStatement(query);
                     st.setString(1, "%" + aut + "%");
                     System.out.println("Hago la query de autores");
 
                 } else if (!isb.equals("")) {
-
                     query = "SELECT * FROM libros WHERE ISBN LIKE ? ";
                     st = con.prepareStatement(query);
                     st.setString(1, "%" + isb + "%");
                     System.out.println("Hago la query de ISBN");
 
                 } else if (!gen.equals("")) {
-
                     query = "SELECT * FROM libros WHERE genero LIKE ?";
                     st = con.prepareStatement(query);
                     st.setString(1, "%" + gen + "%");
                     System.out.println("Hago la query de genero");
 
-                }else{
+                } else {
                     System.out.println("Ninguno estrito");
                     JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar libros");
                 }
 
                 try (ResultSet rs = st.executeQuery()) {
-
                     ObservableList<Libro> lib = FXCollections.observableArrayList();
 
                     while (rs.next()) {
-
                         String titulo = rs.getString("titulo");
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
@@ -151,7 +128,6 @@ public class reservarController {
                         int idLibro = rs.getInt("idLibro");
 
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible, idLibro);
-
                         lib.add(libro);
                     }
 
@@ -161,7 +137,6 @@ public class reservarController {
                     Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
                     Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
                     IdLibro.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
-                    
 
                     tablaLibros.setItems(lib);
                 }
@@ -170,7 +145,7 @@ public class reservarController {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
+            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." + '\n' + "Inténtelo otra vez.");
         }
     }
 
@@ -181,21 +156,19 @@ public class reservarController {
 
         ObservableList<Libro> lib = FXCollections.observableArrayList();
         tablaLibros.setItems(lib);
-
     }
 
     @FXML
     private void reservarLibros() {
         Libro libroSelecc = tablaLibros.getSelectionModel().getSelectedItem();
         if (libroSelecc != null) {
-            // Procesar la reserva del libro seleccionado
             System.out.println("Reservando el libro: " + libroSelecc.getTitulo());
             realizarReserva(libroSelecc);
         } else {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún libro." +'\n' + "Inténtelo otra vez.");
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún libro." + '\n' + "Inténtelo otra vez.");
         }
     }
-    
+
     private void realizarReserva(Libro libroSelecc) {
         Usuario usuarioInicio = App.getUsuario();
         if (usuarioInicio != null) {
@@ -203,27 +176,39 @@ public class reservarController {
             Connection con = null;
             try {
                 con = DriverManager.getConnection(bibl, usr, pass);
+                con.setAutoCommit(false);
+
                 String query2 = "INSERT INTO reservas (idLibro, idUsuario, fecha_reserva) VALUES (?, ?, CURRENT_DATE())";
-                try (PreparedStatement st = con.prepareStatement(query2)) {
+                String queryUpdate = "UPDATE libros SET disponible = ? WHERE idLibro = ?";
+
+                try (PreparedStatement st = con.prepareStatement(query2);
+                     PreparedStatement stUpdate = con.prepareStatement(queryUpdate)) {
+
                     st.setLong(1, libroSelecc.getIdLibro());
                     st.setLong(2, usuarioInicio.getIdUsuario());
                     st.executeUpdate();
+
+                    // Actualiza la disponibilidad del libro
+                    stUpdate.setString(1, "No");
+                    stUpdate.setLong(2, libroSelecc.getIdLibro());
+                    stUpdate.executeUpdate();
+
+                    con.commit(); // Confirma la transacción
+
+                    // Actualiza el estado del libro en la interfaz
+                    libroSelecc.setDisponible("No");
+                    tablaLibros.refresh();
+
                     JOptionPane.showMessageDialog(null, "Reserva realizada con éxito :)");
+                } catch (SQLException e) {
+                    con.rollback(); // Revertir la transacción en caso de error
+                    JOptionPane.showMessageDialog(null, libroSelecc.getTitulo() + " no está disponible :(");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    if (con != null) {
-                        con.close();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
         } else {
             System.out.println("No hay un usuario autenticado.");
         }
     }
-}   
-
+}

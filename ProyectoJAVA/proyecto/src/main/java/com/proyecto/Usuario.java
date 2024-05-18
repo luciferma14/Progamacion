@@ -19,6 +19,13 @@ public class Usuario {
         this.email = email2;
     }
 
+    public Usuario(String nombre2, String apellido2, String email2, int idUsuario2) {
+        this.nombre = nombre2;
+        this.apellido = apellido2;
+        this.email = email2;
+        this.idUsuario = idUsuario2;
+    }
+
     public int getIdUsuario(){
         return idUsuario;
     }

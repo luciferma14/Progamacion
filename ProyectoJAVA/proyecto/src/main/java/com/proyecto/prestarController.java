@@ -38,7 +38,6 @@ public class prestarController {
     @FXML
     private TextField FUser;
 
-
     @FXML
     private TableView<Libro> tablaLibros; 
     @FXML
@@ -52,8 +51,7 @@ public class prestarController {
     @FXML
     private TableColumn<Libro, Boolean> Disponible;
     @FXML
-    private TableColumn<Libro, Integer> Id;
-
+    private TableColumn<Libro, Integer> IdLibro;
 
     @FXML
     private TableView<Usuario> tablaUsers; 
@@ -63,115 +61,70 @@ public class prestarController {
     private TableColumn<Usuario, String> Apellido;
     @FXML
     private TableColumn<Usuario, String> User;
-    
 
-    public PreparedStatement ps;
 
-    public ResultSet rs;
-
-    private static String driv = "com.mysql.jdbc.Driver";
     private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
     private static String usr = "root";
     private static String pass = "dbrootpass";
 
     private static Libro li = null;
-
     public static Libro getLibro() {
         return li;
     }
 
     private static Usuario us = null;
-
     public static Usuario getUsuario() {
         return us;
     }
 
     @FXML
     private void FindLibros() throws SQLException, IOException {
-
         String tit = FTitulo.getText();
-
         String aut = FAutor.getText();
-
         String isb = FISBN.getText();
-
         String gen = FGenero.getText();
 
-
         if (tit != null || aut != null || isb != null || gen != null) {
-
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-
                 PreparedStatement st = null;
-
-                // Para hacer la query de buscar con todos los campos
-                String query = "SELECT * FROM libros WHERE ";
-
-                if(tit == null && aut == null && isb == null && gen == null){
-
-                    if ( !tit.equals("") ) {
-                        query += "titulo = '" + tit + "' AND ";
-                    }
-                    if ( !isb.equals("") ) {
-                        query += "isbn = '" + isb + "' AND ";
-                    }
-                    if ( !gen.equals("") ) {
-                        query += "genero = '" + gen + "' AND ";
-                    }
-                    if ( !aut.equals("") ) {
-                        query += "autor = '" + aut + "' ";
-                    }
-                    // Eliminar el último "AND" si hay al final para que no de error en la query
-                    query = query.replaceAll(" AND $", "");
-                }
-            
+                String query = "SELECT * FROM libros WHERE 1=1";
                 if (!tit.equals("")) {
-                    query = "SELECT * FROM libros WHERE titulo LIKE ?";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + tit + "%");
-                    System.out.println("Hago la query de titulos");
-
-                } else if (!aut.equals("")) {
-
-                    query = "SELECT * FROM libros WHERE autor LIKE ? ";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + aut + "%");
-                    System.out.println("Hago la query de autores");
-
-                } else if (!isb.equals("")) {
-
-                    query = "SELECT * FROM libros WHERE ISBN LIKE ? ";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + isb + "%");
-                    System.out.println("Hago la query de ISBN");
-
-                } else if (!gen.equals("")) {
-
-                    query = "SELECT * FROM libros WHERE genero LIKE ?";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + gen + "%");
-                    System.out.println("Hago la query de genero");
-
-                }else{
-                    System.out.println("Ninguno estrito");
-                    JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar libros");
+                    query += " AND titulo LIKE ?";
                 }
-
+                if (!aut.equals("")) {
+                    query += " AND autor LIKE ?";
+                }
+                if (!isb.equals("")) {
+                    query += " AND ISBN LIKE ?";
+                }
+                if (!gen.equals("")) {
+                    query += " AND genero LIKE ?";
+                }
+                st = con.prepareStatement(query);
+                int paramIndex = 1;
+                if (!tit.equals("")) {
+                    st.setString(paramIndex++, "%" + tit + "%");
+                }
+                if (!aut.equals("")) {
+                    st.setString(paramIndex++, "%" + aut + "%");
+                }
+                if (!isb.equals("")) {
+                    st.setString(paramIndex++, "%" + isb + "%");
+                }
+                if (!gen.equals("")) {
+                    st.setString(paramIndex++, "%" + gen + "%");
+                }
                 try (ResultSet rs = st.executeQuery()) {
-
                     ObservableList<Libro> lib = FXCollections.observableArrayList();
-
                     while (rs.next()) {
-
                         String titulo = rs.getString("titulo");
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
                         String disponible = rs.getString("disponible");
-                        int id = rs.getInt("idLibro");
+                        int idLibro = rs.getInt("idLibro");
 
-                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible, id); 
-
+                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible, idLibro);
                         lib.add(libro);
                     }
 
@@ -180,91 +133,57 @@ public class prestarController {
                     ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
                     Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
                     Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
-                    Id.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
-
+                    IdLibro.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
 
                     tablaLibros.setItems(lib);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         } else {
-            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
+            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características.\nInténtelo otra vez.");
         }
     }
 
     @FXML
     private void FindUsers() throws SQLException, IOException {
-
         String nom = FNombre.getText();
-
         String ape = FApellido.getText();
-
         String use = FUser.getText();
 
-
-        if (nom != null || ape != null || use != null ) {
-
+        if (nom != null || ape != null || use != null) {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-
                 PreparedStatement st = null;
-
-                // Para hacer la query de buscar con todos los campos
-                String query = "SELECT nombre, apellido, email FROM usuarios WHERE ";
-
-                if(nom == null && ape == null && use == null ){
-
-                    if ( !nom.equals("") ) {
-                        query += "nombre = '" + nom + "' AND ";
-                    }
-                    if ( !ape.equals("") ) {
-                        query += "apellido = '" + ape + "' AND ";
-                    }
-                    if ( !use.equals("") ) {
-                        query += "email = '" + use + "' AND ";
-                    }
-                    // Eliminar el último "AND" si hay al final para que no de error en la query
-                    query = query.replaceAll(" AND $", "");
-                }
-            
+                String query = "SELECT * FROM usuarios WHERE 1=1";
                 if (!nom.equals("")) {
-                    query = "SELECT * FROM usuarios WHERE nombre LIKE ?";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + nom + "%");
-                    System.out.println("Hago la query de nombres");
-
-                } else if (!ape.equals("")) {
-
-                    query = "SELECT * FROM usuarios WHERE apellido LIKE ? ";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + ape + "%");
-                    System.out.println("Hago la query de apellido");
-
-                } else if (!use.equals("")) {
-
-                    query = "SELECT * FROM usuarios WHERE email LIKE ? ";
-                    st = con.prepareStatement(query);
-                    st.setString(1, "%" + use + "%");
-                    System.out.println("Hago la query de email");
-
-                }else{
-                    System.out.println("Ninguno estrito");
-                    JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar usuarios");
+                    query += " AND nombre LIKE ?";
                 }
-
+                if (!ape.equals("")) {
+                    query += " AND apellido LIKE ?";
+                }
+                if (!use.equals("")) {
+                    query += " AND email LIKE ?";
+                }
+                st = con.prepareStatement(query);
+                int paramIndex = 1;
+                if (!nom.equals("")) {
+                    st.setString(paramIndex++, "%" + nom + "%");
+                }
+                if (!ape.equals("")) {
+                    st.setString(paramIndex++, "%" + ape + "%");
+                }
+                if (!use.equals("")) {
+                    st.setString(paramIndex++, "%" + use + "%");
+                }
                 try (ResultSet rs = st.executeQuery()) {
-
                     ObservableList<Usuario> user = FXCollections.observableArrayList();
-
                     while (rs.next()) {
-
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
                         String email = rs.getString("email");
+                        int idUsuario = rs.getInt("idUsuario");
 
-                        Usuario usuario = new Usuario(nombre, apellido, email);
-
+                        Usuario usuario = new Usuario(nombre, apellido, email, idUsuario);
                         user.add(usuario);
                     }
 
@@ -277,118 +196,43 @@ public class prestarController {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         } else {
-            JOptionPane.showMessageDialog(null, "No tenemos ningún usuario con esas características." +'\n' + "Inténtelo otra vez.");
+            JOptionPane.showMessageDialog(null, "No tenemos ningún usuario con esas características.\nInténtelo otra vez.");
         }
     }
 
     @FXML
     public void registrarPrestamo() throws SQLException {
+        Libro libroSeleccionado = tablaLibros.getSelectionModel().getSelectedItem();
+        Usuario usuarioReceptorSeleccionado = tablaUsers.getSelectionModel().getSelectedItem();
 
-        String nom = FNombre.getText().trim(); 
-        String ape = FApellido.getText().trim();
-        String use = FUser.getText().trim();
-
-        String tit = Titulo.getText().trim(); 
-        String aut = Autor.getText().trim();
-        String isb = ISBN.getText().trim();
-        String gen = Genero.getText().trim();
-
-        if (nom.isEmpty() && ape.isEmpty() && use.isEmpty()) {
-            return;
+        if (libroSeleccionado == null || usuarioReceptorSeleccionado == null) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un libro y un usuario para realizar el préstamo.");
         }
 
-        if (tit.isEmpty() && aut.isEmpty() && isb.isEmpty() && gen.isEmpty()) {
-            return;
-        }
+        Usuario idUsuarioPrestador = App.getUsuario();
 
-        if (nom != null || ape != null || use != null) {
+        try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+            String queryPrestamo = "INSERT INTO prestamos (idUsuarioPrestador, idUsuarioReceptor, idLibro, fecha_prestamo) VALUES (?, ?, ?, CURRENT_DATE())";
+            String queryUpdateLibro = "UPDATE libros SET disponible = ? WHERE idLibro = ?";
 
-            try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+            try (PreparedStatement stPrestamo = con.prepareStatement(queryPrestamo);
+                 PreparedStatement stUpdateLibro = con.prepareStatement(queryUpdateLibro)) {
 
-                // Para hacer la query de buscar con todos los campos
-                String querySacarIdUsu = "SELECT idUsuario FROM usuarios WHERE ";
+                stPrestamo.setInt(1, idUsuarioPrestador.getIdUsuario());
+                stPrestamo.setInt(2, usuarioReceptorSeleccionado.getIdUsuario());
+                stPrestamo.setInt(3, libroSeleccionado.getIdLibro());
+                stPrestamo.executeUpdate();
 
-                if(nom != null || ape != null || use != null){
+                stUpdateLibro.setString(1, "No");
+                stUpdateLibro.setInt(2, libroSeleccionado.getIdLibro());
+                stUpdateLibro.executeUpdate();
+            }
 
-                    if ( !nom.equals("") ) {
-                        querySacarIdUsu += "nombre = '" + nom + "' AND ";
-                    }
-                    if ( !ape.equals("") ) {
-                        querySacarIdUsu += "apellido = '" + ape + "' AND ";
-                    }
-                    if ( !use.equals("") ) {
-                        querySacarIdUsu += "email = '" + use + "' AND ";
-                    }
-        
-                    // Eliminar el último "AND" si hay al final para que no de error en la querySacarId
-                    querySacarIdUsu = querySacarIdUsu.replaceAll(" AND $", "");
-                }
-
-                String query = querySacarIdUsu.toString();
-                PreparedStatement st = con.prepareStatement(query);
-
-                if (tit != null || aut != null || isb != null || gen != null) {
-        
-                    // Para hacer la query de buscar con todos los campos
-                    String querySacarIdLib = "SELECT idLibro FROM libros WHERE ";
-    
-                    if(tit != null || aut != null || isb != null || gen != null){
-    
-                        if ( !tit.equals("") ) {
-                            querySacarIdLib += "titulo = '" + tit + "' AND ";
-                        }
-                        if ( !aut.equals("") ) {
-                            querySacarIdLib += "autor = '" + aut + "' AND ";
-                        }
-                        if ( !isb.equals("") ) {
-                            querySacarIdLib += "ISBN = '" + isb + "' AND ";
-                        }
-                        if ( !gen.equals("") ) {
-                            querySacarIdLib += "genero = '" + gen + "' AND ";
-                        }
-            
-                        // Eliminar el último "AND" si hay al final para que no de error en la querySacarId
-                        querySacarIdUsu = querySacarIdUsu.replaceAll(" AND $", "");
-                    }
-    
-                    String query2 = querySacarIdLib.toString();
-                    PreparedStatement st2 = con.prepareStatement(query2);
-    
-                    ResultSet rs = st.executeQuery();
-                    ResultSet rs2 = st2.executeQuery();
-
-                    if (rs.next() && rs2.next()) { 
-                        int idUser = rs.getInt("idUsuario");
-                        int idLib = rs.getInt("idLibro");
-
-                        // Prepare and execute the loan insert query (assuming 'libro' provides the book ID)
-                        String insertQuery = "INSERT INTO prestamos (idUsuario, idLibro, fecha_prestamo) VALUES (?, ?, CURRENT_DATE())";
-                        PreparedStatement insertSt = con.prepareStatement(insertQuery);
-                        insertSt.setInt(1, idUser);
-                        insertSt.setInt(2, idLib);
-                        insertSt.executeUpdate();
-                        insertSt.close();
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No tenemos ningún usuario con esas características." +'\n' + "Inténtelo otra vez.");
-                    }
-
-                    rs.close();
-                }
-            } 
+            JOptionPane.showMessageDialog(null, "Préstamo registrado exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al registrar el préstamo.");
         }
     }
 }
-                    // String updateQuery = "UPDATE libros SET Disponible = false WHERE ISBN = ?";
-                        // st = con.prepareStatement(updateQuery);
-                        // st.setLong(1, libro.getIsbn());
-                        // st.executeUpdate();
-                        // st.close();
-
-                    // public void registrarPrest() throws IOException, SQLException {
-                    //     if (tablaPrestamos.getSelectionModel().getSelectedItem() != null) {
-                    //         registrarPrestamo();
-                    //     }
-                    // }

@@ -21,6 +21,11 @@ public class Prestamo {
     }
 
 
+    public Prestamo(String titulo, String usuarioPrestador, String fechaPrestamo2) {
+        //TODO Auto-generated constructor stub
+    }
+
+
     public Libro getLibro() {
         return libro;
     }
@@ -68,6 +73,12 @@ public class Prestamo {
         st.setLong(1, libro.getIsbn());
         st.executeUpdate();
         st.close();
+    }
+
+
+    public String getTitulo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTitulo'");
     }
     
 }
