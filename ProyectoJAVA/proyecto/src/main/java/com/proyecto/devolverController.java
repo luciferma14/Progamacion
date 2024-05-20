@@ -21,7 +21,7 @@ public class devolverController {
     @FXML
     private TableColumn<Prestamo, String> tituloColumn;
     @FXML
-    private TableColumn<Prestamo, String> usuarioReceptorColumn;
+    private TableColumn<Prestamo, String> usuarioPrestadorColumn;
     @FXML
     private TableColumn<Prestamo, String> fechaPrestamoColumn;
 
@@ -62,14 +62,14 @@ public class devolverController {
                 ObservableList<Prestamo> prestamos = FXCollections.observableArrayList();
                 while (rs.next()) {
                     String titulo = rs.getString("titulo");
-                    String usuarioReceptor = rs.getString("email");
+                    String usuarioPrestador = rs.getString("email");
                     String fechaPrestamo = rs.getString("fecha_prestamo");
 
-                    prestamos.add(new Prestamo(titulo, usuarioReceptor, fechaPrestamo));
+                    prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaPrestamo));
                 }
 
                 tituloColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("titulo"));
-                usuarioReceptorColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("usuarioReceptor"));
+                usuarioPrestadorColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("usuarioPrestador"));
                 fechaPrestamoColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("fechaPrestamo"));
 
                 tablaPrestamos.setItems(prestamos);

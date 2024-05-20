@@ -12,7 +12,7 @@
       <TableView fx:id="tablaPrestamos" layoutX="45.0" layoutY="119.0" prefHeight="252.0" prefWidth="587.0" style="-fx-background-color: #e3dff7;">
          <columns>
             <TableColumn fx:id="tituloColumn" prefWidth="156.0" style="-fx-background-color: #bbb0f7;" text="Título" />
-            <TableColumn fx:id="usuarioReceptorColumn" prefWidth="221.0" style="-fx-background-color: #bbb0f7;" text="Usuario Receptor" />
+            <TableColumn fx:id="usuarioPrestadorColumn" prefWidth="221.0" style="-fx-background-color: #bbb0f7;" text="Usuario Receptor" />
             <TableColumn fx:id="fechaPrestamoColumn" prefWidth="209.0" style="-fx-background-color: #bbb0f7;" text="Fecha de Préstamo" />
          </columns>
       </TableView>
