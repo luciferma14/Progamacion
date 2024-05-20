@@ -36,7 +36,6 @@ public class devolverController {
 
     Usuario usuarioActual = App.getUsuario();
 
-
     @FXML
     private void initialize() {
         cargarPrestamos();
