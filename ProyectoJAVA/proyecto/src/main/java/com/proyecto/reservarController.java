@@ -124,7 +124,9 @@ public class reservarController {
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
+                        // consulta a la tabla reservas y si esta es no y si no esta es si
                         String disponible = rs.getString("disponible");
+
                         int idLibro = rs.getInt("idLibro");
 
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible, idLibro);
@@ -173,10 +175,11 @@ public class reservarController {
         Usuario usuarioInicio = App.getUsuario();
         if (usuarioInicio != null) {
             System.out.println("Usuario autenticado: " + usuarioInicio.getIdUsuario());
+            System.out.println("");
             Connection con = null;
             try {
                 con = DriverManager.getConnection(bibl, usr, pass);
-                con.setAutoCommit(false);
+
 
                 String query2 = "INSERT INTO reservas (idLibro, idUsuario, fecha_reserva) VALUES (?, ?, CURRENT_DATE())";
                 String queryUpdate = "UPDATE libros SET disponible = ? WHERE idLibro = ?";
@@ -193,7 +196,7 @@ public class reservarController {
                     stUpdate.setLong(2, libroSelecc.getIdLibro());
                     stUpdate.executeUpdate();
 
-                    con.commit(); // Confirma la transacción
+
 
                     // Actualiza el estado del libro en la interfaz
                     libroSelecc.setDisponible("No");
@@ -201,7 +204,7 @@ public class reservarController {
 
                     JOptionPane.showMessageDialog(null, "Reserva realizada con éxito :)");
                 } catch (SQLException e) {
-                    con.rollback(); // Revertir la transacción en caso de error
+                    e.printStackTrace();
                     JOptionPane.showMessageDialog(null, libroSelecc.getTitulo() + " no está disponible :(");
                 }
             } catch (SQLException e) {

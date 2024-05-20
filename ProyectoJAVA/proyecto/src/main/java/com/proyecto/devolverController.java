@@ -25,51 +25,66 @@ public class devolverController {
     @FXML
     private TableColumn<Prestamo, String> fechaPrestamoColumn;
 
-    private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
-    private static String usr = "root";
-    private static String pass = "dbrootpass";
+    private static final String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
+    private static final String usr = "root";
+    private static final String pass = "dbrootpass";
 
-        @FXML
+    @FXML
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
     }
 
-    Usuario usuarioActual = App.getUsuario();
+    private Usuario usuarioActual = App.getUsuario();
 
     @FXML
     private void initialize() {
-        cargarPrestamos();
+        cargarPrestamosYReservas();
     }
 
-    // CAMBIAR NOMBRE DE LOS USUARIOS DE LA TABLA PRESTAMOS (idUsuarioPrestador y idUsuarioReceptor) Y RELACIONAR LAS CLAVES FORÁNEAS
-    // BORRAR COLUMNA DE LA FECHA DE LA DEVOLUCIÓN
-
-
-    public void cargarPrestamos(){
+    private void cargarPrestamosYReservas() {
         if (usuarioActual != null) {
-
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-                String query = "SELECT L.titulo, U.email, P.fecha_prestamo " +
-                                "FROM prestamos P " + 
-                                "INNER JOIN libros L USING(idLibro) " +
-                                "INNER JOIN usuarios U ON P.idUsuarioPrestador = U.idUsuario " +
-                                "WHERE P.idUsuarioReceptor = ?";
-                PreparedStatement st = con.prepareStatement(query);
-                st.setInt(1, usuarioActual.getIdUsuario());
-                ResultSet rs = st.executeQuery();
+                String queryPrestamos = "SELECT L.titulo, U.email, P.fecha_prestamo " +
+                                        "FROM prestamos P " + 
+                                        "INNER JOIN libros L USING(idLibro) " +
+                                        "INNER JOIN usuarios U ON P.idUsuarioPrestador = U.idUsuario " +
+                                        "WHERE P.idUsuarioReceptor = ?";
+                String queryReservas = "SELECT L.titulo, U.email, R.fecha_reserva" +
+                                       "FROM reservas R " +
+                                       "INNER JOIN libros L USING(idLibro) " +
+                                       "INNER JOIN usuarios U ON R.idUsuarioReservador = U.idUsuario " +
+                                       "WHERE R.idUsuarioReservador = ?";
+
+                PreparedStatement stPrestamos = con.prepareStatement(queryPrestamos);
+                PreparedStatement stReservas = con.prepareStatement(queryReservas);
+
+                stPrestamos.setInt(1, usuarioActual.getIdUsuario());
+                stReservas.setInt(1, usuarioActual.getIdUsuario());
+
+                ResultSet rsPrestamos = stPrestamos.executeQuery();
+                ResultSet rsReservas = stReservas.executeQuery();
 
                 ObservableList<Prestamo> prestamos = FXCollections.observableArrayList();
-                while (rs.next()) {
-                    String titulo = rs.getString("titulo");
-                    String usuarioPrestador = rs.getString("email");
-                    String fechaPrestamo = rs.getString("fecha_prestamo");
+
+                while (rsPrestamos.next()) {
+                    String titulo = rsPrestamos.getString("titulo");
+                    String usuarioPrestador = rsPrestamos.getString("email");
+                    String fechaPrestamo = rsPrestamos.getString("fecha_prestamo");
 
                     prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaPrestamo));
                 }
 
-                tituloColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("titulo"));
-                usuarioPrestadorColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("usuarioPrestador"));
-                fechaPrestamoColumn.setCellValueFactory(new PropertyValueFactory<Prestamo, String>("fechaPrestamo"));
+                while (rsReservas.next()) {
+                    String titulo = rsReservas.getString("titulo");
+                    String usuarioPrestador = rsReservas.getString("email");
+                    String fechaPrestamo = rsReservas.getString("fecha_prestamo");
+
+                    prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaPrestamo));
+                }
+
+                tituloColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+                usuarioPrestadorColumn.setCellValueFactory(new PropertyValueFactory<>("usuarioPrestador"));
+                fechaPrestamoColumn.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
 
                 tablaPrestamos.setItems(prestamos);
             } catch (SQLException e) {
@@ -83,15 +98,24 @@ public class devolverController {
         Prestamo prestamoSeleccionado = tablaPrestamos.getSelectionModel().getSelectedItem();
         if (prestamoSeleccionado != null) {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-                String query = "DELETE FROM prestamos WHERE idLibro = ? AND idUsuarioReceptor = ?";
-                PreparedStatement st = con.prepareStatement(query);
-                st.setInt(1, obtenerIdLibro(prestamoSeleccionado.getTitulo()));
+                String queryPrestamo = "DELETE FROM prestamos WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuarioReceptor = ?";
+                String queryReserva = "DELETE FROM reservas WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuarioReservador = ?";
+
+                PreparedStatement st = con.prepareStatement(queryPrestamo);
+                st.setString(1, prestamoSeleccionado.getTitulo());
                 st.setInt(2, usuarioActual.getIdUsuario());
                 int rowsAffected = st.executeUpdate();
 
+                if (rowsAffected == 0) {
+                    st = con.prepareStatement(queryReserva);
+                    st.setString(1, prestamoSeleccionado.getTitulo());
+                    st.setInt(2, usuarioActual.getIdUsuario());
+                    rowsAffected = st.executeUpdate();
+                }
+
                 if (rowsAffected > 0) {
                     JOptionPane.showMessageDialog(null, "Libro devuelto con éxito.");
-                    cargarPrestamos();
+                    cargarPrestamosYReservas();
                 } else {
                     JOptionPane.showMessageDialog(null, "Error al devolver el libro.");
                 }
@@ -102,21 +126,4 @@ public class devolverController {
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un libro para devolver.");
         }
     }
-
-    private int obtenerIdLibro(String titulo) {
-        int idLibro = -1;
-        try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-            String query = "SELECT idLibro FROM libros WHERE titulo = ?";
-            PreparedStatement st = con.prepareStatement(query);
-            st.setString(1, titulo);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                idLibro = rs.getInt("idLibro");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return idLibro;
-    }
 }
-
