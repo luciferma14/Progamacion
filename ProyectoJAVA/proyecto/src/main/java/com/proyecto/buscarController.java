@@ -19,6 +19,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class buscarController {
 
     @FXML
+    private void cerrarSesion() throws IOException {
+        App.setRoot("primeraVentana");
+    }
+
+    @FXML
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
     }

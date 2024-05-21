@@ -42,5 +42,6 @@
             <TableColumn fx:id="IdLibro" prefWidth="52.0" style="-fx-background-color: #bbb0f7;" text="Id" />
          </columns>
       </TableView>
+      <Button fx:id="cerrarSesion" layoutX="689.0" layoutY="18.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #bbb0f7;" text="Cerrar sesión" textFill="#2c178d" />
    </children>
 </AnchorPane>

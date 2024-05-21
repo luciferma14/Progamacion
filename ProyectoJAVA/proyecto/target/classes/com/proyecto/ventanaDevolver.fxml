@@ -23,5 +23,6 @@
          </font>
       </Label>
       <Button fx:id="volver" layoutX="45.0" layoutY="401.0" mnemonicParsing="false" onAction="#cambiaAOpciones" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
+      <Button fx:id="cerrarSesion" layoutX="580.0" layoutY="19.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #bbb0f7;" text="Cerrar sesión" textFill="#2c178d" />
    </children>
 </AnchorPane>

@@ -30,6 +30,11 @@ public class devolverController {
     private static final String pass = "dbrootpass";
 
     @FXML
+    private void cerrarSesion() throws IOException {
+        App.setRoot("primeraVentana");
+    }
+
+    @FXML
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
     }

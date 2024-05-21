@@ -5,6 +5,11 @@ import javafx.fxml.FXML;
 public class busResPresDevController {
 
     @FXML
+    private void cerrarSesion() throws IOException {
+        App.setRoot("primeraVentana");
+    }
+
+    @FXML
     private void cambiaABuscar() throws IOException {
         App.setRoot("ventanaBuscar");
     }
