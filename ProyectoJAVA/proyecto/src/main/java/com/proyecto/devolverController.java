@@ -49,11 +49,11 @@ public class devolverController {
                                         "INNER JOIN libros L USING(idLibro) " +
                                         "INNER JOIN usuarios U ON P.idUsuarioPrestador = U.idUsuario " +
                                         "WHERE P.idUsuarioReceptor = ?";
-                String queryReservas = "SELECT L.titulo, U.email, R.fecha_reserva" +
+                String queryReservas = "SELECT L.titulo, U.email, R.fecha_reserva " +
                                        "FROM reservas R " +
                                        "INNER JOIN libros L USING(idLibro) " +
-                                       "INNER JOIN usuarios U ON R.idUsuarioReservador = U.idUsuario " +
-                                       "WHERE R.idUsuarioReservador = ?";
+                                       "INNER JOIN usuarios U USING(idUsuario) " +
+                                       "WHERE R.idUsuario = ?";
 
                 PreparedStatement stPrestamos = con.prepareStatement(queryPrestamos);
                 PreparedStatement stReservas = con.prepareStatement(queryReservas);
@@ -77,11 +77,11 @@ public class devolverController {
                 while (rsReservas.next()) {
                     String titulo = rsReservas.getString("titulo");
                     String usuarioPrestador = rsReservas.getString("email");
-                    String fechaPrestamo = rsReservas.getString("fecha_prestamo");
+                    String fechaReserva = rsReservas.getString("fecha_reserva");
 
-                    prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaPrestamo));
+                    prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaReserva));
                 }
-
+                
                 tituloColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
                 usuarioPrestadorColumn.setCellValueFactory(new PropertyValueFactory<>("usuarioPrestador"));
                 fechaPrestamoColumn.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
@@ -99,7 +99,7 @@ public class devolverController {
         if (prestamoSeleccionado != null) {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
                 String queryPrestamo = "DELETE FROM prestamos WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuarioReceptor = ?";
-                String queryReserva = "DELETE FROM reservas WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuarioReservador = ?";
+                String queryReserva = "DELETE FROM reservas WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuario = ?";
 
                 PreparedStatement st = con.prepareStatement(queryPrestamo);
                 st.setString(1, prestamoSeleccionado.getTitulo());
