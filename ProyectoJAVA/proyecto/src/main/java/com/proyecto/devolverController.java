@@ -51,13 +51,13 @@ public class devolverController {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
                 String queryPrestamos = "SELECT L.titulo, U.email, P.fecha_prestamo " +
                                         "FROM prestamos P " + 
-                                        "INNER JOIN libros L USING(idLibro) " +
-                                        "INNER JOIN usuarios U ON P.idUsuarioPrestador = U.idUsuario " +
+                                        "JOIN libros L USING(idLibro) " +
+                                        "JOIN usuarios U ON P.idUsuarioPrestador = U.idUsuario " +
                                         "WHERE P.idUsuarioReceptor = ?";
                 String queryReservas = "SELECT L.titulo, U.email, R.fecha_reserva " +
                                        "FROM reservas R " +
-                                       "INNER JOIN libros L USING(idLibro) " +
-                                       "INNER JOIN usuarios U USING(idUsuario) " +
+                                       "JOIN libros L USING(idLibro) " +
+                                       "JOIN usuarios U USING(idUsuario) " +
                                        "WHERE R.idUsuario = ?";
 
                 PreparedStatement stPrestamos = con.prepareStatement(queryPrestamos);

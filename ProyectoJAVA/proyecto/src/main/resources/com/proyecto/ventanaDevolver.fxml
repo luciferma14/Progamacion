@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="458.0" prefWidth="692.0" style="-fx-background-color: #a2e6f5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.devolverController">
+<AnchorPane prefHeight="600.0" prefWidth="1080.0" style="-fx-background-color: #a2e6f5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.proyecto.devolverController">
    <children>
-      <TableView fx:id="tablaPrestamos" layoutX="45.0" layoutY="119.0" onSort="#initialize" prefHeight="252.0" prefWidth="587.0" style="-fx-background-color: #e3dff7;">
+      <TableView fx:id="tablaPrestamos" layoutX="110.0" layoutY="117.0" onSort="#initialize" prefHeight="360.0" prefWidth="835.0" style="-fx-background-color: #e3dff7;">
          <columns>
-            <TableColumn fx:id="tituloColumn" prefWidth="156.0" style="-fx-background-color: #bbb0f7;" text="Título" />
-            <TableColumn fx:id="usuarioPrestadorColumn" prefWidth="221.0" style="-fx-background-color: #bbb0f7;" text="Usuario Prestador" />
-            <TableColumn fx:id="fechaPrestamoColumn" prefWidth="209.0" style="-fx-background-color: #bbb0f7;" text="D/F Préstamo / Reservas" />
+            <TableColumn fx:id="tituloColumn" prefWidth="209.33334350585938" style="-fx-background-color: #bbb0f7;" text="Título" />
+            <TableColumn fx:id="usuarioPrestadorColumn" prefWidth="330.6666564941406" style="-fx-background-color: #bbb0f7;" text="Reserva / Usuario Prestador" />
+            <TableColumn fx:id="fechaPrestamoColumn" prefWidth="294.33331298828125" style="-fx-background-color: #bbb0f7;" text="Fecha Préstamo / Reservas" />
          </columns>
       </TableView>
-      <Button layoutX="551.0" layoutY="401.0" mnemonicParsing="false" onAction="#devolverLibro" style="-fx-background-color: #bbb0f7;" text="Devolver" textFill="#2c178d" />
-      <Label layoutX="117.0" layoutY="43.0" text="Devuelve aquí tus libros leídos" textFill="#3f1ea4">
+      <Button layoutX="940.0" layoutY="535.0" mnemonicParsing="false" onAction="#devolverLibro" style="-fx-background-color: #bbb0f7;" text="Devolver" textFill="#2c178d" />
+      <Label layoutX="285.0" layoutY="51.0" text="Devuelve aquí tus libros leídos" textFill="#3f1ea4">
          <font>
-            <Font name="Serif Regular" size="26.0" />
+            <Font name="Serif Regular" size="32.0" />
          </font>
       </Label>
-      <Button fx:id="volver" layoutX="45.0" layoutY="401.0" mnemonicParsing="false" onAction="#cambiaAOpciones" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
-      <Button fx:id="cerrarSesion" layoutX="580.0" layoutY="19.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #bbb0f7;" text="Cerrar sesión" textFill="#2c178d" />
+      <Button fx:id="volver" layoutX="53.0" layoutY="536.0" mnemonicParsing="false" onAction="#cambiaAOpciones" style="-fx-background-color: #bbb0f7;" text="Volver" textFill="#2c178d" />
+      <Button fx:id="cerrarSesion" layoutX="958.0" layoutY="19.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #bbb0f7;" text="Cerrar sesión" textFill="#2c178d" />
    </children>
 </AnchorPane>

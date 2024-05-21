@@ -18,11 +18,55 @@ public class App extends Application {
         scene = new Scene(loadFXML("primeraVentana"));
         stage.setScene(scene);
         stage.show();
+        
     }
 
     static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+        Parent root = loadFXML(fxml);
+        scene.setRoot(root);
+        if (fxml.equals("primeraVentana")){
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1080);
+            stage.setHeight(600);
+        }
+        if (fxml.equals("busResPresDev")){
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1080);
+            stage.setHeight(600);
+        } 
+        if (fxml.equals("ventanaBuscar")){
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1080);
+            stage.setHeight(600);
+        } 
+        if (fxml.equals("ventanaReservar")){
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1080);
+            stage.setHeight(600);
+        } 
+        if (fxml.equals("ventanaPrestar")){
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1080);
+            stage.setHeight(600);
+        } 
+        if (fxml.equals("ventanaDevolver")){
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1080);
+            stage.setHeight(600);
+        }
+        if (fxml.equals("ventanaRegistrarse")){
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1080);
+            stage.setHeight(600);
+        } 
+        if (fxml.equals("ventanaInicioSesion")){
+            Stage stage = (Stage) scene.getWindow();
+            stage.setWidth(1080);
+            stage.setHeight(600);
+        } 
+        
     }
+
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
@@ -47,4 +91,5 @@ public class App extends Application {
     public static Usuario getUsuario() {
         return usuarioAutenticado;
     }
+
 }
