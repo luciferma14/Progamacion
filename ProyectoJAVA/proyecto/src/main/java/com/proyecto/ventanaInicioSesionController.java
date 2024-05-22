@@ -6,11 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 
 public class ventanaInicioSesionController {
@@ -20,11 +19,6 @@ public class ventanaInicioSesionController {
 	@FXML
 	private TextField idPass;
 
-    public PreparedStatement ps;
-
-	public ResultSet rs;
-
-    private static String driv = "com.mysql.jdbc.Driver";
     private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
     private static String usr= "root";
     private static String pass = "dbrootpass";	
@@ -63,7 +57,11 @@ public class ventanaInicioSesionController {
                     App.setRoot("busResPresDev");
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "No tenemos ninguna cuenta con esas características." +'\n' + "Inténtelo otra vez");
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("No se encontraron usuarios");
+                    alert.setHeaderText(null);
+                    alert.setContentText("No tenemos ninguna cuenta con esas características.\" + '\\n" + "' + \"Inténtelo otra vez.");
+                    alert.showAndWait();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

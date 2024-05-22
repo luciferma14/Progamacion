@@ -4,16 +4,16 @@ import java.sql.Statement;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class buscarController {
@@ -52,13 +52,8 @@ public class buscarController {
     private TableColumn<Libro, Boolean> Disponible;
     @FXML
     private TableColumn<Libro, Integer> Id;
-    
 
-    public PreparedStatement ps;
 
-    public ResultSet rs;
-
-    private static String driv = "com.mysql.jdbc.Driver";
     private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
     private static String usr = "root";
     private static String pass = "dbrootpass";
@@ -143,7 +138,11 @@ public class buscarController {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." +'\n' + "Inténtelo otra vez.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("No se encontraron libros");
+            alert.setHeaderText(null);
+            alert.setContentText("No se encontraron libros con esas características.");
+            alert.showAndWait();
         }
     }
 }

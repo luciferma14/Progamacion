@@ -6,12 +6,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.JOptionPane;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -118,7 +117,11 @@ public class reservarController {
 
                 } else {
                     System.out.println("Ninguno estrito");
-                    JOptionPane.showMessageDialog(null, "Escribe alguno de los campos para buscar libros");
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("No se encontraron libros");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Por favor, escribe alguno de los campos para buscar libros");
+                    alert.showAndWait();
                 }
 
                 try (ResultSet rs = st.executeQuery()) {
@@ -152,7 +155,11 @@ public class reservarController {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características." + '\n' + "Inténtelo otra vez.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No tenemos ningún libro con esas características.\" + '\\n" + "' + \"Inténtelo otra vez.");
+            alert.showAndWait();
         }
     }
 
@@ -172,7 +179,11 @@ public class reservarController {
             System.out.println("Reservando el libro: " + libroSelecc.getTitulo());
             realizarReserva(libroSelecc);
         } else {
-            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún libro." + '\n' + "Inténtelo otra vez.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No se ha seleccionado ningún libro." + '\n' + "Inténtelo otra vez.");
+            alert.showAndWait();
         }
     }
 
@@ -207,10 +218,19 @@ public class reservarController {
                     libroSelecc.setDisponible("No");
                     tablaLibros.refresh();
 
-                    JOptionPane.showMessageDialog(null, "Reserva realizada con éxito :)");
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Reserva realizada");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Reserva realizada con éxito :)");
+                    alert.showAndWait();
+                    
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, libroSelecc.getTitulo() + " no está disponible :(");
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText(libroSelecc.getTitulo() + " no está disponible :(");
+                    alert.showAndWait();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

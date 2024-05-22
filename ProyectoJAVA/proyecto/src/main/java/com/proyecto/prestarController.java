@@ -6,10 +6,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -146,7 +147,11 @@ public class prestarController {
                 e.printStackTrace();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No tenemos ningún libro con esas características.\nInténtelo otra vez.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No tenemos ningún libro con esas características.");
+            alert.showAndWait();
         }
     }
 
@@ -202,7 +207,11 @@ public class prestarController {
                 e.printStackTrace();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No tenemos ningún usuario con esas características.\nInténtelo otra vez.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No tenemos ningún usuario con esas características.");
+            alert.showAndWait(); 
         }
     }
 
@@ -212,7 +221,11 @@ public class prestarController {
         Usuario usuarioReceptorSeleccionado = tablaUsers.getSelectionModel().getSelectedItem();
 
         if (libroSeleccionado == null || usuarioReceptorSeleccionado == null) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un libro y un usuario para realizar el préstamo.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Debe seleccionar un libro y un usuario para realizar el préstamo.");
+            alert.showAndWait();
         }
 
         Usuario idUsuarioPrestador = App.getUsuario();
@@ -234,10 +247,18 @@ public class prestarController {
                 stUpdateLibro.executeUpdate();
             }
 
-            JOptionPane.showMessageDialog(null, "Préstamo registrado exitosamente.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Préstamo realizado");
+            alert.setHeaderText(null);
+            alert.setContentText("Préstamo registrado correctamente");
+            alert.showAndWait();
         } catch (SQLException e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al registrar el préstamo.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error en el préstamo");
+            alert.setHeaderText(null);
+            alert.setContentText("Ocurrió un error al registrar el préstamo.");
+            alert.showAndWait();
         }
     }
 }

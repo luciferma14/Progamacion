@@ -9,10 +9,11 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.JOptionPane;
 
 public class devolverController {
 
@@ -119,16 +120,30 @@ public class devolverController {
                 }
 
                 if (rowsAffected > 0) {
-                    JOptionPane.showMessageDialog(null, "Libro devuelto con éxito.");
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Libros devuelto");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Libro devuleto con éxito :)");
+                    alert.showAndWait();
+        
                     cargarPrestamosYReservas();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error al devolver el libro.");
+                    Alert alert = new Alert(AlertType.WARNING);
+                    alert.setTitle("Error");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Error al devolver el libro");
+                    alert.showAndWait();
+                
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Por favor, seleccione un libro para devolver.");
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, seleccione un libro para devolver.");
+            alert.showAndWait();
         }
     }
 }
