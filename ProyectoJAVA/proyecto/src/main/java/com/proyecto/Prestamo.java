@@ -5,6 +5,7 @@ public class Prestamo {
     private String titulo;
     private String usuarioPrestador;
     private String fechaPrestamo;
+    private int idLibro;
 
  
 
@@ -36,5 +37,9 @@ public class Prestamo {
 
     public void setFechaPrestamo(String fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
+    }
+
+    public long getIdLibro() {
+        return idLibro;
     }
 }

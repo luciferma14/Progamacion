@@ -57,7 +57,7 @@ public class ventanaInicioSesionController {
                     App.setRoot("busResPresDev");
 
                 } else {
-                    Alert alert = new Alert(AlertType.WARNING);
+                    Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("No se encontraron usuarios");
                     alert.setHeaderText(null);
                     alert.setContentText("No tenemos ninguna cuenta con esas características.\" + '\\n" + "' + \"Inténtelo otra vez.");

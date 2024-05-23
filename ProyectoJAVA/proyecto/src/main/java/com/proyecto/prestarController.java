@@ -68,7 +68,6 @@ public class prestarController {
     @FXML
     private TableColumn<Usuario, String> User;
 
-
     private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
     private static String usr = "root";
     private static String pass = "dbrootpass";
@@ -147,7 +146,7 @@ public class prestarController {
                 e.printStackTrace();
             }
         } else {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("No tenemos ningún libro con esas características.");
@@ -207,7 +206,7 @@ public class prestarController {
                 e.printStackTrace();
             }
         } else {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("No tenemos ningún usuario con esas características.");
@@ -221,11 +220,21 @@ public class prestarController {
         Usuario usuarioReceptorSeleccionado = tablaUsers.getSelectionModel().getSelectedItem();
 
         if (libroSeleccionado == null || usuarioReceptorSeleccionado == null) {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Debe seleccionar un libro y un usuario para realizar el préstamo.");
             alert.showAndWait();
+            return;
+        }
+
+        if ("No".equals(libroSeleccionado.getDisponible())) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Libro no disponible");
+            alert.setHeaderText(null);
+            alert.setContentText("El libro seleccionado no está disponible para prestar.");
+            alert.showAndWait();
+            return;
         }
 
         Usuario idUsuarioPrestador = App.getUsuario();
@@ -235,7 +244,7 @@ public class prestarController {
             String queryUpdateLibro = "UPDATE libros SET disponible = ? WHERE idLibro = ?";
 
             try (PreparedStatement stPrestamo = con.prepareStatement(queryPrestamo);
-                 PreparedStatement stUpdateLibro = con.prepareStatement(queryUpdateLibro)) {
+                PreparedStatement stUpdateLibro = con.prepareStatement(queryUpdateLibro)) {
 
                 stPrestamo.setInt(1, idUsuarioPrestador.getIdUsuario());
                 stPrestamo.setInt(2, usuarioReceptorSeleccionado.getIdUsuario());
@@ -245,16 +254,20 @@ public class prestarController {
                 stUpdateLibro.setString(1, "No");
                 stUpdateLibro.setInt(2, libroSeleccionado.getIdLibro());
                 stUpdateLibro.executeUpdate();
+                
+                // Actualizar el estado del libro en la tabla local
+                libroSeleccionado.setDisponible("No");
+                tablaLibros.refresh(); // Actualizar la vista de la tabla
             }
 
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Préstamo realizado");
             alert.setHeaderText(null);
             alert.setContentText("Préstamo registrado correctamente");
             alert.showAndWait();
         } catch (SQLException e) {
             e.printStackTrace();
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error en el préstamo");
             alert.setHeaderText(null);
             alert.setContentText("Ocurrió un error al registrar el préstamo.");

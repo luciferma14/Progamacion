@@ -48,7 +48,7 @@ public class reservarController {
     @FXML
     private TableColumn<Libro, String> Genero;
     @FXML
-    private TableColumn<Libro, Boolean> Disponible;
+    private TableColumn<Libro, String> Disponible;
     @FXML
     private TableColumn<Libro, Integer> IdLibro;
 
@@ -117,7 +117,7 @@ public class reservarController {
 
                 } else {
                     System.out.println("Ninguno estrito");
-                    Alert alert = new Alert(AlertType.WARNING);
+                    Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("No se encontraron libros");
                     alert.setHeaderText(null);
                     alert.setContentText("Por favor, escribe alguno de los campos para buscar libros");
@@ -145,7 +145,7 @@ public class reservarController {
                     Autor.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
                     ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
                     Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
-                    Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
+                    Disponible.setCellValueFactory(new PropertyValueFactory<Libro, String>("disponible"));
                     IdLibro.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
 
                     tablaLibros.setItems(lib);
@@ -155,7 +155,7 @@ public class reservarController {
             }
 
         } else {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("No tenemos ningún libro con esas características.\" + '\\n" + "' + \"Inténtelo otra vez.");
@@ -176,16 +176,25 @@ public class reservarController {
     private void reservarLibros() {
         Libro libroSelecc = tablaLibros.getSelectionModel().getSelectedItem();
         if (libroSelecc != null) {
+            if ("No".equals(libroSelecc.getDisponible())) {
+                Alert alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Libro no disponible");
+                alert.setHeaderText(null);
+                alert.setContentText(libroSelecc.getTitulo() + " no está disponible para reservar.");
+                alert.showAndWait();
+                return;
+            }
             System.out.println("Reservando el libro: " + libroSelecc.getTitulo());
             realizarReserva(libroSelecc);
         } else {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
-            alert.setContentText("No se ha seleccionado ningún libro." + '\n' + "Inténtelo otra vez.");
+            alert.setContentText("No se ha seleccionado ningún libro.\nInténtelo otra vez.");
             alert.showAndWait();
         }
     }
+
 
     private void realizarReserva(Libro libroSelecc) {
         Usuario usuarioInicio = App.getUsuario();
@@ -218,7 +227,7 @@ public class reservarController {
                     libroSelecc.setDisponible("No");
                     tablaLibros.refresh();
 
-                    Alert alert = new Alert(AlertType.WARNING);
+                    Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Reserva realizada");
                     alert.setHeaderText(null);
                     alert.setContentText("Reserva realizada con éxito :)");
@@ -226,7 +235,7 @@ public class reservarController {
                     
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    Alert alert = new Alert(AlertType.WARNING);
+                    Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText(libroSelecc.getTitulo() + " no está disponible :(");

@@ -106,6 +106,7 @@ public class devolverController {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
                 String queryPrestamo = "DELETE FROM prestamos WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuarioReceptor = ?";
                 String queryReserva = "DELETE FROM reservas WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuario = ?";
+                String queryUpdateDisponibilidad = "UPDATE libros SET disponible = 'Si' WHERE titulo = ?";
 
                 PreparedStatement st = con.prepareStatement(queryPrestamo);
                 st.setString(1, prestamoSeleccionado.getTitulo());
@@ -120,26 +121,29 @@ public class devolverController {
                 }
 
                 if (rowsAffected > 0) {
-                    Alert alert = new Alert(AlertType.WARNING);
-                    alert.setTitle("Libros devuelto");
+                    PreparedStatement stUpdate = con.prepareStatement(queryUpdateDisponibilidad);
+                    stUpdate.setString(1, prestamoSeleccionado.getTitulo());
+                    stUpdate.executeUpdate();
+
+                    Alert alert = new Alert(AlertType.INFORMATION);
+                    alert.setTitle("Libro devuelto");
                     alert.setHeaderText(null);
-                    alert.setContentText("Libro devuleto con éxito :)");
+                    alert.setContentText("Libro devuelto con éxito :)");
                     alert.showAndWait();
         
                     cargarPrestamosYReservas();
                 } else {
-                    Alert alert = new Alert(AlertType.WARNING);
+                    Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
                     alert.setContentText("Error al devolver el libro");
                     alert.showAndWait();
-                
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         } else {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Por favor, seleccione un libro para devolver.");

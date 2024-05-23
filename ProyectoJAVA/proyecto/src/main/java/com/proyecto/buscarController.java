@@ -138,7 +138,7 @@ public class buscarController {
             }
 
         } else {
-            Alert alert = new Alert(AlertType.WARNING);
+            Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("No se encontraron libros");
             alert.setHeaderText(null);
             alert.setContentText("No se encontraron libros con esas características.");
