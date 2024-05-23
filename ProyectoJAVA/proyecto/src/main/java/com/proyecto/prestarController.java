@@ -16,17 +16,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controlador para gestionar los préstamos de libros.
+ */
 public class prestarController {
-
-    @FXML
-    private void cerrarSesion() throws IOException {
-        App.setRoot("primeraVentana");
-    }
-
-    @FXML
-    private void cambiaAOpciones() throws IOException {
-        App.setRoot("busResPresDev");
-    }
 
     @FXML
     private TextField FTitulo;
@@ -68,20 +61,57 @@ public class prestarController {
     @FXML
     private TableColumn<Usuario, String> User;
 
-    private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
-    private static String usr = "root";
-    private static String pass = "dbrootpass";
+    private static final String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
+    private static final String usr = "root";
+    private static final String pass = "dbrootpass";
 
     private static Libro li = null;
+    private static Usuario us = null;
+
+    /**
+     * Obtiene el libro seleccionado.
+     * 
+     * @return el libro seleccionado
+     */
     public static Libro getLibro() {
         return li;
     }
 
-    private static Usuario us = null;
+    /**
+     * Obtiene el usuario seleccionado.
+     * 
+     * @return el usuario seleccionado
+     */
     public static Usuario getUsuario() {
         return us;
     }
 
+    /**
+     * Cierra la sesión actual y vuelve a la primera ventana.
+     * 
+     * @throws IOException si ocurre un error al cambiar de ventana
+     */
+    @FXML
+    private void cerrarSesion() throws IOException {
+        App.setRoot("primeraVentana");
+    }
+
+    /**
+     * Cambia a la ventana de opciones.
+     * 
+     * @throws IOException si ocurre un error al cambiar de ventana
+     */
+    @FXML
+    private void cambiaAOpciones() throws IOException {
+        App.setRoot("busResPresDev");
+    }
+
+    /**
+     * Busca libros en la base de datos según los datos intruducidos en la búsqueda.
+     * 
+     * @throws SQLException si ocurre un error en la consulta de la base de datos
+     * @throws IOException si ocurre un error
+     */
     @FXML
     private void FindLibros() throws SQLException, IOException {
         String tit = FTitulo.getText();
@@ -92,7 +122,9 @@ public class prestarController {
         if (tit != null || aut != null || isb != null || gen != null) {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
                 PreparedStatement st = null;
-                String query = "SELECT * FROM libros WHERE 1=1";
+                String query = "SELECT * FROM libros WHERE 1=1"; // Adición dinámica de las condiciones.
+
+                // Añade las condiciones basadas en la entrada del usuario.
                 if (!tit.equals("")) {
                     query += " AND titulo LIKE ?";
                 }
@@ -105,8 +137,11 @@ public class prestarController {
                 if (!gen.equals("")) {
                     query += " AND genero LIKE ?";
                 }
+
                 st = con.prepareStatement(query);
                 int paramIndex = 1;
+                
+                
                 if (!tit.equals("")) {
                     st.setString(paramIndex++, "%" + tit + "%");
                 }
@@ -119,8 +154,11 @@ public class prestarController {
                 if (!gen.equals("")) {
                     st.setString(paramIndex++, "%" + gen + "%");
                 }
+
                 try (ResultSet rs = st.executeQuery()) {
                     ObservableList<Libro> lib = FXCollections.observableArrayList();
+
+                    // Procesa los resultados
                     while (rs.next()) {
                         String titulo = rs.getString("titulo");
                         String autor = rs.getString("autor");
@@ -133,12 +171,12 @@ public class prestarController {
                         lib.add(libro);
                     }
 
-                    Titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
-                    Autor.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
-                    ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
-                    Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
-                    Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
-                    IdLibro.setCellValueFactory(new PropertyValueFactory<Libro, Integer>("idLibro"));
+                    Titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+                    Autor.setCellValueFactory(new PropertyValueFactory<>("autor"));
+                    ISBN.setCellValueFactory(new PropertyValueFactory<>("isbnString"));
+                    Genero.setCellValueFactory(new PropertyValueFactory<>("genero"));
+                    Disponible.setCellValueFactory(new PropertyValueFactory<>("disponible"));
+                    IdLibro.setCellValueFactory(new PropertyValueFactory<>("idLibro"));
 
                     tablaLibros.setItems(lib);
                 }
@@ -154,6 +192,12 @@ public class prestarController {
         }
     }
 
+    /**
+     * Busca usuarios en la base de datos según los datos intruducidos en la búsqueda.
+     * 
+     * @throws SQLException si ocurre un error en la consulta de la base de datos
+     * @throws IOException si ocurre un error
+     */
     @FXML
     private void FindUsers() throws SQLException, IOException {
         String nom = FNombre.getText();
@@ -163,7 +207,9 @@ public class prestarController {
         if (nom != null || ape != null || use != null) {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
                 PreparedStatement st = null;
-                String query = "SELECT * FROM usuarios WHERE 1=1";
+                String query = "SELECT * FROM usuarios WHERE 1=1"; // Adición dinámica de las condiciones.
+
+                // Añade las condiciones basadas en la entrada del usuario.
                 if (!nom.equals("")) {
                     query += " AND nombre LIKE ?";
                 }
@@ -173,8 +219,10 @@ public class prestarController {
                 if (!use.equals("")) {
                     query += " AND email LIKE ?";
                 }
+
                 st = con.prepareStatement(query);
                 int paramIndex = 1;
+
                 if (!nom.equals("")) {
                     st.setString(paramIndex++, "%" + nom + "%");
                 }
@@ -184,21 +232,23 @@ public class prestarController {
                 if (!use.equals("")) {
                     st.setString(paramIndex++, "%" + use + "%");
                 }
+
                 try (ResultSet rs = st.executeQuery()) {
                     ObservableList<Usuario> user = FXCollections.observableArrayList();
+                    // Procesa los resultados
                     while (rs.next()) {
+                        int idUsuario = rs.getInt("idUsuario");
                         String nombre = rs.getString("nombre");
                         String apellido = rs.getString("apellido");
                         String email = rs.getString("email");
-                        int idUsuario = rs.getInt("idUsuario");
 
-                        Usuario usuario = new Usuario(nombre, apellido, email, idUsuario);
+                        Usuario usuario = new Usuario(idUsuario, nombre, apellido, email);
                         user.add(usuario);
                     }
 
-                    Nombre.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nombre"));
-                    Apellido.setCellValueFactory(new PropertyValueFactory<Usuario, String>("apellido"));
-                    User.setCellValueFactory(new PropertyValueFactory<Usuario, String>("email"));
+                    Nombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+                    Apellido.setCellValueFactory(new PropertyValueFactory<>("apellido"));
+                    User.setCellValueFactory(new PropertyValueFactory<>("email"));
 
                     tablaUsers.setItems(user);
                 }
@@ -214,6 +264,11 @@ public class prestarController {
         }
     }
 
+    /**
+     * Registra un préstamo de el libro en la base de datos.
+     * 
+     * @throws SQLException si ocurre un error en la consulta de la base de datos
+     */
     @FXML
     public void registrarPrestamo() throws SQLException {
         Libro libroSeleccionado = tablaLibros.getSelectionModel().getSelectedItem();
@@ -244,7 +299,7 @@ public class prestarController {
             String queryUpdateLibro = "UPDATE libros SET disponible = ? WHERE idLibro = ?";
 
             try (PreparedStatement stPrestamo = con.prepareStatement(queryPrestamo);
-                PreparedStatement stUpdateLibro = con.prepareStatement(queryUpdateLibro)) {
+                 PreparedStatement stUpdateLibro = con.prepareStatement(queryUpdateLibro)) {
 
                 stPrestamo.setInt(1, idUsuarioPrestador.getIdUsuario());
                 stPrestamo.setInt(2, usuarioReceptorSeleccionado.getIdUsuario());
@@ -255,9 +310,9 @@ public class prestarController {
                 stUpdateLibro.setInt(2, libroSeleccionado.getIdLibro());
                 stUpdateLibro.executeUpdate();
                 
-                // Actualizar el estado del libro en la tabla local
+                // Actualiza el estado del libro en la tabla local
                 libroSeleccionado.setDisponible("No");
-                tablaLibros.refresh(); // Actualizar la vista de la tabla
+                tablaLibros.refresh(); // Actualiza la vista de la tabla
             }
 
             Alert alert = new Alert(AlertType.INFORMATION);

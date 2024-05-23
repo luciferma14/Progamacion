@@ -6,12 +6,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextField;
 
+/**
+ * Controlador de la ventana que nos permite iniciar sesión.
+ */
 public class ventanaInicioSesionController {
 
 	@FXML
@@ -24,13 +26,24 @@ public class ventanaInicioSesionController {
     private static String pass = "dbrootpass";	
 
 
+    /**
+     * Cambia a la primera ventana de la aplicación.
+     * 
+     * @throws IOException por si ocurre algún error al cambiar la ventana
+     */
     @FXML
     private void cambiaAPrimeraVentana() throws IOException {
         App.setRoot("primeraVentana");
     }
 
+    /**
+     * Nos permite iniciar sesión mediante la base de datos.
+     * 
+     * @throws SQLException por si ocurre algún error con la base de datos
+     * @throws IOException por si ocurre un error
+     */
     @FXML
-    public void Ingresar(ActionEvent event) throws SQLException, IOException {
+    public void Ingresar() throws SQLException, IOException {
 
         String username = idUser.getText();
         String password = idPass.getText();
@@ -44,8 +57,8 @@ public class ventanaInicioSesionController {
 
                 ResultSet rs = st.executeQuery();
 
+                // Procesa los resultados.
                 if (rs.next()) {
-
                     Integer idUsuario = rs.getInt("idUsuario");
                     String nombre = rs.getString("nombre");
                     String email = rs.getString("email");
@@ -57,6 +70,7 @@ public class ventanaInicioSesionController {
                     App.setRoot("busResPresDev");
 
                 } else {
+                    // Muestra una alerta si no se ha encontrado el usuario.
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("No se encontraron usuarios");
                     alert.setHeaderText(null);

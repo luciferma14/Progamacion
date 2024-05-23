@@ -16,17 +16,31 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controlador de las reservas que se realizan en la biblioteca.
+ */
 public class reservarController {
 
+    /**
+     * Cierra la sesión actual y vuelve a la primera ventana.
+     * 
+     * @throws IOException si ocurre un error al cambiar de ventana
+     */
     @FXML
     private void cerrarSesion() throws IOException {
         App.setRoot("primeraVentana");
     }
 
+    /**
+     * Cambia a la ventana de opciones.
+     * 
+     * @throws IOException si ocurre un error al cambiar de ventana
+     */
     @FXML
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
     }
+
 
     @FXML
     private TextField FTitulo;
@@ -59,10 +73,21 @@ public class reservarController {
 
     private static Libro li = null;
 
+    /**
+     * Obtiene el libro seleccionado.
+     * 
+     * @return el libro seleccionado
+     */
     public static Libro getLibro() {
         return li;
     }
 
+    /**
+     * Busca libros en la base de datos según los datos intruducidos en la búsqueda.
+     * 
+     * @throws SQLException si ocurre un error en la consulta de la base de datos
+     * @throws IOException si ocurre un error
+     */
     @FXML
     private void FindLibros() throws SQLException, IOException {
         String tit = FTitulo.getText();
@@ -127,12 +152,13 @@ public class reservarController {
                 try (ResultSet rs = st.executeQuery()) {
                     ObservableList<Libro> lib = FXCollections.observableArrayList();
 
+                    // Procesa los resultados
                     while (rs.next()) {
                         String titulo = rs.getString("titulo");
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
                         String genero = rs.getString("genero");
-                        // consulta a la tabla reservas y si esta es no y si no esta es si
+                        // Consulta a la tabla reservas y si esta es no y si no esta es si
                         String disponible = rs.getString("disponible");
 
                         int idLibro = rs.getInt("idLibro");
@@ -141,6 +167,7 @@ public class reservarController {
                         lib.add(libro);
                     }
 
+                    // Configura las columnas de la tabla con los valores de los libros.
                     Titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
                     Autor.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
                     ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
@@ -155,6 +182,7 @@ public class reservarController {
             }
 
         } else {
+            // Muestra una alerta para los libros que no se han encontrado
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
@@ -172,6 +200,9 @@ public class reservarController {
         tablaLibros.setItems(lib);
     }
 
+    /**
+     * Reserva libros en la base de datos según lo que haya introducido en los campos de texto.
+     */
     @FXML
     private void reservarLibros() {
         Libro libroSelecc = tablaLibros.getSelectionModel().getSelectedItem();
@@ -195,7 +226,10 @@ public class reservarController {
         }
     }
 
-
+    /**
+     * Realiza la reserva según los datos introducidos por los campos de texto.
+     * @param libroSelecc libro que se ha seleccionado
+     */
     private void realizarReserva(Libro libroSelecc) {
         Usuario usuarioInicio = App.getUsuario();
         if (usuarioInicio != null) {
@@ -204,7 +238,6 @@ public class reservarController {
             Connection con = null;
             try {
                 con = DriverManager.getConnection(bibl, usr, pass);
-
 
                 String query2 = "INSERT INTO reservas (idLibro, idUsuario, fecha_reserva) VALUES (?, ?, CURRENT_DATE())";
                 String queryUpdate = "UPDATE libros SET disponible = ? WHERE idLibro = ?";
@@ -216,14 +249,12 @@ public class reservarController {
                     st.setLong(2, usuarioInicio.getIdUsuario());
                     st.executeUpdate();
 
-                    // Actualiza la disponibilidad del libro
+                    // Actualiza la disponibilidad del libro.
                     stUpdate.setString(1, "No");
                     stUpdate.setLong(2, libroSelecc.getIdLibro());
                     stUpdate.executeUpdate();
 
-
-
-                    // Actualiza el estado del libro en la interfaz
+                    // Actualiza el estado del libro en la interfaz.
                     libroSelecc.setDisponible("No");
                     tablaLibros.refresh();
 
@@ -235,6 +266,7 @@ public class reservarController {
                     
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    // Muestra una alerta si algún libro no está disponible.
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);

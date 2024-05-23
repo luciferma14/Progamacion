@@ -16,17 +16,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controlador para la búsqueda de libros en la base de datos de la biblioteca.
+ */
 public class buscarController {
-
-    @FXML
-    private void cerrarSesion() throws IOException {
-        App.setRoot("primeraVentana");
-    }
-
-    @FXML
-    private void cambiaAOpciones() throws IOException {
-        App.setRoot("busResPresDev");
-    }
 
     @FXML
     private TextField FTitulo;
@@ -36,7 +29,6 @@ public class buscarController {
     private TextField FISBN;
     @FXML
     private TextField FGenero;
-
 
     @FXML
     private TableView<Libro> tabla; 
@@ -53,65 +45,89 @@ public class buscarController {
     @FXML
     private TableColumn<Libro, Integer> Id;
 
-
-    private static String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
-    private static String usr = "root";
-    private static String pass = "dbrootpass";
+    private static final String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
+    private static final String usr = "root";
+    private static final String pass = "dbrootpass";
 
     private static Libro li = null;
 
+    /**
+     * Obtiene el libro actual.
+     * 
+     * @return el libro actual.
+     */
     public static Libro getLibro() {
         return li;
     }
 
+    /**
+     * Cierra la sesión actual y vuelve a la primera ventana.
+     * 
+     * @throws IOException si ocurre un error al cambiar la ventana.
+     */
+    @FXML
+    private void cerrarSesion() throws IOException {
+        App.setRoot("primeraVentana");
+    }
+
+    /**
+     * Cambia a la ventana de opciones.
+     * 
+     * @throws IOException si ocurre un error al cambiar la ventana.
+     */
+    @FXML
+    private void cambiaAOpciones() throws IOException {
+        App.setRoot("busResPresDev");
+    }
+
+    /**
+     * Busca libros en la base de datos según lo que haya introducido en los campos de texto.
+     * 
+     * @throws SQLException si ocurre un error en la consulta a la base de datos.
+     * @throws IOException si ocurre un error durante el proceso.
+     */
     @FXML
     private void FindLibros() throws SQLException, IOException {
 
+        // Obtiene los valores introducidos en los campos de texto.
         String tit = FTitulo.getText();
-
         String aut = FAutor.getText();
-
         String isb = FISBN.getText();
-
         String gen = FGenero.getText();
 
-
+        // Verifica si al menos uno de los campos tiene valor.
         if (tit != null || aut != null || isb != null || gen != null) {
 
-            try (
-                Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-
+            try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
                 Statement st = con.createStatement();
 
-                // Para hacer la query de buscar con todos los campos
+                // Construye la consulta SQL para buscar libros según lo intruducido.
                 String query = "SELECT * FROM libros WHERE ";
 
+                if (!tit.equals("")) {
+                    query += "titulo LIKE '%" + tit + "%' AND ";
+                }
+                if (!isb.equals("")) {
+                    query += "isbn LIKE '%" + isb + "%' AND ";
+                }
+                if (!gen.equals("")) {
+                    query += "genero LIKE '%" + gen + "%' AND ";
+                }
+                if (!aut.equals("")) {
+                    query += "autor LIKE '%" + aut + "%' AND ";
+                }
 
-                    if ( !tit.equals("") ) {
-                        query = query+"titulo LIKE  '%" + tit + "%' AND ";
-                    }
-                    if ( !isb.equals("") ) {
-                        query += "isbn LIKE '%" + isb + "%' AND ";
-                    }
-                    if ( !gen.equals("") ) {
-                        query += "genero LIKE '%" + gen + "%' AND ";
-                    }
-                    if ( !aut.equals("") ) {
-                        query = query+"autor LIKE '%" + aut + "%' ;";
-                    }
+                // Elimina el último "AND" si hay al final para evitar error en la consulta.
+                query = query.replaceAll(" AND $", ";");
 
-                    query = query.replaceAll(" AND $", ";");
+                System.out.println(query);
 
-                    System.out.println(query);
-                    // Eliminar el último "AND" si hay al final para que no de error en la query
-            
-                try (
-                    ResultSet rs = st.executeQuery(query)) {
-
+                // Ejecuta la consulta SQL.
+                try (ResultSet rs = st.executeQuery(query)) {
                     ObservableList<Libro> lib = FXCollections.observableArrayList();
 
+                    // Procesa el resultado de la consulta.
                     while (rs.next()) {
-
                         String titulo = rs.getString("titulo");
                         String autor = rs.getString("autor");
                         long isbn = rs.getLong("ISBN");
@@ -119,18 +135,19 @@ public class buscarController {
                         String disponible = rs.getString("disponible");
                         int id = rs.getInt("idLibro");
 
-
+                        // Crea una instancia de Libro y agregarla a la lista.
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible, id);
-
                         lib.add(libro);
                     }
 
+                    // Configura las columnas de la tabla con los valores de los libros.
                     Titulo.setCellValueFactory(new PropertyValueFactory<Libro, String>("titulo"));
                     Autor.setCellValueFactory(new PropertyValueFactory<Libro, String>("autor"));
                     ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
                     Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
                     Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
 
+                    // Asigna la lista de libros a la tabla.
                     tabla.setItems(lib);
                 }
             } catch (SQLException e) {
@@ -138,6 +155,7 @@ public class buscarController {
             }
 
         } else {
+            // Muestra una alerta si no se encontraron libros con los datos intruducidos.
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("No se encontraron libros");
             alert.setHeaderText(null);

@@ -15,6 +15,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Controlador para la gestión de la devolución de libros en la biblioteca.
+ */
 public class devolverController {
 
     @FXML
@@ -30,23 +33,39 @@ public class devolverController {
     private static final String usr = "root";
     private static final String pass = "dbrootpass";
 
+    private Usuario usuarioActual = App.getUsuario();
+
+    /**
+     * Cierra la sesión actual y vuelve a la primera ventana.
+     * 
+     * @throws IOException si ocurre un error al cambiar la ventana.
+     */
     @FXML
     private void cerrarSesion() throws IOException {
         App.setRoot("primeraVentana");
     }
 
+    /**
+     * Cambia a la ventana de opciones.
+     * 
+     * @throws IOException si ocurre un error al cambiar la ventana.
+     */
     @FXML
     private void cambiaAOpciones() throws IOException {
         App.setRoot("busResPresDev");
     }
 
-    private Usuario usuarioActual = App.getUsuario();
-
+    /**
+     * Inicializa el controlador cargando los préstamos y reservas del usuario actual.
+     */
     @FXML
     private void initialize() {
         cargarPrestamosYReservas();
     }
 
+    /**
+     * Carga los préstamos y reservas del usuario actual desde la base de datos.
+     */
     private void cargarPrestamosYReservas() {
         if (usuarioActual != null) {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
@@ -72,6 +91,7 @@ public class devolverController {
 
                 ObservableList<Prestamo> prestamos = FXCollections.observableArrayList();
 
+                // Procesa los resultados de los préstamos.
                 while (rsPrestamos.next()) {
                     String titulo = rsPrestamos.getString("titulo");
                     String usuarioPrestador = rsPrestamos.getString("email");
@@ -80,6 +100,7 @@ public class devolverController {
                     prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaPrestamo));
                 }
 
+                // Procesa los resultados de las reservas.
                 while (rsReservas.next()) {
                     String titulo = rsReservas.getString("titulo");
                     String usuarioPrestador = rsReservas.getString("email");
@@ -87,11 +108,13 @@ public class devolverController {
 
                     prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaReserva));
                 }
-                
+
+                // Configura las columnas de la tabla.
                 tituloColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
                 usuarioPrestadorColumn.setCellValueFactory(new PropertyValueFactory<>("usuarioPrestador"));
                 fechaPrestamoColumn.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
 
+                // Asigna los datos a la tabla.
                 tablaPrestamos.setItems(prestamos);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -99,11 +122,15 @@ public class devolverController {
         }
     }
 
+    /**
+     * Realiza la devolución del libro seleccionado.
+     */
     @FXML
     private void devolverLibro() {
         Prestamo prestamoSeleccionado = tablaPrestamos.getSelectionModel().getSelectedItem();
         if (prestamoSeleccionado != null) {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
+                // Consultas para eliminar el préstamo o la reserva y actualizar si está disponible el libro.
                 String queryPrestamo = "DELETE FROM prestamos WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuarioReceptor = ?";
                 String queryReserva = "DELETE FROM reservas WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuario = ?";
                 String queryUpdateDisponibilidad = "UPDATE libros SET disponible = 'Si' WHERE titulo = ?";
@@ -121,18 +148,22 @@ public class devolverController {
                 }
 
                 if (rowsAffected > 0) {
+                    // Actualiza la disponibilidad del libro.
                     PreparedStatement stUpdate = con.prepareStatement(queryUpdateDisponibilidad);
                     stUpdate.setString(1, prestamoSeleccionado.getTitulo());
                     stUpdate.executeUpdate();
 
+                    // Muestra alerta de éxito.
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Libro devuelto");
                     alert.setHeaderText(null);
                     alert.setContentText("Libro devuelto con éxito :)");
                     alert.showAndWait();
-        
+
+                    // Recarga la tabla de préstamos y reservas.
                     cargarPrestamosYReservas();
                 } else {
+                    // Muestra alerta de error si no se ha podido devolver el libro.
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("Error");
                     alert.setHeaderText(null);
@@ -143,6 +174,7 @@ public class devolverController {
                 e.printStackTrace();
             }
         } else {
+            // Muestra alerta de error si no se ha seleccionado un libro.
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText(null);
