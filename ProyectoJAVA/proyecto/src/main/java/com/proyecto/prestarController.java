@@ -38,20 +38,14 @@ public class prestarController {
     private TextField FUser;
 
     @FXML
-    private TableView<Libro> tablaLibros; 
+    private TableView<Reserva> tablaLibros;
     @FXML
-    private TableColumn<Libro, String> Titulo; 
+    private TableColumn<Reserva, String> titulo;
     @FXML
-    private TableColumn<Libro, String> Autor;
+    private TableColumn<Reserva, String> usuario;
     @FXML
-    private TableColumn<Libro, Long> ISBN;
-    @FXML
-    private TableColumn<Libro, String> Genero;
-    @FXML
-    private TableColumn<Libro, Boolean> Disponible;
-    @FXML
-    private TableColumn<Libro, Integer> IdLibro;
-
+    private TableColumn<Reserva, String> fechaReserva;
+    
     @FXML
     private TableView<Usuario> tablaUsers; 
     @FXML
@@ -87,6 +81,17 @@ public class prestarController {
     }
 
     /**
+     * Obtiene el ID del usuario actual.
+     * 
+     * @return el ID del usuario actual
+     */
+    public static int getUsuarioId() {
+        // Este método debe devolver el ID del usuario que ha iniciado sesión.
+        // Si tienes un método en tu aplicación para obtener el usuario actual, úsalo aquí.
+        return App.getUsuario().getIdUsuario();
+    }
+
+    /**
      * Cierra la sesión actual y vuelve a la primera ventana.
      * 
      * @throws IOException si ocurre un error al cambiar de ventana
@@ -106,6 +111,8 @@ public class prestarController {
         App.setRoot("busResPresDev");
     }
 
+    private Usuario usuarioActual = App.getUsuario();
+
     /**
      * Busca libros en la base de datos según los datos intruducidos en la búsqueda.
      * 
@@ -113,82 +120,40 @@ public class prestarController {
      * @throws IOException si ocurre un error
      */
     @FXML
-    private void FindLibros() throws SQLException, IOException {
-        String tit = FTitulo.getText();
-        String aut = FAutor.getText();
-        String isb = FISBN.getText();
-        String gen = FGenero.getText();
+    private void initialize() throws SQLException, IOException {
+   
+        try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
 
-        if (tit != null || aut != null || isb != null || gen != null) {
-            try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-                PreparedStatement st = null;
-                String query = "SELECT * FROM libros WHERE 1=1"; // Adición dinámica de las condiciones.
+            String query = "SELECT L.titulo, U.email, R.fecha_reserva " +
+            "FROM reservas R " +
+            "JOIN libros L USING(idLibro) " +
+            "JOIN usuarios U USING(idUsuario) " +
+            "WHERE R.idUsuario = ?";
 
-                // Añade las condiciones basadas en la entrada del usuario.
-                if (!tit.equals("")) {
-                    query += " AND titulo LIKE ?";
-                }
-                if (!aut.equals("")) {
-                    query += " AND autor LIKE ?";
-                }
-                if (!isb.equals("")) {
-                    query += " AND ISBN LIKE ?";
-                }
-                if (!gen.equals("")) {
-                    query += " AND genero LIKE ?";
-                }
+            PreparedStatement st = con.prepareStatement(query);
+            st.setInt(1, usuarioActual.getIdUsuario());
 
-                st = con.prepareStatement(query);
-                int paramIndex = 1;
-                
-                
-                if (!tit.equals("")) {
-                    st.setString(paramIndex++, "%" + tit + "%");
-                }
-                if (!aut.equals("")) {
-                    st.setString(paramIndex++, "%" + aut + "%");
-                }
-                if (!isb.equals("")) {
-                    st.setString(paramIndex++, "%" + isb + "%");
-                }
-                if (!gen.equals("")) {
-                    st.setString(paramIndex++, "%" + gen + "%");
-                }
+            ResultSet rs = st.executeQuery();
 
-                try (ResultSet rs = st.executeQuery()) {
-                    ObservableList<Libro> lib = FXCollections.observableArrayList();
+            ObservableList<Reserva> reservas = FXCollections.observableArrayList();
+            
+            while (rs.next()) {
+                String titulo = rs.getString("titulo");
+                String usuario = rs.getString("email");
+                String fechaReserva = rs.getString("fecha_reserva");
 
-                    // Procesa los resultados
-                    while (rs.next()) {
-                        String titulo = rs.getString("titulo");
-                        String autor = rs.getString("autor");
-                        long isbn = rs.getLong("ISBN");
-                        String genero = rs.getString("genero");
-                        String disponible = rs.getString("disponible");
-                        int idLibro = rs.getInt("idLibro");
-
-                        Libro libro = new Libro(titulo, autor, isbn, genero, disponible, idLibro);
-                        lib.add(libro);
-                    }
-
-                    Titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-                    Autor.setCellValueFactory(new PropertyValueFactory<>("autor"));
-                    ISBN.setCellValueFactory(new PropertyValueFactory<>("isbnString"));
-                    Genero.setCellValueFactory(new PropertyValueFactory<>("genero"));
-                    Disponible.setCellValueFactory(new PropertyValueFactory<>("disponible"));
-                    IdLibro.setCellValueFactory(new PropertyValueFactory<>("idLibro"));
-
-                    tablaLibros.setItems(lib);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                reservas.add(new Reserva(titulo, usuario, fechaReserva));
             }
-        } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("No tenemos ningún libro con esas características.");
-            alert.showAndWait();
+
+            titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+            usuario.setCellValueFactory(new PropertyValueFactory<>("usuario"));
+            fechaReserva.setCellValueFactory(new PropertyValueFactory<>("fechaReserva"));
+
+            // Asigna los datos a la tabla.
+            tablaLibros.setItems(reservas);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -271,7 +236,7 @@ public class prestarController {
      */
     @FXML
     public void registrarPrestamo() throws SQLException {
-        Libro libroSeleccionado = tablaLibros.getSelectionModel().getSelectedItem();
+        Reserva libroSeleccionado = tablaLibros.getSelectionModel().getSelectedItem();
         Usuario usuarioReceptorSeleccionado = tablaUsers.getSelectionModel().getSelectedItem();
 
         if (libroSeleccionado == null || usuarioReceptorSeleccionado == null) {
@@ -279,15 +244,6 @@ public class prestarController {
             alert.setTitle("Error");
             alert.setHeaderText(null);
             alert.setContentText("Debe seleccionar un libro y un usuario para realizar el préstamo.");
-            alert.showAndWait();
-            return;
-        }
-
-        if ("No".equals(libroSeleccionado.getDisponible())) {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Libro no disponible");
-            alert.setHeaderText(null);
-            alert.setContentText("El libro seleccionado no está disponible para prestar.");
             alert.showAndWait();
             return;
         }
@@ -310,9 +266,6 @@ public class prestarController {
                 stUpdateLibro.setInt(2, libroSeleccionado.getIdLibro());
                 stUpdateLibro.executeUpdate();
                 
-                // Actualiza el estado del libro en la tabla local
-                libroSeleccionado.setDisponible("No");
-                tablaLibros.refresh(); // Actualiza la vista de la tabla
             }
 
             Alert alert = new Alert(AlertType.INFORMATION);

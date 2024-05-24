@@ -16,34 +16,13 @@
             <Font name="Serif Regular" size="32.0" />
          </font>
       </Label>
-      <TextField fx:id="FAutor" layoutX="39.0" layoutY="55.0" prefHeight="35.0" prefWidth="186.0" promptText="Autor..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
-      <Label layoutX="108.0" layoutY="30.0" prefWidth="44.0" text="Autor" textFill="#3f1ea4">
-         <font>
-            <Font size="16.0" />
-         </font></Label>
       <Label layoutX="388.0" layoutY="143.0" />
-      <Label layoutX="109.0" layoutY="223.0" text="Título" textFill="#3f1ea4">
-         <font>
-            <Font size="16.0" />
-         </font></Label>
-      <TextField fx:id="FTitulo" layoutX="38.0" layoutY="250.0" prefHeight="35.0" prefWidth="186.0" promptText="Título..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
-      <Label layoutX="114.0" layoutY="95.0" text="ISBN" textFill="#3f1ea4">
-         <font>
-            <Font size="16.0" />
-         </font></Label>
-      <TextField fx:id="FISBN" layoutX="36.0" layoutY="121.0" prefHeight="35.0" prefWidth="186.0" promptText="ISBN..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
-      <Label layoutX="104.0" layoutY="157.0" text="Género" textFill="#3f1ea4">
-         <font>
-            <Font size="16.0" />
-         </font></Label>
-      <TextField fx:id="FGenero" layoutX="38.0" layoutY="185.0" prefHeight="35.0" prefWidth="186.0" promptText="Género..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
       <Button fx:id="prestar" layoutX="959.0" layoutY="549.0" mnemonicParsing="false" onAction="#registrarPrestamo" style="-fx-background-color: #bbb0f7;" text="Prestar" textFill="#2c178d" />
       <Label layoutX="52.0" layoutY="35.0" textFill="#3f1ea4">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <Button fx:id="buscar" layoutX="98.0" layoutY="297.0" mnemonicParsing="false" onAction="#FindLibros" style="-fx-background-color: #bbb0f7;" text="Buscar" textFill="#2c178d" />
       <TableView fx:id="tablaUsers" layoutX="39.0" layoutY="349.0" prefHeight="185.0" prefWidth="562.0" style="-fx-background-color: #e3dff7;">
          <columns>
             <TableColumn fx:id="Nombre" prefWidth="144.0" style="-fx-background-color: #bbb0f7;" text="Nombre" />
@@ -63,7 +42,7 @@
          </font></Label>
       <TextField fx:id="FUser" layoutX="732.0" layoutY="362.0" prefHeight="35.0" prefWidth="186.0" promptText="Usuario..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
       <TextField fx:id="FApellido" layoutX="735.0" layoutY="488.0" prefHeight="35.0" prefWidth="186.0" promptText="Apellido..." style="-fx-background-color: #e3dff7; -fx-border-color: #3f1ea4;" />
-      <Label layoutX="360.0" layoutY="297.0" text="*Reñena los campos que quieras*" textFill="#3f1ea4">
+      <Label layoutX="199.0" layoutY="304.0" text="*Reñena los campos que quieras*" textFill="#3f1ea4">
          <font>
             <Font size="16.0" />
          </font>
@@ -73,16 +52,13 @@
             <Font size="16.0" />
          </font></Label>
       <Button fx:id="buscar1" layoutX="629.0" layoutY="367.0" mnemonicParsing="false" onAction="#FindUsers" style="-fx-background-color: #bbb0f7;" text="Buscar" textFill="#2c178d" />
-      <TableView fx:id="tablaLibros" layoutX="246.0" layoutY="66.0" prefHeight="201.0" prefWidth="810.0" style="-fx-background-color: #e3dff7;">
+      <Button fx:id="cerrarSesion" layoutX="960.0" layoutY="18.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #bbb0f7;" text="Cerrar sesión" textFill="#2c178d" />
+      <TableView fx:id="tablaLibros" layoutX="120.0" layoutY="65.0" onSort="#initialize" prefHeight="226.0" prefWidth="827.0" style="-fx-background-color: #e3dff7;">
          <columns>
-            <TableColumn fx:id="Titulo" prefWidth="145.0" style="-fx-background-color: #bbb0f7;" text="Título" />
-            <TableColumn fx:id="Autor" prefWidth="173.0" style="-fx-background-color: #bbb0f7;" text="Autor" />
-            <TableColumn fx:id="ISBN" prefWidth="177.0" style="-fx-background-color: #bbb0f7;" text="ISBN" />
-            <TableColumn fx:id="Genero" prefWidth="133.0" style="-fx-background-color: #bbb0f7;" text="Género" />
-            <TableColumn fx:id="Disponible" prefWidth="102.33331298828125" style="-fx-background-color: #bbb0f7;" text="Disponible" />
-            <TableColumn fx:id="IdLibro" prefWidth="79.0" style="-fx-background-color: #bbb0f7;" text="Id" />
+            <TableColumn fx:id="titulo" prefWidth="209.33334350585938" style="-fx-background-color: #bbb0f7;" text="Título" />
+            <TableColumn fx:id="usuario" prefWidth="330.6666564941406" style="-fx-background-color: #bbb0f7;" text="Usuario" />
+            <TableColumn fx:id="fechaReserva" prefWidth="294.33331298828125" style="-fx-background-color: #bbb0f7;" text="Fecha Reservas" />
          </columns>
       </TableView>
-      <Button fx:id="cerrarSesion" layoutX="960.0" layoutY="18.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #bbb0f7;" text="Cerrar sesión" textFill="#2c178d" />
    </children>
 </AnchorPane>

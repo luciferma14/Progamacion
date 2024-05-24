@@ -23,11 +23,11 @@ public class devolverController {
     @FXML
     private TableView<Prestamo> tablaPrestamos;
     @FXML
-    private TableColumn<Prestamo, String> tituloColumn;
+    private TableColumn<Prestamo, String> titulo;
     @FXML
-    private TableColumn<Prestamo, String> usuarioPrestadorColumn;
+    private TableColumn<Prestamo, String> usuarioPrestador;
     @FXML
-    private TableColumn<Prestamo, String> fechaPrestamoColumn;
+    private TableColumn<Prestamo, String> fechaPrestamo;
 
     private static final String bibl = "jdbc:mysql://localhost:33006/Biblioteca";
     private static final String usr = "root";
@@ -110,9 +110,9 @@ public class devolverController {
                 }
 
                 // Configura las columnas de la tabla.
-                tituloColumn.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-                usuarioPrestadorColumn.setCellValueFactory(new PropertyValueFactory<>("usuarioPrestador"));
-                fechaPrestamoColumn.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
+                titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+                usuarioPrestador.setCellValueFactory(new PropertyValueFactory<>("usuarioPrestador"));
+                fechaPrestamo.setCellValueFactory(new PropertyValueFactory<>("fechaPrestamo"));
 
                 // Asigna los datos a la tabla.
                 tablaPrestamos.setItems(prestamos);

@@ -11,9 +11,9 @@
    <children>
       <TableView fx:id="tablaPrestamos" layoutX="110.0" layoutY="117.0" onSort="#initialize" prefHeight="360.0" prefWidth="835.0" style="-fx-background-color: #e3dff7;">
          <columns>
-            <TableColumn fx:id="tituloColumn" prefWidth="209.33334350585938" style="-fx-background-color: #bbb0f7;" text="Título" />
-            <TableColumn fx:id="usuarioPrestadorColumn" prefWidth="330.6666564941406" style="-fx-background-color: #bbb0f7;" text="Reserva / Usuario Prestador" />
-            <TableColumn fx:id="fechaPrestamoColumn" prefWidth="294.33331298828125" style="-fx-background-color: #bbb0f7;" text="Fecha Préstamo / Reservas" />
+            <TableColumn fx:id="titulo" prefWidth="209.33334350585938" style="-fx-background-color: #bbb0f7;" text="Título" />
+            <TableColumn fx:id="usuarioPrestador" prefWidth="330.6666564941406" style="-fx-background-color: #bbb0f7;" text="Reserva / Usuario Prestador" />
+            <TableColumn fx:id="fechaPrestamo" prefWidth="294.33331298828125" style="-fx-background-color: #bbb0f7;" text="Fecha Préstamo / Reservas" />
          </columns>
       </TableView>
       <Button layoutX="940.0" layoutY="535.0" mnemonicParsing="false" onAction="#devolverLibro" style="-fx-background-color: #bbb0f7;" text="Devolver" textFill="#2c178d" />
