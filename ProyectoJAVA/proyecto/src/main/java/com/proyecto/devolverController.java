@@ -105,7 +105,7 @@ public class devolverController {
                     String titulo = rsReservas.getString("titulo");
                     String usuarioPrestador = rsReservas.getString("email");
                     String fechaReserva = rsReservas.getString("fecha_reserva");
-
+                    
                     prestamos.add(new Prestamo(titulo, usuarioPrestador, fechaReserva));
                 }
 

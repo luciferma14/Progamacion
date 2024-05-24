@@ -53,11 +53,11 @@
          </font></Label>
       <Button fx:id="buscar1" layoutX="629.0" layoutY="367.0" mnemonicParsing="false" onAction="#FindUsers" style="-fx-background-color: #bbb0f7;" text="Buscar" textFill="#2c178d" />
       <Button fx:id="cerrarSesion" layoutX="960.0" layoutY="18.0" mnemonicParsing="false" onAction="#cerrarSesion" style="-fx-background-color: #bbb0f7;" text="Cerrar sesión" textFill="#2c178d" />
-      <TableView fx:id="tablaLibros" layoutX="120.0" layoutY="65.0" onSort="#initialize" prefHeight="226.0" prefWidth="827.0" style="-fx-background-color: #e3dff7;">
+      <TableView fx:id="tablaLibros" layoutX="120.0" layoutY="65.0" prefHeight="226.0" prefWidth="827.0">
          <columns>
-            <TableColumn fx:id="titulo" prefWidth="209.33334350585938" style="-fx-background-color: #bbb0f7;" text="Título" />
-            <TableColumn fx:id="usuario" prefWidth="330.6666564941406" style="-fx-background-color: #bbb0f7;" text="Usuario" />
-            <TableColumn fx:id="fechaReserva" prefWidth="294.33331298828125" style="-fx-background-color: #bbb0f7;" text="Fecha Reservas" />
+            <TableColumn fx:id="titulo" prefWidth="209.33334350585938" text="Título" />
+            <TableColumn fx:id="usuario" prefWidth="330.6666564941406" text="Usuario" />
+            <TableColumn fx:id="fechaReserva" prefWidth="294.33331298828125" text="Fecha Reservas" />
          </columns>
       </TableView>
    </children>

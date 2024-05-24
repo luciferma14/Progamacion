@@ -5,6 +5,7 @@ module com.proyecto {
     requires java.sql;
     requires com.h2database;
     requires java.desktop;
+    requires mysql.connector.j;
     
 
     opens com.proyecto to javafx.fxml;

@@ -9,7 +9,7 @@ public class Reserva {
     private int idUsuario;
     private String titulo;
     private String usuario;
-    private String fechaReserva;
+    public String fechaReserva;
     
 
     /**
