@@ -240,7 +240,6 @@ public class prestarController {
             String queryPrestamo = "INSERT INTO prestamos (idUsuarioPrestador, idUsuarioReceptor, idLibro, fecha_prestamo) VALUES (?, ?, ?, CURRENT_DATE())";
             String queryUpdateLibro = "UPDATE libros SET disponible = 'No' WHERE idLibro = ?";
             String queryReserva = "DELETE FROM reservas WHERE idLibro = ? AND idUsuario = ?";
-            String queryPrestamoDelete = "DELETE FROM prestamos WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuarioReceptor = ?";
 
 
             try (PreparedStatement stPrestamo = con.prepareStatement(queryPrestamo);
@@ -259,10 +258,7 @@ public class prestarController {
                 stDelete.setInt(2, usuarioActual.getIdUsuario());
                 stDelete.executeUpdate();
 
-                PreparedStatement st = con.prepareStatement(queryPrestamoDelete);
-                st.setString(1, libroSeleccionado.getTitulo());
-                st.setInt(2, usuarioActual.getIdUsuario());
-                int rowsAffected = st.executeUpdate();
+                tablaLibros.refresh(); // ARREGLAR ESTO -->> NNO FUNCIONA
             }
 
             Alert alert = new Alert(AlertType.INFORMATION);
