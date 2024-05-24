@@ -22,15 +22,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class prestarController {
 
     @FXML
-    private TextField FTitulo;
-    @FXML
-    private TextField FAutor;
-    @FXML
-    private TextField FISBN;
-    @FXML
-    private TextField FGenero;
-
-    @FXML
     private TextField FNombre;
     @FXML
     private TextField FApellido;
@@ -45,11 +36,11 @@ public class prestarController {
     private TableColumn<Reserva, String> usuario;
     @FXML
     private TableColumn<Reserva, String> fechaReserva;
-    
+
     @FXML
-    private TableView<Usuario> tablaUsers; 
+    private TableView<Usuario> tablaUsers;
     @FXML
-    private TableColumn<Usuario, String> Nombre; 
+    private TableColumn<Usuario, String> Nombre;
     @FXML
     private TableColumn<Usuario, String> Apellido;
     @FXML
@@ -86,8 +77,6 @@ public class prestarController {
      * @return el ID del usuario actual
      */
     public static int getUsuarioId() {
-        // Este método debe devolver el ID del usuario que ha iniciado sesión.
-        // Si tienes un método en tu aplicación para obtener el usuario actual, úsalo aquí.
         return App.getUsuario().getIdUsuario();
     }
 
@@ -121,14 +110,12 @@ public class prestarController {
      */
     @FXML
     private void initialize() throws SQLException, IOException {
-   
         try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-
-            String query = "SELECT L.titulo, U.email, R.fecha_reserva " +
-            "FROM reservas R " +
-            "JOIN libros L USING(idLibro) " +
-            "JOIN usuarios U USING(idUsuario) " +
-            "WHERE R.idUsuario = ?";
+            String query = "SELECT R.idLibro, L.titulo, U.email, R.fecha_reserva " +
+                           "FROM reservas R " +
+                           "JOIN libros L USING(idLibro) " +
+                           "JOIN usuarios U USING(idUsuario) " +
+                           "WHERE R.idUsuario = ?";
 
             PreparedStatement st = con.prepareStatement(query);
             st.setInt(1, usuarioActual.getIdUsuario());
@@ -136,13 +123,14 @@ public class prestarController {
             ResultSet rs = st.executeQuery();
 
             ObservableList<Reserva> reservas = FXCollections.observableArrayList();
-            
+
             while (rs.next()) {
+                int idLibro = rs.getInt("idLibro");
                 String titulo = rs.getString("titulo");
                 String usuario = rs.getString("email");
                 String fechaReserva = rs.getString("fecha_reserva");
 
-                reservas.add(new Reserva(titulo, usuario, fechaReserva));
+                reservas.add(new Reserva(idLibro, titulo, usuario, fechaReserva));
             }
 
             titulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
@@ -151,7 +139,7 @@ public class prestarController {
 
             // Asigna los datos a la tabla.
             tablaLibros.setItems(reservas);
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -171,36 +159,34 @@ public class prestarController {
 
         if (nom != null || ape != null || use != null) {
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
-                PreparedStatement st = null;
                 String query = "SELECT * FROM usuarios WHERE 1=1"; // Adición dinámica de las condiciones.
 
                 // Añade las condiciones basadas en la entrada del usuario.
-                if (!nom.equals("")) {
+                if (!nom.isEmpty()) {
                     query += " AND nombre LIKE ?";
                 }
-                if (!ape.equals("")) {
+                if (!ape.isEmpty()) {
                     query += " AND apellido LIKE ?";
                 }
-                if (!use.equals("")) {
+                if (!use.isEmpty()) {
                     query += " AND email LIKE ?";
                 }
 
-                st = con.prepareStatement(query);
+                PreparedStatement st = con.prepareStatement(query);
                 int paramIndex = 1;
 
-                if (!nom.equals("")) {
+                if (!nom.isEmpty()) {
                     st.setString(paramIndex++, "%" + nom + "%");
                 }
-                if (!ape.equals("")) {
+                if (!ape.isEmpty()) {
                     st.setString(paramIndex++, "%" + ape + "%");
                 }
-                if (!use.equals("")) {
+                if (!use.isEmpty()) {
                     st.setString(paramIndex++, "%" + use + "%");
                 }
 
                 try (ResultSet rs = st.executeQuery()) {
                     ObservableList<Usuario> user = FXCollections.observableArrayList();
-                    // Procesa los resultados
                     while (rs.next()) {
                         int idUsuario = rs.getInt("idUsuario");
                         String nombre = rs.getString("nombre");
@@ -252,20 +238,31 @@ public class prestarController {
 
         try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
             String queryPrestamo = "INSERT INTO prestamos (idUsuarioPrestador, idUsuarioReceptor, idLibro, fecha_prestamo) VALUES (?, ?, ?, CURRENT_DATE())";
-            String queryUpdateLibro = "UPDATE libros SET disponible = ? WHERE idLibro = ?";
+            String queryUpdateLibro = "UPDATE libros SET disponible = 'No' WHERE idLibro = ?";
+            String queryReserva = "DELETE FROM reservas WHERE idLibro = ? AND idUsuario = ?";
+            String queryPrestamoDelete = "DELETE FROM prestamos WHERE idLibro = (SELECT idLibro FROM libros WHERE titulo = ?) AND idUsuarioReceptor = ?";
+
 
             try (PreparedStatement stPrestamo = con.prepareStatement(queryPrestamo);
-                 PreparedStatement stUpdateLibro = con.prepareStatement(queryUpdateLibro)) {
+                 PreparedStatement stUpdateLibro = con.prepareStatement(queryUpdateLibro);
+                 PreparedStatement stDelete = con.prepareStatement(queryReserva)) {
 
                 stPrestamo.setInt(1, idUsuarioPrestador.getIdUsuario());
                 stPrestamo.setInt(2, usuarioReceptorSeleccionado.getIdUsuario());
                 stPrestamo.setInt(3, libroSeleccionado.getIdLibro());
                 stPrestamo.executeUpdate();
 
-                stUpdateLibro.setString(1, "No");
-                stUpdateLibro.setInt(2, libroSeleccionado.getIdLibro());
+                stUpdateLibro.setInt(1, libroSeleccionado.getIdLibro());
                 stUpdateLibro.executeUpdate();
-                
+
+                stDelete.setInt(1, libroSeleccionado.getIdLibro());
+                stDelete.setInt(2, usuarioActual.getIdUsuario());
+                stDelete.executeUpdate();
+
+                PreparedStatement st = con.prepareStatement(queryPrestamoDelete);
+                st.setString(1, libroSeleccionado.getTitulo());
+                st.setInt(2, usuarioActual.getIdUsuario());
+                int rowsAffected = st.executeUpdate();
             }
 
             Alert alert = new Alert(AlertType.INFORMATION);
