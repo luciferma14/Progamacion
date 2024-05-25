@@ -103,13 +103,22 @@ public class prestarController {
     private Usuario usuarioActual = App.getUsuario();
 
     /**
-     * Busca libros en la base de datos según los datos intruducidos en la búsqueda.
+     * Inicializa la tabla de reservas con los datos de la base de datos.
      * 
      * @throws SQLException si ocurre un error en la consulta de la base de datos
      * @throws IOException si ocurre un error
      */
     @FXML
     private void initialize() throws SQLException, IOException {
+        cargarReservas();
+    }
+
+    /**
+     * Carga las reservas desde la base de datos y las muestra en la tabla.
+     * 
+     * @throws SQLException si ocurre un error en la consulta de la base de datos
+     */
+    private void cargarReservas() throws SQLException {
         try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
             String query = "SELECT R.idLibro, L.titulo, U.email, R.fecha_reserva " +
                            "FROM reservas R " +
@@ -146,7 +155,7 @@ public class prestarController {
     }
 
     /**
-     * Busca usuarios en la base de datos según los datos intruducidos en la búsqueda.
+     * Busca usuarios en la base de datos según los datos introducidos en la búsqueda.
      * 
      * @throws SQLException si ocurre un error en la consulta de la base de datos
      * @throws IOException si ocurre un error
@@ -241,7 +250,6 @@ public class prestarController {
             String queryUpdateLibro = "UPDATE libros SET disponible = 'No' WHERE idLibro = ?";
             String queryReserva = "DELETE FROM reservas WHERE idLibro = ? AND idUsuario = ?";
 
-
             try (PreparedStatement stPrestamo = con.prepareStatement(queryPrestamo);
                  PreparedStatement stUpdateLibro = con.prepareStatement(queryUpdateLibro);
                  PreparedStatement stDelete = con.prepareStatement(queryReserva)) {
@@ -258,7 +266,8 @@ public class prestarController {
                 stDelete.setInt(2, usuarioActual.getIdUsuario());
                 stDelete.executeUpdate();
 
-                tablaLibros.refresh(); // ARREGLAR ESTO -->> NNO FUNCIONA
+                // Recargar las reservas después de eliminar
+                cargarReservas();
             }
 
             Alert alert = new Alert(AlertType.INFORMATION);
