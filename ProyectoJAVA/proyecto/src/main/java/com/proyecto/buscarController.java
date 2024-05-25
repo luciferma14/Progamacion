@@ -115,6 +115,13 @@ public class buscarController {
                 }
                 if (!aut.equals("")) {
                     query += "autor LIKE '%" + aut + "%' AND ";
+                } else {
+                    // Muestra una alerta si no se encontraron libros con los datos intruducidos.
+                    Alert alert = new Alert(AlertType.ERROR);
+                    alert.setTitle("No se encontraron libros");
+                    alert.setHeaderText(null);
+                    alert.setContentText("No se encontraron libros con esas características.");
+                    alert.showAndWait();
                 }
 
                 // Elimina el último "AND" si hay al final para evitar error en la consulta.
