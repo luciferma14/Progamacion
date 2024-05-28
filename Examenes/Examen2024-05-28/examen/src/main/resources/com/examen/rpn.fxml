@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.examen.rpnController">
+   <children>
+      <Button fx:id="ocho" layoutX="366.0" layoutY="186.0" mnemonicParsing="false" onAction="#añadirOcho" prefHeight="74.0" prefWidth="70.0" text="8" />
+      <Button fx:id="nueve" layoutX="436.0" layoutY="186.0" mnemonicParsing="false" onAction="#añadirNueve" prefHeight="74.0" prefWidth="70.0" text="9" />
+      <Button fx:id="siete" layoutX="296.0" layoutY="186.0" mnemonicParsing="false" onAction="#añadirSiete" prefHeight="74.0" prefWidth="70.0" text="7" />
+      <Button fx:id="cinco" layoutX="366.0" layoutY="260.0" mnemonicParsing="false" onAction="#añadirCinco" prefHeight="74.0" prefWidth="70.0" text="5" />
+      <Button fx:id="seis" layoutX="436.0" layoutY="260.0" mnemonicParsing="false" onAction="#añadirSeis" prefHeight="74.0" prefWidth="70.0" text="6" />
+      <Button fx:id="cuatro" layoutX="296.0" layoutY="260.0" mnemonicParsing="false" onAction="#añadirCuatro" prefHeight="74.0" prefWidth="70.0" text="4" />
+      <Button fx:id="mas" layoutX="506.0" layoutY="186.0" mnemonicParsing="false" onAction="#sum" prefHeight="148.0" prefWidth="70.0" text="+" />
+      <Button fx:id="dos" layoutX="366.0" layoutY="334.0" mnemonicParsing="false" onAction="#añadirDos" prefHeight="74.0" prefWidth="70.0" text="2" />
+      <Button fx:id="tres" layoutX="436.0" layoutY="334.0" mnemonicParsing="false" onAction="#añadirTres" prefHeight="74.0" prefWidth="70.0" text="3" />
+      <Button fx:id="uno" layoutX="296.0" layoutY="334.0" mnemonicParsing="false" onAction="#añadirUno" prefHeight="74.0" prefWidth="70.0" text="1" />
+      <Button fx:id="enter" layoutX="506.0" layoutY="334.0" mnemonicParsing="false" onAction="#enter" prefHeight="148.0" prefWidth="70.0" text="Enter" />
+      <Button fx:id="punto" layoutX="436.0" layoutY="408.0" mnemonicParsing="false" onAction="#añadirPunto" prefHeight="74.0" prefWidth="70.0" text="." />
+      <Button fx:id="cero" layoutX="296.0" layoutY="408.0" mnemonicParsing="false" onAction="#añadirCero" prefHeight="74.0" prefWidth="140.0" text="0" />
+      <Button fx:id="dividir" layoutX="366.0" layoutY="112.0" mnemonicParsing="false" onAction="#div" prefHeight="74.0" prefWidth="70.0" text="/" />
+      <Button fx:id="multiplicar" layoutX="436.0" layoutY="112.0" mnemonicParsing="false" onAction="#mult" prefHeight="74.0" prefWidth="70.0" text="*" />
+      <Button layoutX="296.0" layoutY="112.0" mnemonicParsing="false" prefHeight="74.0" prefWidth="70.0" text="+/-" />
+      <Button fx:id="menos" layoutX="506.0" layoutY="112.0" mnemonicParsing="false" onAction="#res" prefHeight="74.0" prefWidth="70.0" text="-" />
+      <Label layoutX="168.0" layoutY="23.0" text="RPN Strikes back">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1ffbff" height="298.0" layoutX="24.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="237.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1ffffe" height="65.0" layoutX="24.0" layoutY="416.0" stroke="BLACK" strokeType="INSIDE" width="237.0" />
+      <VBox alignment="BOTTOM_LEFT" layoutX="32.0" layoutY="120.0" prefHeight="275.0" prefWidth="221.0">
+         <children>
+            <Label fx:id="fila9" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="fila8" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="fila7" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="fila6" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="fila5" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="fila4" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="fila3" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="fila2" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="fila1" alignment="TOP_RIGHT" contentDisplay="BOTTOM" prefHeight="16.0" prefWidth="228.0" text="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="numeros" alignment="CENTER_RIGHT" layoutX="32.0" layoutY="434.0" prefHeight="30.0" prefWidth="221.0" text="">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
