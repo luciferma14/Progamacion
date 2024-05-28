@@ -74,7 +74,7 @@ public class ventanaInicioSesionController {
                     Alert alert = new Alert(AlertType.ERROR);
                     alert.setTitle("No se encontraron usuarios");
                     alert.setHeaderText(null);
-                    alert.setContentText("No tenemos ninguna cuenta con esas características.\" + '\\n" + "' + \"Inténtelo otra vez.");
+                    alert.setContentText("No tenemos ninguna cuenta con esas características. Inténtelo otra vez.");
                     alert.showAndWait();
                 }
             } catch (SQLException e) {
