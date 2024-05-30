@@ -95,8 +95,7 @@ public class buscarController {
         String isb = FISBN.getText();
         String gen = FGenero.getText();
 
-        // Verifica si al menos uno de los campos tiene valor.
-        if (tit != null || aut != null || isb != null || gen != null) {
+        if ((tit != null && !tit.isEmpty()) || (aut != null && !aut.isEmpty()) || (isb != null && !isb.isEmpty()) || (gen != null && !gen.isEmpty())) {
 
             try (Connection con = DriverManager.getConnection(bibl, usr, pass)) {
                 Statement st = con.createStatement();
@@ -115,13 +114,6 @@ public class buscarController {
                 }
                 if (!aut.equals("")) {
                     query += "autor LIKE '%" + aut + "%' AND ";
-                } else {
-                    // Muestra una alerta si no se encontraron libros con los datos intruducidos.
-                    Alert alert = new Alert(AlertType.ERROR);
-                    alert.setTitle("No se encontraron libros");
-                    alert.setHeaderText(null);
-                    alert.setContentText("No se encontraron libros con esas características.");
-                    alert.showAndWait();
                 }
 
                 // Elimina el último "AND" si hay al final para evitar error en la consulta.
@@ -132,7 +124,7 @@ public class buscarController {
                 // Ejecuta la consulta SQL.
                 try (ResultSet rs = st.executeQuery(query)) {
                     ObservableList<Libro> lib = FXCollections.observableArrayList();
-
+                    boolean  bol = false;
                     // Procesa el resultado de la consulta.
                     while (rs.next()) {
                         String titulo = rs.getString("titulo");
@@ -145,6 +137,7 @@ public class buscarController {
                         // Crea una instancia de Libro y agregarla a la lista.
                         Libro libro = new Libro(titulo, autor, isbn, genero, disponible, id);
                         lib.add(libro);
+                        bol = true;
                     }
 
                     // Configura las columnas de la tabla con los valores de los libros.
@@ -153,9 +146,17 @@ public class buscarController {
                     ISBN.setCellValueFactory(new PropertyValueFactory<Libro, Long>("isbnString"));
                     Genero.setCellValueFactory(new PropertyValueFactory<Libro, String>("genero"));
                     Disponible.setCellValueFactory(new PropertyValueFactory<Libro, Boolean>("disponible"));
-
+                    
                     // Asigna la lista de libros a la tabla.
                     tabla.setItems(lib);
+                    
+                    if (!bol) {
+                        Alert alert = new Alert(AlertType.ERROR);
+                        alert.setTitle("No se encontraron libros");
+                        alert.setHeaderText(null);
+                        alert.setContentText("No hay libros con esas características.");
+                        alert.showAndWait();
+                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -166,7 +167,7 @@ public class buscarController {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("No se encontraron libros");
             alert.setHeaderText(null);
-            alert.setContentText("No se encontraron libros con esas características.");
+            alert.setContentText("Necesitas rellenar los campos.");
             alert.showAndWait();
         }
     }
