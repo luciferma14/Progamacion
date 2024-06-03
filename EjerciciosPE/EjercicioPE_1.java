@@ -1,4 +1,4 @@
-package PGM.EjercicioPE;
+
 
 public class EjercicioPE_1 {
     public static void main(String[] args) {

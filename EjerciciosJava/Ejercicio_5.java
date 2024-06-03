@@ -1,5 +1,3 @@
-package EjerciciosAvanzados1;
-
 
 import java.util.Scanner;                           
 

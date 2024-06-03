@@ -1,4 +1,4 @@
-package AER;
+
 import java.util.Scanner;
 
 import javax.sound.sampled.SourceDataLine;

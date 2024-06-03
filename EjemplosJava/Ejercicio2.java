@@ -4,6 +4,7 @@ public class Ejercicio2 {
         int b = 3;
         char c = '5';
         
-        System.out.println("a + b + c = "+ (a + b + c) + "resint = +resint+"resdouble ="+resdouble);
+        int resdouble = (int) (a + b + c);
+        System.out.println("a + b + c = "+ (a + b + c) + "resint = + resint + " + resdouble + "=" +  resdouble);
     }
 }

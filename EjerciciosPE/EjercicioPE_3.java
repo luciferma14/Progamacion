@@ -1,4 +1,3 @@
-package PGM.EjercicioPE;
 
 import java.util.Scanner;
 

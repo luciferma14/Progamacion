@@ -1,4 +1,4 @@
-package EjerciciosAvanzados1;
+
 
 import java.util.Scanner;
 
@@ -69,7 +69,3 @@ public class Ejercicio_4
     }
 
 }     
-    
-        
-
-      

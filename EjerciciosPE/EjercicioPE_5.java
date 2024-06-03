@@ -1,4 +1,4 @@
-package PGM.EjercicioPE;
+
 import java.util.Scanner;
 
 public class EjercicioPE_5 {
