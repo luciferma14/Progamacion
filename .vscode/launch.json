@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Menu",
+            "request": "launch",
+            "mainClass": "Menu",
+            "projectName": "Programacion_a68fa78e"
+        },
+        {
+            "type": "java",
+            "name": "ExEj1",
+            "request": "launch",
+            "mainClass": "EjerExamenes.ExEj1",
+            "projectName": "Programacion_a68fa78e"
+        },
+        {
+            "type": "java",
             "name": "Ejercicio_4",
             "request": "launch",
             "mainClass": "Ejercicio_4",

@@ -1,4 +1,3 @@
-package Examen22;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +55,7 @@ public class Menu {
         
         }while(true);
     }
-        private static void crearPedido(List<Formulario> formularios) {
+        private static <Formulario, Pedidos> void crearPedido(List<Formulario> formularios) {
             Scanner sc = new Scanner(System.in);
 
             System.out.println("--- Crear pedido ---");
@@ -97,7 +96,7 @@ public class Menu {
             System.out.println("ID de la devolución creada: " + devolucion.getId());
         }
 
-        private static void crearReclamacion(List<Formulario> formularios) {
+        private static <Reclamaciones> void crearReclamacion(List<Formulario> formularios) {
             Scanner sc = new Scanner(System.in);
 
             System.out.println("--- Crear reclamación ---");
@@ -115,7 +114,7 @@ public class Menu {
             System.out.println("ID de la reclamación creada: " + reclamacion.getId());
         }
 
-        private static void cerrarReclamacion(List<Formulario> formularios) {
+        private static <Reclamaciones, Formulario> void cerrarReclamacion(List<Formulario> formularios) {
             
             Scanner scanner = new Scanner(System.in);
 
@@ -129,15 +128,15 @@ public class Menu {
         
         }
 
-        private static void imprimirFormulario(List<Formulario> formularios) {
+        private static <Formulario> void imprimirFormulario(List<Formulario> formularios) {
             
         }
 
-        private static void imprimirTodasReclamaciones(List<Formulario> formularios) {
+        private static <Formulario> void imprimirTodasReclamaciones(List<Formulario> formularios) {
             
         }
 
-        private static void imprimirTodos(List<Formulario> formularios) {
+        private static <Formulario> void imprimirTodos(List<Formulario> formularios) {
             
         }
 
@@ -145,7 +144,7 @@ public class Menu {
             throw new UnsupportedOperationException("Unimplemented method 'generarId'");
         }
 
-        private static Reclamaciones buscarReclamacion(List<Formulario> formularios) {
+        private static <Reclamaciones, Formulario> Reclamaciones buscarReclamacion(List<Formulario> formularios) {
             throw new UnsupportedOperationException("Unimplemented method 'buscarReclamacion'");
         }
     } 

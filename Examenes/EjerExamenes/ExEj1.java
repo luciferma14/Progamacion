@@ -1,8 +1,6 @@
 package EjerExamenes;
 import java.util.Scanner;
 
-import javax.sound.midi.Soundbank;
-
 public class ExEj1 {
     public static void main(String[] args) {
 
@@ -34,9 +32,11 @@ public class ExEj1 {
             System.out.println("Si no vas a contestar bien me voy");
         }else {
 
-            if (respuesta1.equals("No"));{
-            System.out.println("Loooser!");
-            }else (respuesta1.equals("Si")){
+            if (respuesta1.equals("No")){
+                System.out.println("Loooser!");
+
+            }if(respuesta1.equals("Si")) {
+               
                 System.out.print("Cuantos años llevas programando?");
                 años = sc.nextInt();
                 if (años <= 1){
@@ -50,6 +50,3 @@ public class ExEj1 {
         }        
     }        
 }
-
-  
-

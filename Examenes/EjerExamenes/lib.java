@@ -2,7 +2,7 @@ package EjerExamenes;
 import java.util.Scanner;
 
 public class lib {
-    public static  {
+    public static void cortesia() {
 
         Scanner sc = new Scanner(System.in);
 

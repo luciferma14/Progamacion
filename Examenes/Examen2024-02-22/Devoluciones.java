@@ -1,7 +1,5 @@
-package Examen22;
 
-
-public class Devoluciones extends Formulario{
+public class Devoluciones {
 
     private String producto;
     private double precio;

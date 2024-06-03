@@ -1,7 +1,5 @@
-package Examen22;
 
-
-public class Reclamaciones extends Formulario{
+public class Reclamaciones{
 
     private String texto;
     private String estado;

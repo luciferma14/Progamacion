@@ -1,4 +1,3 @@
-package Examen22;
 
 public class Formulario {
 
