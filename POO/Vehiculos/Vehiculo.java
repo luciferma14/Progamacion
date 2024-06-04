@@ -2,7 +2,7 @@ public class Vehiculo {
     
     private static int vehiculosCreados;
     private static int kilometrosTotales;
-    private  int kilometrosRecorridos;
+    private int kilometrosRecorridos;
 
    
     public int anda(int km) {
