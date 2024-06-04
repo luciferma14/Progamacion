@@ -8,7 +8,7 @@ public class Calculos {
         double precioTotal = 0 ;
         double unidades = 0 ;
         double precioM3 = 0 ;
-        HashMap<String,Tablon> lista = new HashMap<>();
+        HashMap<String,Tablon> lista = Catalogo.listado();
         Tablon tablonRef = lista.get(ref);
 
         int largo = tablonRef.largo;
