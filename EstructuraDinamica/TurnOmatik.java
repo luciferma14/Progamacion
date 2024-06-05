@@ -33,7 +33,7 @@ public class TurnOmatik {
 
                 case 2:
                     if (!clientes.isEmpty()) {
-                        cliente = clientes.poll();
+                        cliente = clientes.poll(); // Sacar el primero de la cola
                         System.out.println("Atendiendo a: " + cliente);
                     } else {
                         System.out.println("No hay clientes en la cola.");

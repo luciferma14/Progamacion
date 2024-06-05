@@ -1,4 +1,4 @@
-package EstructuraDinamica;
+
         
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class Estadistica {
 
         while (true) {
             
-            System.out.print("Número: ");
+            System.out.print("NÃºmero: ");
             entrada = sc.nextLine();
 
             if (entrada.equalsIgnoreCase("q")) {
@@ -37,7 +37,7 @@ public class Estadistica {
             media = suma / num;
             desviacion = Math.sqrt((sumaCuadrados - num * Math.pow(media, 2)) / num);
 
-            System.out.println("-Media: " + media + "  -Desviación típica: " + desviacion);
+            System.out.println("-Media: " + media + "  -Desviaciï¿½n tï¿½pica: " + desviacion);
         }
     }
 }
