@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Universidad",
+            "request": "launch",
+            "mainClass": "Universidad",
+            "projectName": ""
+        },
+        {
+            "type": "java",
+            "name": "MainUniversidad",
+            "request": "launch",
+            "mainClass": "MainUniversidad",
+            "projectName": ""
+        },
+        {
+            "type": "java",
             "name": "Menu",
             "request": "launch",
             "mainClass": "Menu",

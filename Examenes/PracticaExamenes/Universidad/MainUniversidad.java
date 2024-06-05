@@ -1,22 +1,26 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainUniversidad {
+public class MainUniversidad{
+
     public static void main(String[] args) {
+        
         List<Persona> personas = new ArrayList<>();
 
-        Direccion direccion1 = new Direccion("Calle Principal", "Ciudad A", 1234, "País A");
-        Estudiante estudiante1 = new Estudiante("Juan", "González", "12345678A", 1001);
-        personas.add(estudiante1);
-        Estudiante estudiante2 = new Estudiante("María", "López", "87654321B", direccion1, 1002);
-        personas.add(estudiante2);
-        Profesor profesor1 = new Profesor("Carlos", "Martínez", "98765432C", direccion1, 101);
-        personas.add(profesor1);
-        Profesor profesor2 = new Profesor("Ana", "Sánchez", "23456789D", direccion1, 101);
-        personas.add(profesor2);
+        Direccion direc = new Direccion("Pinedo", "Valencia",46910, "España");
+        Estudiante estud1 = new Estudiante("Lucia", "Ferrandis", "789456123T", 14);
+        Estudiante estud2 = new Estudiante("Alvaro", "Ferrandis", "123456789T", direc, 21);
+        Profesor prof1 = new Profesor("Juan", "Garcia", "123456789G", 21);
+        Profesor prof2 = new Profesor("Fede", "Garcia", "789456123P", direc, 14);
 
-        for (Persona persona : personas) {
-            System.out.println(persona);
-        }
+        personas.add(estud1);
+        personas.add(estud2);
+        personas.add(prof1);
+        personas.add(prof2);
+
+        System.out.println("Estudiante 1: " + estud1.toString());
+        System.out.println("Estudiante 2: " + estud2.toString());
+        System.out.println("Profesor 1: " + prof1.toString());
+        System.out.println("Profesor 1: " + prof2.toString());
     }
 }
