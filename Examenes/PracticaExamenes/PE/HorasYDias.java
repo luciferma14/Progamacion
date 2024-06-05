@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class HorasYDias {
-    
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
@@ -43,10 +42,5 @@ public class HorasYDias {
         total = diaHora + horas;
 
         System.out.println("Entre las " + hora1 + " del dia " + dia1 + " y las " + hora2 + " del dia " + dia2 + " hay " + total + " horas");
-
-
-
-
-
     }
 }
