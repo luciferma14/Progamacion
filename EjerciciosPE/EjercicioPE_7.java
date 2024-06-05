@@ -10,9 +10,6 @@ public class EjercicioPE_7 {
         String opcion3 = "tijera";
         int opcionOrdenador;
         int opcionUsuario;
-        String opcionOrdenadorStg;
-        String opcionUsuarioStg;
-
 
         opcionOrdenador = (int) (Math.random() * 3) + 1;
 
@@ -22,7 +19,6 @@ public class EjercicioPE_7 {
         System.out.println("2 - Papel");
         System.out.println("3 - Tijera");
        
-
         do {
             System.out.print("Introduce tu opción: ");
              opcionUsuario = sc.nextInt();
@@ -41,9 +37,7 @@ public class EjercicioPE_7 {
             case 3: opcionUsuarioStg = "Tijera"; break;
         }
 
-        
         System.out.println("El ordenador eligió: " + opcionOrdenador);
-
 
         if (opcionOrdenador == opcionUsuario) {
             System.out.println("Ha habido un empate!");
@@ -57,7 +51,5 @@ public class EjercicioPE_7 {
         } else {
             System.out.println("HAS PERDIDO!! :(");
         }
-
-
     }
 }
