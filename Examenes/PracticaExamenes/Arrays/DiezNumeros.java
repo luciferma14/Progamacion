@@ -6,17 +6,17 @@ public class DiezNumeros{
 
         Scanner sc = new Scanner(System.in);
 
-        int[] diez = new int[5];
+        int[] cinco = new int[5];
         int numeros;
 
-        System.out.println("Inserta 10 números: ");
+        System.out.println("Inserta 5 números: ");
         for (int i = 0; i < 5; i++) {
             System.out.print("Número " + (i + 1) + ": ");
             numeros = sc.nextInt();
-            diez[i] = numeros;
+            cinco[i] = numeros;
         }
-        System.out.println("Números insertados: " + Arrays.toString(diez));
-        System.out.println("Números invertidos: " + Arrays.toString(invertir(diez)));
+        System.out.println("Números insertados: " + Arrays.toString(cinco));
+        System.out.println("Números invertidos: " + Arrays.toString(invertir(cinco)));
     }
 
     public static int[] invertir(int[] array){
