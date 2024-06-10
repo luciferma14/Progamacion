@@ -11,28 +11,28 @@ public class Conversor {
             List<String> docsOK = new ArrayList<>();
             List<String> docsKO = new ArrayList<>();
 
-            for (String line : docsIn){
-                if (line.matches("\\d{8}[A-Z]")){
-                    Doc doc = new Doc(line, null, null);
+            for (String linea : docsIn){
+                if (linea.matches("\\d{8}[A-Z]")){
+                    Doc doc = new Doc(linea, null, null);
                     if (Validador.esValido(doc)){
                         Validador.fichero(doc);
                     }else{
-                        docsKO.add(line);
+                        docsKO.add(linea);
                     }
-                }else if (line.matches("\\d{20},[A-Z0-9]{11}")){
-                    if (Algoritmos.validarCCC(line.split( ",")[0])){
-                        docsOK.add("CCC:" + line.replace(",", "-"));
+                }else if (linea.matches("\\d{20},[A-Z0-9]{11}")){
+                    if (Algoritmos.validarCCC(linea.split( ",")[0])){
+                        docsOK.add("CCC:" + linea.replace(",", "-"));
                     }else {
-                        docsKO.add(line);
+                        docsKO.add(linea);
                     }
-                }else if (line.matches("\\d{16},\\d{2}/\\d{2}")) {
-                    if (Algoritmos.validarTarjeta(line.split(",")[0])) {
-                        docsOK.add("Card:" + line.replace(",", "-"));
+                }else if (linea.matches("\\d{16},\\d{2}/\\d{2}")) {
+                    if (Algoritmos.validarTarjeta(linea.split(",")[0])) {
+                        docsOK.add("Card:" + linea.replace(",", "-"));
                     } else {
-                        docsKO.add(line);
+                        docsKO.add(linea);
                     }
                 }else {
-                    docsKO.add(line);
+                    docsKO.add(linea);
                 }
             
                 Api.escribirDoc("docs_ok.txt", docsOK);
