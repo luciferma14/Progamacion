@@ -1,7 +1,6 @@
 package ExOrd2;
 
 import java.util.*;
-
 public class Conversor {
 
     public static void main(String[] args) {
@@ -44,5 +43,4 @@ public class Conversor {
         
         }
     }
-    
 }
