@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.sound.midi.Soundbank;
+
 public class GestorInventario {
     
     public static void main(String[] args) {
@@ -16,13 +18,11 @@ public class GestorInventario {
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
 
-            String linea = br.readLine(); //fr.read(), para un caracter
-            System.out.println();
-            String [] partes = linea.split(",");
+            String linea;
 
-            while(partes != null) {
-                System.out.println(linea);
-                linea = br.readLine();
+            while((linea = br.readLine()) != null) {
+                String [] partes = linea.split(",");
+
                 String nom = partes[0];
                 double precio = Double.parseDouble(partes[1]);
                 String categ = partes[2];
@@ -30,8 +30,9 @@ public class GestorInventario {
                 Producto prod = new Producto(nom, precio, categ);
 
                 inventario.agregarProducto(prod);
-                
             }
+
+            System.out.println("Hecho");
             br.close();
             fr.close();
             } catch(IOException e) {

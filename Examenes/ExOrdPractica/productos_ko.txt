@@ -1,0 +1,6 @@
+Microondas,150.0,Electrodomésticos
+Lavadora,800.0,Electrodomésticos
+Refrigerador,1200.0,Electrodomésticos
+Secadora,900.0,Electrodomésticos
+Laptop,1100.0,Electrónica
+,500.0,Electrónica

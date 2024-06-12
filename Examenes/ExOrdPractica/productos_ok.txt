@@ -1,0 +1,6 @@
+Producto: Televisor - 499.99 - Electrónica
+Producto: Tablet - 299.99 - Electrónica
+Producto: Smartphone - 999.99 - Electrónica
+Producto: Cámara - 750.0 - Electrónica
+Producto: Impresora - 200.0 - Oficina
+Producto: Cafetera - 50.0 - Hogar
