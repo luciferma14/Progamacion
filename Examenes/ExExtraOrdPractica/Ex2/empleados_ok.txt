@@ -1,0 +1,7 @@
+Empleado: Juan Pérez - 30 - 3000.0 - IT
+Empleado: Ana Gómez - 25 - 2000.0 - HR
+Empleado: Luis Ramírez - 45 - 5000.0 - Finance
+Empleado: José Sánchez - 35 - 9000.0 - Sales
+Empleado: Marta Díaz - 18 - 1100.0 - HR
+Empleado: Sara Ruiz - 29 - 7000.0 - IT
+Empleado: Miguel Ortiz - 55 - 10000.0 - Sales

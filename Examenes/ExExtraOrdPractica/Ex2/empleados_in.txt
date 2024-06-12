@@ -1,0 +1,12 @@
+Juan Pérez,30,3000,IT
+Ana Gómez,25,2000,HR
+Luis Ramírez,45,5000,Finance
+Carlos Sosa,70,4000,Sales
+María Fernández,17,2500,IT
+Pedro López,40,15000,Finance
+Lucía Martínez,22,2500,Marketing
+José Sánchez,35,9000,Sales
+Marta Díaz,18,1100,HR
+Sara Ruiz,29,7000,IT
+Miguel Ortiz,55,10000,Sales
+,40,5000,IT

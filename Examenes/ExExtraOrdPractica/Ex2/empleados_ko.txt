@@ -1,0 +1,5 @@
+Carlos Sosa,70,4000.0,Sales
+María Fernández,17,2500.0,IT
+Pedro López,40,15000.0,Finance
+Lucía Martínez,22,2500.0,Marketing
+,40,5000.0,IT
