@@ -5,13 +5,12 @@ public class AER_433 {
         Scanner sc = new Scanner(System.in);
 
         int uvas;
-        
+
         while (true) {
             uvas = sc.nextInt();
             if (uvas == 0) {
                 System.exit(0);
             }
-
             int nivel = 0;
             int totalUvas = 0;
 
@@ -19,7 +18,6 @@ public class AER_433 {
                 nivel++;
                 totalUvas += nivel;
             }
-
             System.out.println(nivel);
         }
     }
