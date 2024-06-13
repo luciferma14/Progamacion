@@ -1,0 +1,15 @@
+El Quijote,Miguel de Cervantes,9781234567890,1605,Ficción
+Cien Años de Soledad,Gabriel García Márquez,9781234567891,1967,Ficción
+Introducción a la Programación,John Doe,9781234567892,2020,Educativo
+Fundamentos de Física,David Halliday,9781234567893,2015,Científico
+La Sombra del Viento,Carlos Ruiz Zafón,9781234567894,2001,Ficción
+El Poder del Hábito,Charles Duhigg,9781234567895,2012,No Ficción
+Breve Historia del Tiempo,Stephen Hawking,9781234567896,1988,Científico
+La Biografía de Steve Jobs,Walter Isaacson,9781234567897,2011,Biográfico
+Educación para la Vida,Paulo Freire,9781234567898,1996,Educativo
+Cálculo Multivariable,James Stewart,9781234567899,2010,Científico
+La Guerra de los Mundos,H.G. Wells,9781234567800,1898,Ficción
+Caminos a la Excelencia,Anders Ericsson,9781234567801,2016,No Ficción
+Un Mundo Feliz,Aldous Huxley,9781234567802,1932,Ficción
+El Hombre en Busca de Sentido,Viktor Frankl,9781234567803,1946,No Ficción
+Los Secretos de la Mente Millonaria,T. Harv Eker,9781234567804,2005,No Ficción

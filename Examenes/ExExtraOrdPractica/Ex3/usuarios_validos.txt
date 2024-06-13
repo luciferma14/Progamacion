@@ -1,0 +1,12 @@
+
+Usuario: Juan Pérez - U12345 - juan.perez@example.com - 1234567890
+Usuario: Maria López - U12346 - maria.lopez@example.com - 0987654321
+Usuario: Luis García - U12347 - luis.garcia@example.com - 5678901234
+Usuario: Ana Torres - U12348 - ana.torres@example.com - 2345678901
+Usuario: José Díaz - U12349 - jose.diaz@example.com - 3456789012
+Usuario: Carla Sánchez - U12350 - carla.sanchez@example.com - 4567890123
+Usuario: Miguel Rodríguez - U12351 - miguel.rodriguez@example.com - 5678901235
+Usuario: Pedro Gómez - U12353 - pedro.gomez@example.com - 7890123456
+Usuario: Elena Navarro - U12354 - elena.navarro@example.com - 8901234567
+Usuario: Ricardo Fernández - U12355 - ricardo.fernandez@example.com - 9012345678
+Usuario: Patricia Ramírez - U12358 - patricia.ramirez@example.com - 3456780123

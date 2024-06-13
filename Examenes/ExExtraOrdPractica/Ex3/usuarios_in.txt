@@ -1,0 +1,16 @@
+Juan Pérez,U12345,juan.perez@example.com,1234567890
+Maria López,U12346,maria.lopez@example.com,0987654321
+Luis García,U12347,luis.garcia@example.com,5678901234
+Ana Torres,U12348,ana.torres@example.com,2345678901
+José Díaz,U12349,jose.diaz@example.com,3456789012
+Carla Sánchez,U12350,carla.sanchez@example.com,4567890123
+Miguel Rodríguez,U12351,miguel.rodriguez@example.com,5678901235
+Laura Martínez,U12352,laura.martinez@example,6789012345   
+Pedro Gómez,U12353,pedro.gomez@example.com,7890123456
+Elena Navarro,U12354,elena.navarro@example.com,8901234567
+Ricardo Fernández,U12355,ricardo.fernandez@example.com,9012345678
+Carmen Morales,U12356,,1234567809                        
+Hugo Ortiz,U12357,hugo.ortiz@example.com,234567801       
+Patricia Ramírez,U12358,patricia.ramirez@example.com,3456780123
+Andrés Suárez,U12359,andres.suarez@example,4567890124     
+Jessica Alba,,jessica.alba@example.com,5678901236        

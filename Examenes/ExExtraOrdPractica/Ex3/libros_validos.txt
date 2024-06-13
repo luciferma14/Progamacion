@@ -1,0 +1,39 @@
+Libro: Cien Años de Soledad - Gabriel García Márquez - 9781234567891 - 1967 - Ficción
+Libro: Introducción a la Programación - John Doe - 9781234567892 - 2020 - Educativo
+Libro: Fundamentos de Física - David Halliday - 9781234567893 - 2015 - Científico
+Libro: La Sombra del Viento - Carlos Ruiz Zafón - 9781234567894 - 2001 - Ficción
+Libro: El Poder del Hábito - Charles Duhigg - 9781234567895 - 2012 - No Ficción
+Libro: Breve Historia del Tiempo - Stephen Hawking - 9781234567896 - 1988 - Científico
+Libro: La Biografía de Steve Jobs - Walter Isaacson - 9781234567897 - 2011 - Biográfico
+Libro: Educación para la Vida - Paulo Freire - 9781234567898 - 1996 - Educativo
+Libro: Cálculo Multivariable - James Stewart - 9781234567899 - 2010 - Científico
+Libro: Caminos a la Excelencia - Anders Ericsson - 9781234567801 - 2016 - No Ficción
+Libro: Un Mundo Feliz - Aldous Huxley - 9781234567802 - 1932 - Ficción
+Libro: El Hombre en Busca de Sentido - Viktor Frankl - 9781234567803 - 1946 - No Ficción
+Libro: Los Secretos de la Mente Millonaria - T. Harv Eker - 9781234567804 - 2005 - No Ficción
+Libro: Cien Años de Soledad - Gabriel García Márquez - 9781234567891 - 1967 - Ficción
+Libro: Introducción a la Programación - John Doe - 9781234567892 - 2020 - Educativo
+Libro: Fundamentos de Física - David Halliday - 9781234567893 - 2015 - Científico
+Libro: La Sombra del Viento - Carlos Ruiz Zafón - 9781234567894 - 2001 - Ficción
+Libro: El Poder del Hábito - Charles Duhigg - 9781234567895 - 2012 - No Ficción
+Libro: Breve Historia del Tiempo - Stephen Hawking - 9781234567896 - 1988 - Científico
+Libro: La Biografía de Steve Jobs - Walter Isaacson - 9781234567897 - 2011 - Biográfico
+Libro: Educación para la Vida - Paulo Freire - 9781234567898 - 1996 - Educativo
+Libro: Cálculo Multivariable - James Stewart - 9781234567899 - 2010 - Científico
+Libro: Caminos a la Excelencia - Anders Ericsson - 9781234567801 - 2016 - No Ficción
+Libro: Un Mundo Feliz - Aldous Huxley - 9781234567802 - 1932 - Ficción
+Libro: El Hombre en Busca de Sentido - Viktor Frankl - 9781234567803 - 1946 - No Ficción
+Libro: Los Secretos de la Mente Millonaria - T. Harv Eker - 9781234567804 - 2005 - No Ficción
+Libro: Cien Años de Soledad - Gabriel García Márquez - 9781234567891 - 1967 - Ficción
+Libro: Introducción a la Programación - John Doe - 9781234567892 - 2020 - Educativo
+Libro: Fundamentos de Física - David Halliday - 9781234567893 - 2015 - Científico
+Libro: La Sombra del Viento - Carlos Ruiz Zafón - 9781234567894 - 2001 - Ficción
+Libro: El Poder del Hábito - Charles Duhigg - 9781234567895 - 2012 - No Ficción
+Libro: Breve Historia del Tiempo - Stephen Hawking - 9781234567896 - 1988 - Científico
+Libro: La Biografía de Steve Jobs - Walter Isaacson - 9781234567897 - 2011 - Biográfico
+Libro: Educación para la Vida - Paulo Freire - 9781234567898 - 1996 - Educativo
+Libro: Cálculo Multivariable - James Stewart - 9781234567899 - 2010 - Científico
+Libro: Caminos a la Excelencia - Anders Ericsson - 9781234567801 - 2016 - No Ficción
+Libro: Un Mundo Feliz - Aldous Huxley - 9781234567802 - 1932 - Ficción
+Libro: El Hombre en Busca de Sentido - Viktor Frankl - 9781234567803 - 1946 - No Ficción
+Libro: Los Secretos de la Mente Millonaria - T. Harv Eker - 9781234567804 - 2005 - No Ficción

@@ -1,0 +1,20 @@
+El Quijote,U12345,2024-06-10
+Cien Años de Soledad,U12346,2024-06-16
+Introducción a la Programación,U12347,2024-06-17
+Fundamentos de Física,U12348,2024-06-18
+La Sombra del Viento,U12349,2024-06-19
+El Poder del Hábito,U12350,2024-06-20
+Breve Historia del Tiempo,U12351,2024-06-21
+La Biografía de Steve Jobs,U12352,2024-06-22
+Educación para la Vida,U12353,2024-06-23
+Cálculo Multivariable,U12354,2024-06-24
+La Guerra de los Mundos,U12355,2024-06-25
+Caminos a la Excelencia,U12356,2024-06-26
+Un Mundo Feliz,U12357,2024-06-27
+El Hombre en Busca de Sentido,U12358,2024-06-28
+Los Secretos de la Mente Millonaria,U12359,2024-06-29
+Libro Inexistente,U12360,2024-06-30 
+El Quijote,U99999,2024-07-01 
+Fundamentos de Física,U12351,2024-06-14 
+La Sombra del Viento,U12349 
+, , ,2024-06-30 
