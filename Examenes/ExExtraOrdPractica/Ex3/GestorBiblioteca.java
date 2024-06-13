@@ -58,8 +58,6 @@ public class GestorBiblioteca {
             //validar.registrarPrestamo(tit, id, fPres, fLim);
            
 
-
-
         } catch(IOException e) {
             e.printStackTrace();
         }
