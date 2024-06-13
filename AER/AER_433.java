@@ -1,21 +1,26 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AER_433 {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
-        ArrayList<Integer> uvas = new ArrayList<Integer>();
 
-        int uva;
+        int uvas;
+        
+        while (true) {
+            uvas = sc.nextInt();
+            if (uvas == 0) {
+                System.exit(0);
+            }
 
-        do {
-            uvas = new ArrayList<Integer>();
-            uva = sc.nextInt();
+            int nivel = 0;
+            int totalUvas = 0;
 
-        }while(uva != 0);
+            while (totalUvas < uvas) {
+                nivel++;
+                totalUvas += nivel;
+            }
 
-
-
+            System.out.println(nivel);
+        }
     }
 }
