@@ -5,13 +5,8 @@ public class Ejercicio6 {
         String apellido1 = "Ferrandis";
         String apellido2 = "Martinez";
 
-    
-
         System.out.println(nombre.length());
         System.out.println(apellido1.length());
         System.out.println(apellido2.length());
-
-
-        
     }
 }

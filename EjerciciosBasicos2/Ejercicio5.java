@@ -6,12 +6,8 @@ public class Ejercicio5 {
         int primerespacio = nombre.indexOf(' ');
         int segundoespacio = nombre.indexOf(' ',primerespacio+1);
 
-
-
         System.out.println(nombre.substring(0,primerespacio));
         System.out.println(nombre.substring(primerespacio+1,segundoespacio)); 
-        System.out.println(nombre.substring(segundoespacio+1));                
-        
-
+        System.out.println(nombre.substring(segundoespacio+1));
     }
 }
