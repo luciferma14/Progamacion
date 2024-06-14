@@ -1,6 +1,7 @@
-gugutata
-mata tapa papa pato
-seto taco coma matute
-sien encima mapa patuco comida
-cata tasama malote tejaba batama
-kiosko comida
+3
+10 15 20
+16 12 23
+2
+175 200
+140 150
+0
