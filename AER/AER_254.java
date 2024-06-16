@@ -11,30 +11,29 @@ public class AER_254 {
             if (casos == 0) {
                 break;
             }
-
-            int[] esquiadores = new int[casos];
-            int[] esquis = new int[casos];
-
+            
+            int[] personas = new int[casos];
             for (int i = 0; i < casos; i++) {
-                esquiadores[i] = sc.nextInt();
+                personas[i] = sc.nextInt();
             }
 
+            int[] esquis = new int[casos];
             for (int i = 0; i < casos; i++) {
                 esquis[i] = sc.nextInt();
             }
 
-            int result = menor(esquiadores, esquis);
+            int result = menor(personas, esquis);
             System.out.println(result);
         }
     }
 
-    private static int menor(int[] esquiadores, int[] esquis) {
-        Arrays.sort(esquiadores);
+    private static int menor(int[] personas, int[] esquis) {
+        Arrays.sort(personas);
         Arrays.sort(esquis);
 
         int menor = 0;
-        for (int i = 0; i < esquiadores.length; i++) {
-            menor += Math.abs(esquiadores[i] - esquis[i]);
+        for (int i = 0; i < personas.length; i++) {
+            menor += Math.abs(personas[i] - esquis[i]);
         }
 
         return menor;
