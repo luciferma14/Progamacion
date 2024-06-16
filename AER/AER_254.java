@@ -4,41 +4,39 @@ import java.util.Scanner;
 public class AER_254 {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         while (true) {
-            int N = scanner.nextInt();
-            if (N == 0) {
+            int casos = sc.nextInt();
+            if (casos == 0) {
                 break;
             }
 
-            int[] esquiadores = new int[N];
-            int[] esquis = new int[N];
+            int[] esquiadores = new int[casos];
+            int[] esquis = new int[casos];
 
-            for (int i = 0; i < N; i++) {
-                esquiadores[i] = scanner.nextInt();
+            for (int i = 0; i < casos; i++) {
+                esquiadores[i] = sc.nextInt();
             }
 
-            for (int i = 0; i < N; i++) {
-                esquis[i] = scanner.nextInt();
+            for (int i = 0; i < casos; i++) {
+                esquis[i] = sc.nextInt();
             }
 
-            int resultado = minimizarDiferencias(esquiadores, esquis);
-            System.out.println(resultado);
+            int result = menor(esquiadores, esquis);
+            System.out.println(result);
         }
-
-        scanner.close();
     }
 
-    private static int minimizarDiferencias(int[] esquiadores, int[] esquis) {
+    private static int menor(int[] esquiadores, int[] esquis) {
         Arrays.sort(esquiadores);
         Arrays.sort(esquis);
 
-        int sumaDiferencias = 0;
+        int menor = 0;
         for (int i = 0; i < esquiadores.length; i++) {
-            sumaDiferencias += Math.abs(esquiadores[i] - esquis[i]);
+            menor += Math.abs(esquiadores[i] - esquis[i]);
         }
 
-        return sumaDiferencias;
+        return menor;
     }
 }
