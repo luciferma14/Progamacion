@@ -1,31 +1,44 @@
+import java.util.Arrays;
 import java.util.Scanner;
-import java.util.TreeSet;
 
 public class AER_254 {
-    
+
     public static void main(String[] args) {
-        
-        Scanner sc = new Scanner(System.in);
-        TreeSet<Integer> numeros = new TreeSet<Integer>();
+        Scanner scanner = new Scanner(System.in);
 
-        int num;
-        int num2;
-
-        do{
-            numeros = new TreeSet<>();
-            num = sc.nextInt();
-            if(num == 0){
-                System.exit(0);
+        while (true) {
+            int N = scanner.nextInt();
+            if (N == 0) {
+                break;
             }
 
-            for(int i = 0; i <= 2; i++){
-                num2 = sc.nextInt();
-                numeros.add(num2);
+            int[] esquiadores = new int[N];
+            int[] esquis = new int[N];
+
+            for (int i = 0; i < N; i++) {
+                esquiadores[i] = scanner.nextInt();
             }
 
-            System.out.println(numeros);
-    
-        }while(num != 0);
-            
+            for (int i = 0; i < N; i++) {
+                esquis[i] = scanner.nextInt();
+            }
+
+            int resultado = minimizarDiferencias(esquiadores, esquis);
+            System.out.println(resultado);
+        }
+
+        scanner.close();
+    }
+
+    private static int minimizarDiferencias(int[] esquiadores, int[] esquis) {
+        Arrays.sort(esquiadores);
+        Arrays.sort(esquis);
+
+        int sumaDiferencias = 0;
+        for (int i = 0; i < esquiadores.length; i++) {
+            sumaDiferencias += Math.abs(esquiadores[i] - esquis[i]);
+        }
+
+        return sumaDiferencias;
     }
 }
