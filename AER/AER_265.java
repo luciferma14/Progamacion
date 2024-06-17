@@ -6,7 +6,6 @@ public class AER_265 {
         Scanner sc = new Scanner(System.in);
 
         int num;
-        String numero;
 
         do{
             num = sc.nextInt();
