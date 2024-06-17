@@ -1,39 +1,28 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AER_265 {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
-        ArrayList<Integer> numeros = new ArrayList<Integer>();
 
         int num;
         String numero;
-        int numDigitos;
-        int div = 0;
-        int result = 0;
 
         do{
             num = sc.nextInt();
 
-            if (num == 0){
-                break;
-            }else{
-                numeros.add(num);   
-            }
+            if (num == 0) break;
 
-            numero = Integer.toString(num);
-            
-            for(int i = 0; i < numero.length(); i++){
+            int total = num;
 
-                numDigitos = (int) Math.log10(num) + 1;
-                div = (int) Math.pow(10, numDigitos - 1);
-                result = num % div;
-    
+            String s_num= Integer.toString(num);
+
+            while (s_num.length()>1) {
+                s_num = s_num.substring(1, s_num.length());
+                total += Integer.valueOf(s_num);
             }
-            
-            
-            System.out.println(result);
+                
+            System.out.println(total);
 
         }while(num != 0);
     }
