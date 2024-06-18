@@ -1,4 +1,3 @@
-import libreria.FNumDAW;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -23,8 +22,6 @@ public class AER210 {
                 suma = suma + j;
 
             }
-            
-            System.out.println(FNumDAW.anteriorPrimo(suma));
 
         }
     }
