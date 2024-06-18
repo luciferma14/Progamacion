@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AER_369",
+            "request": "launch",
+            "mainClass": "AER_369",
+            "projectName": "Programacion_a68fa78e"
+        },
+        {
+            "type": "java",
             "name": "GestorInventario",
             "request": "launch",
             "mainClass": "ExOrdPractica.GestorInventario",
